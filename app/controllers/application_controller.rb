@@ -10,11 +10,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_theme
-    if params[:theme].present? && (THEMES.include?(params[:theme]) || params[:theme] == "default")
+    if params[:theme].present? && (THEMES.include?(params[:theme]) || params[:theme] == "cosmo")
       @theme = params[:theme]
       session[:theme] = params[:theme]
     else
-      @theme ||= session[:theme] || "default"
+      @theme ||= session[:theme] || "cosmo"
     end
   end
 
