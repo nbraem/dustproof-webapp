@@ -1,0 +1,45 @@
+.navbar.navbar-inverse.navbar-static-top
+  .container
+    %button.navbar-toggle(type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse")
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = link_to t("app_name"), root_path, class: "navbar-brand"
+
+    .navbar-collapse.collapse.navbar-responsive-collapse
+      %ul.nav.navbar-nav
+        %li= link_to "Wat?", "/wat"
+        %li= link_to "Hoe?", "/hoe"
+        %li= link_to icon_text("line-chart", "Metingen"), "/metingen"
+        %li= link_to icon_text("bullhorn", "Contact"), "/contact"
+        - if user_signed_in? && current_user.admin?
+          %li.dropdown
+            = link_to "#", class: "dropdown-toggle", "aria-expanded" => false, data: { toggle: "dropdown" }, role: "button" do
+              Admin
+              %span.caret
+            %ul.dropdown-menu{ role: "menu" }
+              %li= link_to icon_text("users", "Gebruikers"), users_path
+
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li.dropdown
+            = link_to "#", class: "dropdown-toggle", "aria-expanded" => false, data: { toggle: "dropdown" }, role: "button" do
+              = current_user.full_name
+              %span.caret
+            %ul.dropdown-menu{ role: "menu" }
+              %li= link_to icon_text("gear", t("devise.account_settings")), edit_user_registration_path
+              %li= link_to icon_text("sign-out", t("devise.sign_out")), destroy_user_session_path, method: :delete
+
+        - else
+          %li= link_to icon_text("sign-in", "Inloggen"), new_user_session_path
+
+        - if user_signed_in? && current_user.admin?
+          %li.dropdown
+            %a#themes.dropdown-toggle{ "data-toggle" => "dropdown", :href => "#" }
+              Themes
+              %span.caret
+            %ul.dropdown-menu{ "aria-labelledby" => "Themes" }
+              %li= link_to "Default", params.merge({ theme: "default" })
+              %li.divider
+              - THEMES.each do |theme|
+                %li{class: theme == @theme ? "active" : nil}= link_to theme.capitalize, params.merge({ theme: theme } )

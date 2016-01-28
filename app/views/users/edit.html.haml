@@ -1,0 +1,7 @@
+- model_class = User
+.page-header
+  %h1
+    = @user.full_name
+    %small=t '.title', default: [:'helpers.titles.edit', 'Edit %{model}'], model: model_class.model_name.human.titleize
+
+= render "form"

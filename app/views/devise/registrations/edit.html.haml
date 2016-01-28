@@ -1,0 +1,16 @@
+.page-header
+  %h1= t("devise.account_settings")
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal', autocomplete: "off" }) do |f|
+  .row
+    .col-md-4
+      = f.input :current_password, required: true, hint: t("devise.current_password_hint")
+      = f.input :first_name, required: true
+      = f.input :last_name, required: true
+      = f.input :email
+    .col-md-3.col-md-offset-1
+      = f.input :password, hint: t("devise.new_password_hint"), label: t("devise.new_password")
+
+  .row
+    = f.button :submit, class: 'btn-primary'
+    = link_to t('.cancel', default: t("helpers.links.cancel")), root_path, class: 'btn btn-default'

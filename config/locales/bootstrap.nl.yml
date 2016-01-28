@@ -1,0 +1,26 @@
+nl:
+  breadcrumbs:
+    application:
+      root: "Index"
+    users:
+      index: "Gebruikers"
+      new: "Nieuwe gebruiker"
+      edit: "Bewerken"
+  helpers:
+    actions: "Actions"
+    submit:
+      create: ! 'Maak %{model} aan'
+      submit: ! 'Bewaar %{model} bewaren'
+      update: ! 'Wijzigingen bewaren'
+    links:
+      back: "Terug"
+      cancel: "Annuleren"
+      confirm: "Ben je zeker?"
+      destroy: "Verwijderen"
+      new: "Nieuw"
+      edit: "Bewerken"
+    titles:
+      edit: "Bewerk %{model}"
+      save: "Bewaar %{model}"
+      new: "Nieuwe %{model}"
+      delete: "%{model} verwijderen"

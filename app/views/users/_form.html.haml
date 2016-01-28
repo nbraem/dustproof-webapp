@@ -1,0 +1,22 @@
+= simple_form_for @user, wrapper: :vertical_form, html: { autocomplete: "off" } do |f|
+  .row
+    .col-md-3
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email
+
+    .col-md-3.col-md-offset-1
+      - if @user.new_record?
+        = f.input :password
+      - else
+        = f.input :password, hint: t("devise.new_password_hint"), label: t("devise.new_password")
+
+      = f.hidden_field :admin
+      -# - if @user == current_user
+      -#   = f.input :admin, as: :select, hint: t("devise.admin_disabled_hint"), disabled: true, include_blank: false
+      -# - else
+      -#   = f.input :admin, as: :select, hint: t("devise.admin_hint"), include_blank: false
+
+  %hr
+    = f.button :submit, class: 'btn-primary'
+    = link_to t('.cancel', default: t("helpers.links.cancel")), :back, class: 'btn btn-default'

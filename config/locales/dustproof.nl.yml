@@ -1,0 +1,28 @@
+nl:
+  app_name: "Dustproof.be"
+  users:
+    index:
+      title: "Gebruikers"
+      new: "Nieuwe gebruiker"
+    new:
+      title: "Nieuwe gebruiker"
+  activerecord:
+    models:
+      user:
+        one: "Gebruiker"
+        other: "Gebruikers"
+    attributes:
+      user:
+        first_name: "Voornaam"
+        last_name: "Achternaam"
+        full_name: "Naam"
+        email: "E-mail"
+        password: "Wachtwoord"
+        new_password: "Nieuw wachtword"
+        current_password: "Huidig wachtwoord"
+        created_at: "Aangemaakt op"
+        admin: "Beheerder?"
+  flash:
+    users:
+      cannot_delete_own_account: "Fout: Je kan jezelf niet verwijderen."
+      unauthorized: "Fout: Deze actie is niet toegelaten."

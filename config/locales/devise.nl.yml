@@ -1,0 +1,83 @@
+# Meer vertalingen: https://github.com/plataformatec/devise/wiki/I18n
+
+nl:
+  devise:
+    account_settings: "Instellingen"
+    signed_in_as: "Ingelogd als %{name}"
+    remember_me: "Onthoud mij"
+    sign_up: "Registreren"
+    sign_in: "Inloggen"
+    sign_out: "Uitloggen"
+    forgot_password: "Wachtwoord vergeten?"
+    unlock_instructions_not_received: "Deblokkeringsinstructies niet ontvangen?"
+    forgot_password: "Wachtwoord vergeten?"
+    confirmation_not_received: "Activatieinstructies niet ontvangen?"
+    send_password_reset_instructions: "Stuur mij instructies"
+    new_password: "Nieuw wachtwoord"
+    confirm_new_password: "Bevestig uw nieuw wachtwoord"
+    change_my_password: "Wijzig mijn wachtwoord"
+    new_password_hint: "Enkel invullen indien je het huidige wachtwoord wilt wijzigen."
+    current_password_hint: "Dit *moet* je invullen om je gegevens te wijzigen."
+    change_password: "Wachtwoord wijzigen"
+    this_is_you: "Jijzelf"
+    confirmations:
+      confirmed: 'Je account is geactiveerd. Je kan nu inloggen met het wachtwoord dat je bij het registreren gekozen hebt.'
+      send_instructions: 'Je ontvangt via e-mail instructies hoe je je account kan bevestigen.'
+      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je account kan bevestigen.'
+      new: "Activeringsinstructies opnieuw versturen"
+    failure:
+      already_authenticated: 'Je bent al ingelogd.'
+      unauthenticated: 'Je dient in te loggen om verder te gaan.'
+      unconfirmed: 'Je dient eerst je account te bevestigen.'
+      locked: 'Je account is gelocked.'
+      invalid: 'Ongeldige e-mail of wachtwoord.'
+      invalid_token: 'Invalide authenticiteit token.'
+      timeout: 'Je sessie is verlopen, log a.u.b. opnieuw in.'
+      inactive: 'Je account is nog niet geactiveerd.'
+      last_attempt: 'Je hebt nog een poging over voordat je account wordt geblokkeerd.'
+      not_found_in_database: "Ongeldige e-mail of wachtwoord."
+    mailer:
+      confirmation_instructions:
+        subject: 'Bevestiging mailadres'
+      reset_password_instructions:
+        subject: 'Instructies om nieuw wachtwoord te kiezen'
+      unlock_instructions:
+        subject: 'Unlock instructies'
+    omniauth_callbacks:
+      success: 'Succesvol aangemeld met je %{kind} account.'
+      failure: 'Kon je niet registreren met je %{kind} account, omdat "%{reason}".'
+    passwords:
+      no_token: 'Je kan deze pagina niet benaderen zonder een "wachtwoord reset e-mail"'
+      send_instructions: 'Je ontvangt via e-mail instructies hoe je je wachtwoord moet resetten.'
+      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je wachtwoord moet resetten.'
+      updated: 'Je wachtwoord is gewijzigd. Je bent nu ingelogd.'
+      updated_not_active: 'Je wachtwoord is gewijzigd.'
+    registrations:
+      signed_up_but_unconfirmed: 'Je ontvangt via e-mail instructies om je account te activeren. Kijk even in je mailbox.'
+      signed_up_but_inactive: 'Welkom! Je bent met succes geregistreerd. Je kon niet automatisch ingelogd worden omdat je account nog niet geactiveerd is.'
+      signed_up_but_locked: 'Welkom! Je bent met succes geregistreerd. Je kon niet automatisch ingelogd worden omdat je account geblokkeerd is.'
+      signed_up: 'Welkom! Je bent met succes geregistreerd.'
+      update_needs_confirmation: 'Je hebt je e-mailadres succesvol gewijzigd, maar we moeten je nieuwe mailadres nog verifiëren. Controleer je e-mail en klik op de link in de mail om je mailadres te verifiëren.'
+      updated: 'Je account gegevens zijn bewaard.'
+      new:
+        register: "Registreren"
+        email: "E-mail adres"
+        password: "Verzin een wachtwoord"
+        submit: "Registreer"
+    sessions:
+      signed_in: ''
+      signed_out: ''
+    unlocks:
+      send_instructions: 'Je ontvangt via e-mail instructies hoe je je account kan unlocken.'
+      send_paranoid_instructions: 'Als je e-mailadres bestaat in de database, ontvang je via e-mail instructies hoe je je account kan unlocken.'
+      unlocked: 'Je account is ge-unlocked. Je kan nu weer inloggen.'
+  errors:
+    messages:
+      already_confirmed: "is reeds bevestigd"
+      confirmation_period_expired: "moet worden bevestigd binnen %{period}, probeer het a.u.b. nog een keer"
+      expired: "is verlopen, vraag een nieuwe aan"
+      not_found: "niet gevonden"
+      not_locked: "is niet gesloten"
+      not_saved:
+        one: "Kon de %{resource} niet opslaan:"
+        other: "Kon de %{resource} niet opslaan:"

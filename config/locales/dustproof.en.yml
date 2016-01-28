@@ -1,0 +1,27 @@
+en:
+  app_name: "Dustproof.be"
+  users:
+    index:
+      title: "Users"
+      new: "New user"
+    new:
+      title: "New user"
+  activerecord:
+    models:
+      user:
+        one: "User"
+        other: "Users"
+    attributes:
+      user:
+        first_name: "First name"
+        last_name: "Last name"
+        full_name: "Name"
+        email: "Email"
+        password: "Password"
+        new_password: "New password"
+        current_password: "Current password"
+        created_at: "Created at"
+        admin: "Admin?"
+  flash:
+    users:
+      unauthorized: "Error: This action is not allowed."

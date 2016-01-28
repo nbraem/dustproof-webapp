@@ -1,0 +1,4 @@
+%p Hallo #{@resource.email}!
+%p Uw account is geblokkeerd wegens teveel gefaalde pogingen om in te loggen.
+%p Volg de onderstaande link om uw account te deblokkeren:
+%p= link_to 'Deblokkeer mijn account', unlock_url(@resource, unlock_token: @token)

@@ -1,0 +1,26 @@
+nl:
+  mail_form:
+    models:
+      contact: "Contact formulier"
+    attributes:
+      contact:
+        name: "Naam"
+        email: "E-mail"
+        message: "Bericht"
+    request:
+      title: "Technische informatie"
+      remote_ip: "IP adres"
+      user_agent: "Browser"
+    errors:
+      models:
+        contact:
+          attributes:
+            name:
+              blank: "moet opgegeven zijn"
+            email:
+              blank: "moet opgegeven zijn"
+              invalid: "moet een geldig adres zijn"
+            message:
+              blank: "moet opgegeven zijn"
+    flash:
+      thanks: "Bedankt voor je bericht! We antwoorden zo gauw mogelijk."

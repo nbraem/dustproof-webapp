@@ -1,0 +1,9 @@
+.row
+  .col-sm-4.col-sm-offset-4
+    .page-header
+      %h3= t("devise.confirmations.new")
+
+    = simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+      = f.full_error :confirmation_token
+      = f.input :email, required: true, autofocus: true, label: false, placeholder: User.human_attribute_name(:email)
+      = f.button :submit, t("devise.confirmations.new"), class: "btn btn-primary btn-block"
