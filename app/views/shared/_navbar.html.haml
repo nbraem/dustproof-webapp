@@ -8,10 +8,10 @@
 
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
-        %li= link_to "Wat?", "/wat"
-        %li= link_to "Hoe?", "/hoe"
-        %li= link_to icon_text("line-chart", "Metingen"), "/metingen"
-        %li= link_to icon_text("bullhorn", "Contact"), "/contact"
+        %li{ class: action_name == "what" ? "active" : nil }= link_to "Wat?", "/wat"
+        %li{ class: action_name == "how" ? "active" : nil }= link_to "Hoe?", "/hoe"
+        %li{ class: action_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Metingen"), "/metingen"
+        %li{ class: controller_name == "contacts" ? "active" : nil }= link_to icon_text("bullhorn", "Contact"), "/contact"
         - if user_signed_in? && current_user.admin?
           %li.dropdown
             = link_to "#", class: "dropdown-toggle", "aria-expanded" => false, data: { toggle: "dropdown" }, role: "button" do
