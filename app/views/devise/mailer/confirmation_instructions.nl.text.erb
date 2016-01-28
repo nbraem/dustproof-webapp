@@ -1,0 +1,14 @@
+Hallo <%= @resource.full_name %>,
+
+Je hebt je net geregistreerd bij Dustproof. Welkom!
+
+Volg onderstaande link om je registratie te bevestigen en van start te gaan.
+
+<%= confirmation_url(@resource, confirmation_token: @token) %>
+
+Heb je je niet geregistreerd? Misschien heeft iemand anders per ongeluk jouw e-mail adres opgegeven.
+Je mag deze mail gewoon verwijderen. Wij zullen je in de toekomst niet verder contacteren.
+
+We wensen je een prettige dag,
+
+Het Dustproof team
