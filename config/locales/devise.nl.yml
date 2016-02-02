@@ -5,7 +5,7 @@ nl:
     account_settings: "Instellingen"
     signed_in_as: "Ingelogd als %{name}"
     remember_me: "Onthoud mij"
-    sign_up: "Registreren"
+    sign_up: "Registreer je en doe mee!"
     sign_in: "Inloggen"
     sign_out: "Uitloggen"
     forgot_password: "Wachtwoord vergeten?"

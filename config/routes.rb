@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   end
 
   get "/contact", to: "contacts#new"
-  get "/wat", to: "pages#what"
   get "/hoe", to: "pages#how"
   get "/metingen", to: "pages#measurements"
 

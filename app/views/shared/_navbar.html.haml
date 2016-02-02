@@ -8,8 +8,8 @@
 
     .navbar-collapse.collapse.navbar-responsive-collapse
       %ul.nav.navbar-nav
-        %li{ class: action_name == "what" ? "active" : nil }= link_to "Wat?", "/wat"
-        %li{ class: action_name == "how" ? "active" : nil }= link_to "Hoe?", "/hoe"
+        %li{ class: action_name == "home" ? "active" : nil }= link_to icon_text("home"), root_url
+        %li{ class: action_name == "how" ? "active" : nil }= link_to icon_text("gears", "Hoe?"), "/hoe"
         %li{ class: action_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Metingen"), "/metingen"
         %li{ class: controller_name == "contacts" ? "active" : nil }= link_to icon_text("bullhorn", "Contact"), "/contact"
         - if user_signed_in? && current_user.admin?
