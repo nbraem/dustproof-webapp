@@ -1,7 +1,7 @@
 lock "3.4.0"
 
 set :application, "dustproof"
-set :repo_url, "git@github.com:michaelshmitty/dustproof.git"
+set :repo_url, "git@github.com:Dustproof/dustproof-webapp.git"
 set :branch, "master"
 set :deploy_to, "/home/rails/dustproof"
 set :default_env, rvm_bin_path: "~/.rvm/bin"
