@@ -1,5 +1,6 @@
 nl:
   app_name: "Dustproof.be"
+  tag_line: "Zelf fijn stof meten"
   users:
     index:
       title: "Gebruikers"

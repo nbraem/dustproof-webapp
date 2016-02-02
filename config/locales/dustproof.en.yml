@@ -1,5 +1,6 @@
 en:
   app_name: "Dustproof.be"
+  tag_line: "DIY particulates measurement"
   users:
     index:
       title: "Users"

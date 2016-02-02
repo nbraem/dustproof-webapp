@@ -4,15 +4,33 @@
       %h1{style: "font-size: 64px;"}
         Zelf
         fijn stof meten
-      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       %p
-        = link_to "Meer informatie", "/wat", role: "button", class: "btn btn-primary btn-lg"
+        Is eenvoudiger dan het lijkt. Met een zelfgebouwd apparaat meet je,
+        zonder je brandkast te kraken,
+        = link_to "PM2.5", "https://nl.wikipedia.org/wiki/Fijnstof#PM2.2C5", target: "_blank"
+        en
+        = succeed "." do
+          = link_to "PM10", "https://nl.wikipedia.org/wiki/Fijnstof#PM10", target: "_blank"
+        %br
+        Fijn stof, zie je of ruik je niet.
+        = succeed "." do
+          = link_to "Toch heeft het een negatieve invloed op het aantal gezonde levensjaren", "https://fotogordon.wordpress.com/2012/09/03/gezond-terug-naar-school/", target: "_blank"
+        %br
+        = link_to "De lucht in België is op één na de slechtste van Europa", "http://www.ademloos.be/nieuws/tv-radio/lucht-belgi-op-n-na-vuilste-europa", target: "_blank"
+        en in Vlaanderen is de lucht slechter dan in Wallonië.
+        Daarom dagen we je uit om samen met ons een fijn stof meter te ontwikkelen en te bouwen.
+      %p
         = link_to "Hoe?", "/hoe", role: "button", class: "btn btn-primary btn-lg"
         - unless user_signed_in?
-          = link_to "Registreren", new_user_registration_path, role: "button", class: "btn btn-default btn-lg"
+          = link_to "Doe mee!", new_user_registration_path, role: "button", class: "btn btn-default btn-lg"
 
   .col-md-4
     .well.text-center
       %h4 Een community project in samenwerking met
       = link_to image_tag("voidwarranties_logo.jpg", alt: "VoidWarranties logo", title: "Void Warranties hackerspace Antwerpen"), "http://voidwarranties.be/", target: "_blank"
       = link_to image_tag("wireless_belgie_logo.png", alt: "Wireless België logo", title: "Wireless België"), "http://www.wirelessantwerpen.be/", target: "_blank"
+
+    .well.text-center
+      %h4 Vind ons op
+      = link_to image_tag("github_logo.png", alt: "Vind ons op GitHub", title: "Vind ons op GitHub"), "https://github.com/Dustproof", target: "_blank"
+      %h4 en ontwikkel mee.
