@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "/hoe", to: "pages#how"
   get "/richtlijnen", to: "pages#guidelines"
   get "/metingen", to: "pages#measurements"
+  get "/over-ons", to: "pages#about"
 
   resources :contacts, only: [:new, :create]
 
