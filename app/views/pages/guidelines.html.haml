@@ -1,3 +1,6 @@
+- content_for(:title) do
+  DustProof richtlijnen
+
 .page-header
   %h1 DustProof richtlijnen
 
@@ -6,18 +9,22 @@
     %h2 Laagdrempelig
     %ul
       %li
-        Eenvoudig
+        Eenvoudig in
         %ul
-          %li Ontwerp
-          %li Constructie
-          %li Gebruik
-      %li Kostprijs van de onderdelen moet onder de 50€ liggen.
-
+          %li ontwerp
+          %li constructie
+          %li gebruik
+      %li De kostprijs van de onderdelen moet onder de € 50 liggen.
+  .col-md-6
     %h2 Open source
     %ul
-      %li Alle software, die voor het project ontwikkeld, moet vrij en gratis, voor iedereen,beschikbaar zijn
-      %li Van alle hardware moet de documentatie vrij en gratis, voor iedereen,beschikbaar zijn
+      %li Alle software die voor het project ontwikkeld wordt, moet vrij,
+      gratis en voor iedereen beschikbaar zijn
+      %li Van alle hardware moet de documentatie vrij, gratis en voor iedereen
+      beschikbaar zijn
 
+.row
+  .col-md-6
     %h2 Software moet
     %ul
       %li Goed gedocumenteerd zijn
@@ -27,7 +34,6 @@
           %li
             Begrijpbaar voor iedereen die Arduino code kan schrijven,
             zonder bijkomende kennis van C/C++
-
   .col-md-6
     %h2 Hardware moet
     %ul
@@ -37,16 +43,17 @@
           %li Alle schema’s en/of PCB ontwerpen moeten vrij beschikbaar zijn
       %li Zo eenvoudig mogelijk zijn
 
+.row
+  .col-md-6
     %h2 Behuizing
     %ul
       %li
         Goed gedocumenteerd
         %ul
           %li Alle bouwschema’s en ontwerpen moeten vrij beschikbaar zijn
-      %li Zo eenvoudig mogelijk/
+      %li Zo eenvoudig mogelijk zijn
 
+  .col-md-6
     %h2 Standaard 5 volt (USB) voeding
     %ul
       %li Standaard GSM adapter met eventueel andere stekker moet kunnen
-
-    %h2 De prijs van de onderdelen moet onder de € 50 liggen
