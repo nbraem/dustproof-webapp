@@ -1,5 +1,4 @@
-# dustproof
-Dustproof.be project web application
+# DustProof
+[DustProof](https://dustproof.be) project web application
 
 WIP
-

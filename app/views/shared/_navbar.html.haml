@@ -10,6 +10,7 @@
       %ul.nav.navbar-nav
         %li{ class: action_name == "home" ? "active" : nil }= link_to icon_text("home"), root_url
         %li{ class: action_name == "how" ? "active" : nil }= link_to icon_text("gears", "Hoe?"), "/hoe"
+        %li{ class: action_name == "guidelines" ? "active" : nil }= link_to icon_text("book", "Richtlijnen"), "/richtlijnen"
         %li{ class: action_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Metingen"), "/metingen"
         %li{ class: controller_name == "contacts" ? "active" : nil }= link_to icon_text("bullhorn", "Contact"), "/contact"
         - if user_signed_in? && current_user.admin?
