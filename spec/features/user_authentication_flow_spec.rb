@@ -15,7 +15,7 @@ feature "User authentication flow" do
   scenario "User signs in with valid credentials" do
     sign_in_with user.email, "secret"
 
-    expect(page).to have_text("Dustproof.be")
+    expect(page).to have_text("DustProof.be")
   end
 
   scenario "User updates first name in account settings" do

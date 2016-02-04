@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get "/contact", to: "contacts#new"
   get "/hoe", to: "pages#how"
+  get "/richtlijnen", to: "pages#guidelines"
   get "/metingen", to: "pages#measurements"
 
   resources :contacts, only: [:new, :create]
