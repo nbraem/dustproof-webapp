@@ -96,8 +96,8 @@ Rails.application.configure do
     # Exception notification
   config.middleware.use ExceptionNotification::Rack,
                         email: {
-                          email_prefix: "[Dustproof Exception] ",
-                          sender_address: %{"Dustproof" <bounces@dustproof.be>},
+                          email_prefix: "[DustProof Exception] ",
+                          sender_address: %{"DustProof" <bounces@dustproof.be>},
                           exception_recipients: %w(hostmaster@dustproof.be)
                         }
 end

@@ -1,7 +1,7 @@
 class Devise::Mailer < Devise.parent_mailer.constantize
   include Devise::Mailers::Helpers
 
-  default from: "Dustproof <bounces@dustproof.be>"
+  default from: "DustProof <bounces@dustproof.be>"
   layout "mailer"
 
   def confirmation_instructions(record, token, opts={})
