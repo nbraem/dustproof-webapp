@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get "/over-ons", to: "pages#about"
 
   resources :contacts, only: [:new, :create]
+  resources :measurements do
+    collection do
+      delete :destroy_all
+    end
+  end
 
   root "pages#home"
 end

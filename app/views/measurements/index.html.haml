@@ -1,0 +1,51 @@
+- content_for(:title) do
+  Metingen
+
+.page-header
+  %h1 Metingen
+
+= link_to icon_text("trash", "Verwijder all metingen"), [:destroy_all, :measurements], method: :delete, data: {confirm: "Alle metingen worden verwijderd. Dit kan niet ongedaan gemaakt worden. Ben je zeker?"}, class: "btn btn-sm btn-danger"
+
+%p.text-right= page_entries_info @measurements
+.text-center= paginate @measurements, theme: "twitter-bootstrap-3"
+
+.table-responsive
+  %table.table.table-condensed.table-hover
+    %thead
+      %tr
+        %th #
+        %th.text-center= sort_link(@q, :timestamp)
+        %th.text-center
+          = Measurement.human_attribute_name(:temperature)
+          %br
+          °C
+        %th.text-center
+          = Measurement.human_attribute_name(:humidity)
+          %br
+          \%
+        %th.text-center= Measurement.human_attribute_name(:p1_concentration)
+        %th.text-center= Measurement.human_attribute_name(:p1_filtered)
+        %th.text-center= Measurement.human_attribute_name(:p1_lpo)
+        %th.text-center= Measurement.human_attribute_name(:p1_ratio)
+        %th.text-center= Measurement.human_attribute_name(:p2_concentration)
+        %th.text-center= Measurement.human_attribute_name(:p2_filtered)
+        %th.text-center= Measurement.human_attribute_name(:p2_lpo)
+        %th.text-center= Measurement.human_attribute_name(:p2_ratio)
+
+    %tbody
+      - @measurements.each do |measurement|
+        %tr
+          %th{ scope: "row" }= measurement.seq_id
+          %td.text-center.nowrap= l Time.at(measurement.timestamp), format: :short
+          %td.text-center= measurement.temperature
+          %td.text-center= measurement.humidity
+          %td.text-center= measurement.p1_concentration
+          %td.text-center= measurement.p1_filtered
+          %td.text-center= measurement.p1_lpo
+          %td.text-center= measurement.p1_ratio
+          %td.text-center= measurement.p2_concentration
+          %td.text-center= measurement.p2_filtered
+          %td.text-center= measurement.p2_lpo
+          %td.text-center= measurement.p2_ratio
+
+.text-center= paginate @measurements, theme: "twitter-bootstrap-3"

@@ -23,5 +23,7 @@ describe User do
       with_options(default: false, null: false)
   end
 
+  it { should have_many(:measurements) }
+
   it_behaves_like "an Object with a full_name accessor"
 end
