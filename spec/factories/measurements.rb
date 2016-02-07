@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :measurement do
-    sequence(:seq_id)
+    sequence(:seq)
     p1_lpo 999999
     p2_lpo 888888
     timestamp Time.now

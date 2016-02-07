@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160207004053) do
   enable_extension "plpgsql"
 
   create_table "measurements", force: :cascade do |t|
-    t.integer  "seq_id",           limit: 8, null: false
+    t.integer  "seq",           limit: 8, null: false
     t.float    "p1_concentration"
     t.float    "p1_filtered"
     t.integer  "p1_lpo",           limit: 8

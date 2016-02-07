@@ -4,7 +4,7 @@ describe Measurement do
   it { should have_db_index(:user_id) }
 
   it do
-    should have_db_column(:seq_id).
+    should have_db_column(:seq).
       of_type(:integer).
       with_options(limit: 8)
   end
@@ -66,7 +66,7 @@ describe Measurement do
       of_type(:float)
   end
 
-  it { should validate_presence_of(:seq_id) }
+  it { should validate_presence_of(:seq) }
   it { should validate_presence_of(:timestamp) }
   it { should validate_presence_of(:p1_lpo) }
   it { should validate_presence_of(:p2_lpo) }

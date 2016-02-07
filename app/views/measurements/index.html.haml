@@ -35,7 +35,7 @@
     %tbody
       - @measurements.each do |measurement|
         %tr
-          %th{ scope: "row" }= measurement.seq_id
+          %th{ scope: "row" }= measurement.seq
           %td.text-center.nowrap= l Time.at(measurement.timestamp), format: :short
           %td.text-center= measurement.temperature
           %td.text-center= measurement.humidity

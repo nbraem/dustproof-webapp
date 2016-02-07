@@ -13,7 +13,7 @@ admin = User.create! first_name: "Addo",
                      admin: true
 
 50.times do |i|
-  user.measurements.create! seq_id: i,
+  user.measurements.create! seq: i,
                             timestamp: Time.now,
                             temperature: rand(25).to_f,
                             humidity: rand(100).to_f,

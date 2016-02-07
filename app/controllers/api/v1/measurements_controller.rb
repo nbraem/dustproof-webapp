@@ -26,7 +26,7 @@ class Api::V1::MeasurementsController < Api::V1::BaseController
   def measurement_params
     params.
       require(:measurement).
-      permit(:seq_id,
+      permit(:seq,
              :humidity,
              :temperature,
              :timestamp,

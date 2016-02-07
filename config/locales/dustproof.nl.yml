@@ -29,7 +29,7 @@ nl:
         api_key: "API key"
       measurement:
         timestamp: "Tijdstip"
-        seq_id: "Volgnummer"
+        seq: "Volgnummer"
         temperature: "Temperatuur"
         humidity: "Luchtvochtigheid"
         p1_concentration: "P1 concentratie"

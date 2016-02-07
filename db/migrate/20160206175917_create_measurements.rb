@@ -1,7 +1,7 @@
 class CreateMeasurements < ActiveRecord::Migration
   def change
     create_table :measurements do |t|
-      t.integer :seq_id, limit: 8
+      t.integer :seq, limit: 8
       t.float :p1_concentration
       t.float :p1_filtered
       t.integer :p1_lpo, limit: 8
