@@ -12,7 +12,7 @@
         %li{ class: action_name == "how" ? "active" : nil }= link_to icon_text("gears", "Hoe?"), "/hoe"
         %li{ class: action_name == "guidelines" ? "active" : nil }= link_to icon_text("book", "Richtlijnen"), "/richtlijnen"
         - if user_signed_in?
-          %li{ class: controller_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Metingen"), measurements_path
+          %li{ class: controller_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Mijn metingen"), measurements_path
         - else
           %li{ class: action_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Metingen"), "/metingen"
         %li{ class: action_name == "about" ? "active" : nil }= link_to icon_text("users", "Over ons"), "/over-ons"

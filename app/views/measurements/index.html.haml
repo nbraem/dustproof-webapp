@@ -1,8 +1,8 @@
 - content_for(:title) do
-  Metingen
+  Mijn metingen
 
 .page-header
-  %h1 Metingen
+  %h1 Mijn metingen
 
 = link_to icon_text("trash", "Verwijder all metingen"), [:destroy_all, :measurements], method: :delete, data: {confirm: "Alle metingen worden verwijderd. Dit kan niet ongedaan gemaakt worden. Ben je zeker?"}, class: "btn btn-sm btn-danger"
 
