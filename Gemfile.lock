@@ -22,6 +22,8 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
     actionview-encoded_mail_to (1.0.7)
       rails
+    active_model_serializers (0.9.4)
+      activemodel (>= 3.2)
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
@@ -308,6 +310,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionview-encoded_mail_to
+  active_model_serializers
   binding_of_caller (~> 0.7.2)
   bootstrap-kaminari-views
   capistrano-rails (~> 1.1.2)

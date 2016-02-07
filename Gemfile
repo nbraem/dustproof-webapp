@@ -19,6 +19,7 @@ gem 'twitter-bootstrap-rails'
 gem 'actionview-encoded_mail_to'
 gem 'mail_form'
 gem 'exception_notification'
+gem 'active_model_serializers'
 
 group :development do
   gem 'web-console', '~> 2.0'

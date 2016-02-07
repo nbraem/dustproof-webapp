@@ -1,17 +1,17 @@
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
 FactoryGirl.define do
   factory :measurement do
-    seq_id 1
-p1_concentration 1.5
-p1_filtered 1.5
-p1_lpo 1
-p1_ratio 1.5
-p2_concentration 1.5
-p2_filtered 1.5
-p2_lpo 1
-p2_ratio 1.5
-humidity 1.5
-temperature 1.5
-user nil
-  end
+    sequence(:seq_id)
+    p1_lpo 999999
+    p2_lpo 888888
+    timestamp Time.now
+    user
 
+    trait :invalid do
+      p2_lpo nil
+    end
+
+    factory :invalid_measurement, traits: [:invalid]
+  end
 end
