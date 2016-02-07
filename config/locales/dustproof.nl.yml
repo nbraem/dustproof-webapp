@@ -12,6 +12,9 @@ nl:
       user:
         one: "Gebruiker"
         other: "Gebruikers"
+      measurement:
+        one: "Meting"
+        other: "Metingen"
     attributes:
       user:
         first_name: "Voornaam"
@@ -23,6 +26,20 @@ nl:
         current_password: "Huidig wachtwoord"
         created_at: "Aangemaakt op"
         admin: "Beheerder?"
+      measurement:
+        timestamp: "Tijdstip"
+        seq_id: "Volgnummer"
+        temperature: "Temperatuur"
+        humidity: "Luchtvochtigheid"
+        p1_concentration: "P1 concentratie"
+        p1_filtered: "P1 concentratie (gefilterd)"
+        p1_lpo: "P1 lpo"
+        p1_ratio: "P1 ratio"
+        p2_concentration: "P2 concentratie"
+        p2_filtered: "P2 concentratie (gefilterd)"
+        p2_lpo: "P2 lpo"
+        p2_ratio: "P2 ratio"
+
   flash:
     users:
       cannot_delete_own_account: "Fout: Je kan jezelf niet verwijderen."
