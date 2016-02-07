@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   # Devise
   devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_scope :user do
+    authenticated :user do
+      root to: "measurements#index", as: :authenticated_root
+    end
+  end
 
   # Admin routes
   scope "/admin" do
