@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206175917) do
+ActiveRecord::Schema.define(version: 20160207004053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160206175917) do
     t.float    "p2_ratio"
     t.float    "humidity"
     t.float    "temperature"
-    t.datetime "timestamp",                 null: false
+    t.datetime "timestamp",                  null: false
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 20160206175917) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.string   "api_key"
   end
 
+  add_index "users", ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

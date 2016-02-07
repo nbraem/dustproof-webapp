@@ -14,7 +14,16 @@ class User < ActiveRecord::Base
 
   has_many :measurements, dependent: :destroy
 
+  before_create :generate_api_key
+
   def remember_me
     true
+  end
+
+  def generate_api_key
+    self.api_key = loop do
+      random_api_key = SecureRandom.urlsafe_base64(nil, false)
+      break random_api_key unless User.exists?(api_key: random_api_key)
+    end
   end
 end
