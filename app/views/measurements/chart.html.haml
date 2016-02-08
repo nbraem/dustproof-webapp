@@ -1,0 +1,85 @@
+- content_for :scripts do
+  :javascript
+    $(function () {
+        var options1 = {
+            chart: {
+              renderTo: 'container1'
+            },
+            title: {
+              text: 'Temperatuur'
+            },
+            xAxis: {
+              title: {
+                text: 'Meting'
+              }
+            },
+            yAxis: {
+              title: {
+                text: 'Temperatuur ( °C )'
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                return this.point.timestamp + '<br><b>'+ this.point.y + ' °C</b>';
+              }
+            },
+            legend: {
+                enabled: true
+            },
+            series: [{
+              color: '#ff0000',
+              name: 'Temperatuur',
+              data: #{@measurements.map{|m| {y: m.temperature, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
+            }]
+        };
+        var options2 = {
+            chart: {
+              renderTo: 'container2'
+            },
+            title: {
+              text: 'Luchtvochtigheid'
+            },
+            xAxis: {
+              title: {
+                text: 'Meting'
+              }
+            },
+            yAxis: {
+              title: {
+                text: 'Luchtvochtigheid ( % )'
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                return this.point.timestamp + '<br><b>'+ this.point.y + ' %</b>';
+              }
+            },
+            legend: {
+                enabled: true
+            },
+            series: [{
+              color: '#0000ff',
+              name: 'Luchtvochtigheid',
+              data: #{@measurements.map{|m| {y: m.humidity, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
+            }]
+        };
+        var chart1 = new Highcharts.Chart(options1);
+        var chart2 = new Highcharts.Chart(options2);
+    });
+
+.row
+  .col-sm-12
+    = search_form_for @q, url: [:chart, :measurements] do |f|
+      .row
+        .col-sm-3
+          .form-group
+            = f.search_field :timestamp_gteq, class: "form-control input-sm", placeholder: "Van"
+        .col-sm-3
+          .form-group
+            = f.search_field :timestamp_lteq, class: "form-control input-sm", placeholder: "Tot"
+        .col-sm-6
+          = f.submit "Filter", class: "btn btn-primary btn-sm"
+          = link_to "Reset", [:chart, :measurements], class: "btn btn-default btn-sm"
+%br
+#container1{style: "min-width: 400px; height: 400px; margin: 0 auto"}
+#container2{style: "min-width: 400px; height: 400px; margin: 0 auto"}

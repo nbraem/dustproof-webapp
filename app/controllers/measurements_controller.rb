@@ -4,8 +4,16 @@ class MeasurementsController < ApplicationController
 
   def index
     @q = current_user.measurements.search(params[:q])
-    @q.sorts = "timestamp desc" if @q.sorts.empty?
+    @q.sorts = "timestamp DESC" if @q.sorts.empty?
     @measurements = @q.result(distinct: true).page(params[:page])
+    respond_with(@measurements)
+  end
+
+  def chart
+    @q = current_user.measurements.search(params[:q])
+    @q.sorts = "timestamp ASC" if @q.sorts.empty?
+    @measurements = @q.result
+    @measurements = @measurements.where(timestamp: 2.hours.ago..Time.now) unless params[:q]
     respond_with(@measurements)
   end
 

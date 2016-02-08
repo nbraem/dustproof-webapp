@@ -23,7 +23,8 @@
     -# %link{rel: "shortcut icon", href: "/favicon.png", type: "image/png"}
     -# %link{rel: "icon", href: "/favicon.png", type: "image/png"}
     = javascript_include_tag "application"
-
+    = javascript_include_tag "//code.highcharts.com/highcharts.js"
+    = javascript_include_tag "//code.highcharts.com/highcharts-more.js"
   %body
     = render "shared/navbar"
 
@@ -46,3 +47,4 @@
             Webapplicatie ontwikkeld en gehost door
             = succeed "." do
               = link_to "Michael Smith", "http://michaelsmith.be", target: "_blank"
+    = yield(:scripts)
