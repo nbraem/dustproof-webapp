@@ -24,7 +24,7 @@
               }
             },
             legend: {
-                enabled: true
+                enabled: false
             },
             series: [{
               color: '#ff0000',
@@ -55,7 +55,7 @@
               }
             },
             legend: {
-                enabled: true
+                enabled: false
             },
             series: [{
               color: '#0000ff',
@@ -63,8 +63,74 @@
               data: #{@measurements.map{|m| {y: m.humidity, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
             }]
         };
+        var options3 = {
+            chart: {
+              renderTo: 'container3'
+            },
+            title: {
+              text: 'P1 ratio'
+            },
+            xAxis: {
+              title: {
+                text: 'Meting'
+              }
+            },
+            yAxis: {
+              title: {
+                text: 'P1 ratio'
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                return this.point.timestamp + '<br><b>'+ this.point.y + '</b>';
+              }
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+              color: '#ffff00',
+              name: 'P1 ratio',
+              data: #{@measurements.map{|m| {y: m.p1_ratio, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
+            }]
+        };
+        var options4 = {
+            chart: {
+              renderTo: 'container4'
+            },
+            title: {
+              text: 'P2 ratio'
+            },
+            xAxis: {
+              title: {
+                text: 'Meting'
+              }
+            },
+            yAxis: {
+              title: {
+                text: 'P2 ratio'
+              }
+            },
+            tooltip: {
+              formatter: function() {
+                return this.point.timestamp + '<br><b>'+ this.point.y + '</b>';
+              }
+            },
+            legend: {
+                enabled: false
+            },
+            series: [{
+              color: '#00ff00',
+              name: 'P2 ratio',
+              data: #{@measurements.map{|m| {y: m.p2_ratio, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
+            }]
+        };
+
         var chart1 = new Highcharts.Chart(options1);
         var chart2 = new Highcharts.Chart(options2);
+        var chart3 = new Highcharts.Chart(options3);
+        var chart4 = new Highcharts.Chart(options4);
+
     });
 
 .row
@@ -83,3 +149,5 @@
 %br
 #container1{style: "min-width: 400px; height: 400px; margin: 0 auto"}
 #container2{style: "min-width: 400px; height: 400px; margin: 0 auto"}
+#container3{style: "min-width: 400px; height: 400px; margin: 0 auto"}
+#container4{style: "min-width: 400px; height: 400px; margin: 0 auto"}
