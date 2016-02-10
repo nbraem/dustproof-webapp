@@ -19,19 +19,9 @@
         %th.text-center= sort_link(@q, :timestamp)
         %th.text-center
           = Measurement.human_attribute_name(:temperature)
-          %br
-          °C
         %th.text-center
           = Measurement.human_attribute_name(:humidity)
-          %br
-          \%
-        %th.text-center= Measurement.human_attribute_name(:p1_concentration)
-        %th.text-center= Measurement.human_attribute_name(:p1_filtered)
-        %th.text-center= Measurement.human_attribute_name(:p1_lpo)
         %th.text-center= Measurement.human_attribute_name(:p1_ratio)
-        %th.text-center= Measurement.human_attribute_name(:p2_concentration)
-        %th.text-center= Measurement.human_attribute_name(:p2_filtered)
-        %th.text-center= Measurement.human_attribute_name(:p2_lpo)
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
 
     %tbody
@@ -39,15 +29,17 @@
         %tr
           %th{ scope: "row" }= measurement.seq
           %td.text-center.nowrap= l Time.at(measurement.timestamp), format: :short
-          %td.text-center= measurement.temperature
-          %td.text-center= measurement.humidity
-          %td.text-center= measurement.p1_concentration
-          %td.text-center= measurement.p1_filtered
-          %td.text-center= measurement.p1_lpo
-          %td.text-center= measurement.p1_ratio
-          %td.text-center= measurement.p2_concentration
-          %td.text-center= measurement.p2_filtered
-          %td.text-center= measurement.p2_lpo
-          %td.text-center= measurement.p2_ratio
+          %td.text-center
+            = measurement.temperature
+            °C
+          %td.text-center
+            = measurement.humidity
+            \%
+          %td.text-center
+            = measurement.p1_ratio
+            \%
+          %td.text-center
+            = measurement.p2_ratio
+            \%
 
 .text-center= paginate @measurements, theme: "twitter-bootstrap-3"
