@@ -9,18 +9,14 @@
               text: 'P1 ratio'
             },
             xAxis: {
+              type: 'datetime',
               title: {
-                text: 'Meting'
+                text: 'Tijdstip'
               }
             },
             yAxis: {
               title: {
-                text: 'P1 ratio'
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                return this.point.timestamp + '<br><b>'+ this.point.y + '</b>';
+                text: 'P1 ratio ( % )'
               }
             },
             legend: {
@@ -29,7 +25,7 @@
             series: [{
               color: '#ffff00',
               name: 'P1 ratio',
-              data: #{@measurements.map{|m| {y: m.p1_ratio, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
+              data: #{@measurements.map{|m| [(m.timestamp.to_i + 3600) * 1000, m.p1_ratio]}}
             }]
         };
         var options2 = {
@@ -40,18 +36,14 @@
               text: 'P2 ratio'
             },
             xAxis: {
+              type: 'datetime',
               title: {
-                text: 'Meting'
+                text: 'Tijdstip'
               }
             },
             yAxis: {
               title: {
-                text: 'P2 ratio'
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                return this.point.timestamp + '<br><b>'+ this.point.y + '</b>';
+                text: 'P2 ratio ( % )'
               }
             },
             legend: {
@@ -60,7 +52,7 @@
             series: [{
               color: '#00ff00',
               name: 'P2 ratio',
-              data: #{@measurements.map{|m| {y: m.p2_ratio, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
+              data: #{@measurements.map{|m| [(m.timestamp.to_i + 3600) * 1000, m.p2_ratio]}}
             }]
         };
 
