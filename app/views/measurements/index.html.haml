@@ -21,8 +21,6 @@
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
         %th.text-center= Measurement.human_attribute_name(:p1_count)
         %th.text-center= Measurement.human_attribute_name(:p2_count)
-        %th.text-center= Measurement.human_attribute_name(:temperature)
-        %th.text-center= Measurement.human_attribute_name(:humidity)
 
     %tbody
       - @measurements.each do |measurement|
@@ -37,13 +35,5 @@
             \%
           %td.text-center= measurement.p1_count
           %td.text-center= measurement.p2_count
-          %td.text-center
-            - if measurement.temperature.present?
-              = measurement.temperature
-              °C
-          %td.text-center
-            - if measurement.humidity.present?
-              = measurement.humidity
-              \%
 
 .text-center= paginate @measurements, theme: "twitter-bootstrap-3"
