@@ -26,17 +26,13 @@ class Api::V1::MeasurementsController < Api::V1::BaseController
   def measurement_params
     params.
       require(:measurement).
-      permit(:seq,
+      permit(:transport,
              :humidity,
              :temperature,
              :timestamp,
-             :p1_concentration,
-             :p1_filtered,
-             :p1_lpo,
              :p1_ratio,
-             :p2_concentration,
-             :p2_filtered,
-             :p2_lpo,
-             :p2_ratio)
+             :p2_ratio,
+             :p1_count,
+             :p2_count)
   end
 end

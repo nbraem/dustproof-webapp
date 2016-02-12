@@ -29,17 +29,12 @@ nl:
         api_key: "API key"
       measurement:
         timestamp: "Tijdstip"
-        seq: "Volgnummer"
         temperature: "Temperatuur"
         humidity: "Luchtvochtigheid"
-        p1_concentration: "P1 concentratie"
-        p1_filtered: "P1 concentratie (gefilterd)"
-        p1_lpo: "P1 lpo"
         p1_ratio: "P1 ratio"
-        p2_concentration: "P2 concentratie"
-        p2_filtered: "P2 concentratie (gefilterd)"
-        p2_lpo: "P2 lpo"
         p2_ratio: "P2 ratio"
+        p1_count: "P1 deeltjes"
+        p2_count: "P2 deeltjes"
 
   flash:
     users:

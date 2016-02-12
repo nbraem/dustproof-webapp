@@ -2,14 +2,13 @@
 
 FactoryGirl.define do
   factory :measurement do
-    sequence(:seq)
-    p1_lpo 999999
-    p2_lpo 888888
+    p1_ratio 1.20
+    p2_ratio 0.10
     timestamp Time.now
     user
 
     trait :invalid do
-      p2_lpo nil
+      p2_ratio nil
     end
 
     factory :invalid_measurement, traits: [:invalid]

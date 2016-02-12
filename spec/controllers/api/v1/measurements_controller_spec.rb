@@ -56,7 +56,7 @@ describe Api::V1::MeasurementsController, type: :controller do
         post :create, measurement: invalid_attributes, api_key: user.api_key
         expect(response.status).to eql(500)
         body = HashWithIndifferentAccess.new(JSON.parse(response.body))
-        expect(body["error"]).to eql("P2 lpo moet opgegeven zijn")
+        expect(body["error"]).to eql("P2 ratio moet opgegeven zijn")
       end
     end
   end

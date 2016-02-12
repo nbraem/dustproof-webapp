@@ -15,31 +15,33 @@
   %table.table.table-condensed.table-hover
     %thead
       %tr
-        %th #
+        %th ID
         %th.text-center= sort_link(@q, :timestamp)
-        %th.text-center
-          = Measurement.human_attribute_name(:temperature)
-        %th.text-center
-          = Measurement.human_attribute_name(:humidity)
         %th.text-center= Measurement.human_attribute_name(:p1_ratio)
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
+        %th.text-center= Measurement.human_attribute_name(:p1_count)
+        %th.text-center= Measurement.human_attribute_name(:p2_count)
+        %th.text-center= Measurement.human_attribute_name(:temperature)
+        %th.text-center= Measurement.human_attribute_name(:humidity)
 
     %tbody
       - @measurements.each do |measurement|
         %tr
-          %th{ scope: "row" }= measurement.seq
+          %th{ scope: "row" }= measurement.id
           %td.text-center.nowrap= l Time.at(measurement.timestamp), format: :short
-          %td.text-center
-            = measurement.temperature
-            °C
-          %td.text-center
-            = measurement.humidity
-            \%
           %td.text-center
             = measurement.p1_ratio
             \%
           %td.text-center
             = measurement.p2_ratio
+            \%
+          %td.text-center= measurement.p1_count
+          %td.text-center= measurement.p2_count
+          %td.text-center
+            = measurement.temperature
+            °C
+          %td.text-center
+            = measurement.humidity
             \%
 
 .text-center= paginate @measurements, theme: "twitter-bootstrap-3"

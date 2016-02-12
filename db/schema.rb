@@ -11,27 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207004053) do
+ActiveRecord::Schema.define(version: 20160212002218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "measurements", force: :cascade do |t|
-    t.integer  "seq",           limit: 8, null: false
-    t.float    "p1_concentration"
-    t.float    "p1_filtered"
-    t.integer  "p1_lpo",           limit: 8
     t.float    "p1_ratio"
-    t.float    "p2_concentration"
-    t.float    "p2_filtered"
-    t.integer  "p2_lpo",           limit: 8
     t.float    "p2_ratio"
     t.float    "humidity"
     t.float    "temperature"
-    t.datetime "timestamp",                  null: false
+    t.datetime "timestamp",   null: false
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "transport"
+    t.integer  "p1_count"
+    t.integer  "p2_count"
   end
 
   add_index "measurements", ["user_id"], name: "index_measurements_on_user_id", using: :btree

@@ -6,68 +6,6 @@
               renderTo: 'container1'
             },
             title: {
-              text: 'Temperatuur'
-            },
-            xAxis: {
-              title: {
-                text: 'Meting'
-              }
-            },
-            yAxis: {
-              title: {
-                text: 'Temperatuur ( °C )'
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                return this.point.timestamp + '<br><b>'+ this.point.y + ' °C</b>';
-              }
-            },
-            legend: {
-                enabled: false
-            },
-            series: [{
-              color: '#ff0000',
-              name: 'Temperatuur',
-              data: #{@measurements.map{|m| {y: m.temperature, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
-            }]
-        };
-        var options2 = {
-            chart: {
-              renderTo: 'container2'
-            },
-            title: {
-              text: 'Luchtvochtigheid'
-            },
-            xAxis: {
-              title: {
-                text: 'Meting'
-              }
-            },
-            yAxis: {
-              title: {
-                text: 'Luchtvochtigheid ( % )'
-              }
-            },
-            tooltip: {
-              formatter: function() {
-                return this.point.timestamp + '<br><b>'+ this.point.y + ' %</b>';
-              }
-            },
-            legend: {
-                enabled: false
-            },
-            series: [{
-              color: '#0000ff',
-              name: 'Luchtvochtigheid',
-              data: #{@measurements.map{|m| {y: m.humidity, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
-            }]
-        };
-        var options3 = {
-            chart: {
-              renderTo: 'container3'
-            },
-            title: {
               text: 'P1 ratio'
             },
             xAxis: {
@@ -94,9 +32,9 @@
               data: #{@measurements.map{|m| {y: m.p1_ratio, timestamp: m.timestamp.strftime("%d-%m-%Y %H:%M")}}.to_json}
             }]
         };
-        var options4 = {
+        var options2 = {
             chart: {
-              renderTo: 'container4'
+              renderTo: 'container2'
             },
             title: {
               text: 'P2 ratio'
@@ -128,8 +66,6 @@
 
         var chart1 = new Highcharts.Chart(options1);
         var chart2 = new Highcharts.Chart(options2);
-        var chart3 = new Highcharts.Chart(options3);
-        var chart4 = new Highcharts.Chart(options4);
 
     });
 
@@ -147,7 +83,5 @@
           = f.submit "Filter", class: "btn btn-primary btn-sm"
           = link_to "Reset", [:chart, :measurements], class: "btn btn-default btn-sm"
 %br
-#container3{style: "min-width: 400px; height: 400px; margin: 0 auto"}
-#container4{style: "min-width: 400px; height: 400px; margin: 0 auto"}
 #container1{style: "min-width: 400px; height: 400px; margin: 0 auto"}
 #container2{style: "min-width: 400px; height: 400px; margin: 0 auto"}
