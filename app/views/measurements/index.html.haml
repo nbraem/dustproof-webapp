@@ -38,10 +38,12 @@
           %td.text-center= measurement.p1_count
           %td.text-center= measurement.p2_count
           %td.text-center
-            = measurement.temperature
-            °C
+            - if measurement.temperature.present?
+              = measurement.temperature
+              °C
           %td.text-center
-            = measurement.humidity
-            \%
+            - if measurement.humidity.present?
+              = measurement.humidity
+              \%
 
 .text-center= paginate @measurements, theme: "twitter-bootstrap-3"
