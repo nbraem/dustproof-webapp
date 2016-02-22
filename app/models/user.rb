@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true
 
   has_many :measurements, dependent: :destroy
+  has_many :average_hourly_measurements
+  has_many :average_daily_measurements
 
   before_create :generate_api_key
 
