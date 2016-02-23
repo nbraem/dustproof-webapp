@@ -17,8 +17,7 @@
 /tmp
 
 config/database.yml
-.env.development
-.env.test
+config/secrets.yml
 
 TODO
 
