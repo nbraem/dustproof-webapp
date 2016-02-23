@@ -5,9 +5,19 @@ set :repo_url, "git@github.com:Dustproof/dustproof-webapp.git"
 set :branch, "master"
 set :deploy_to, "/home/rails/dustproof"
 set :default_env, rvm_bin_path: "~/.rvm/bin"
-set :linked_files, %w(config/database.yml config/secrets.yml)
+set :linked_files, %w(config/database.yml config/secrets.yml config/shoryuken.yml)
 set :linked_dirs, %w(tmp/pids)
 set :log_level, :info
+
+# Shoryuken
+set :shoryuken_default_hooks,  true
+
+set :shoryuken_pid,            -> { File.join(shared_path, 'tmp', 'pids', 'shoryuken.pid') }
+set :shoryuken_env,            -> { fetch(:rack_env, fetch(:rails_env, fetch(:stage))) }
+set :shoryuken_log,            -> { File.join(shared_path, 'log', 'shoryuken.log') }
+set :shoryuken_config,         -> { File.join(release_path, 'config', 'shoryuken.yml') }
+set :shoryuken_options,        -> { ['--rails'] }
+set :shoryuken_queues,         -> { ['dustproof-queue-production'] }
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
