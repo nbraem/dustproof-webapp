@@ -77,7 +77,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-    # Mailer config
+  # Mailer config
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "smtp.mandrillapp.com",
@@ -92,12 +92,4 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = { from: "bounces@dustproof.be" }
   config.action_mailer.default_url_options = { host: "dustproof.be" }
-
-    # Exception notification
-  config.middleware.use ExceptionNotification::Rack,
-                        email: {
-                          email_prefix: "[DustProof Exception] ",
-                          sender_address: %{"DustProof" <bounces@dustproof.be>},
-                          exception_recipients: %w(hostmaster@dustproof.be)
-                        }
 end
