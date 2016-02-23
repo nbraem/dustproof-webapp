@@ -6,7 +6,7 @@ set :branch, "master"
 set :deploy_to, "/home/rails/dustproof"
 set :default_env, rvm_bin_path: "~/.rvm/bin"
 set :linked_files, %w(config/database.yml config/secrets.yml config/shoryuken.yml)
-set :linked_dirs, %w(bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
+set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets public/system)
 set :log_level, :info
 
 # Shoryuken
