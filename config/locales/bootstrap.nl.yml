@@ -6,6 +6,8 @@ nl:
       index: "Gebruikers"
       new: "Nieuwe gebruiker"
       edit: "Bewerken"
+    incoming_messages:
+      index: "Incoming messages"
   helpers:
     actions: "Actions"
     submit:

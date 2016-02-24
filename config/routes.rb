@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   # Admin routes
   scope "/admin" do
     resources :users
+    resources :incoming_messages do
+      collection do
+        delete :destroy_all
+      end
+    end
   end
 
   # API
