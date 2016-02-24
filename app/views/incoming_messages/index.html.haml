@@ -1,0 +1,28 @@
+- model_class = IncomingMessage
+
+.page-header
+  %h1 Incoming messages
+
+= link_to icon_text("trash", "Destroy all"), [:destroy_all, :incoming_messages], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger"
+
+.row
+  .col-lg-12
+    .text-right=page_entries_info @incoming_messages
+    .text-center= paginate @incoming_messages, theme: "twitter-bootstrap-3"
+
+    %table.table.table-striped#incoming_messages
+      %thead
+        %tr
+          %th= sort_link(@q, :id)
+          %th= sort_link(@q, :created_at, default_order: :desc)
+          %th= sort_link(@q, :body)
+          %th= sort_link(@q, :status)
+      %tbody
+        - @incoming_messages.each do |incoming_message|
+          %tr{ id: dom_id(incoming_message) }
+            %td= link_to incoming_message.id, incoming_message_path(incoming_message)
+            %td= l incoming_message.created_at, format: :short
+            %td= incoming_message.body
+            %td= incoming_message.status
+
+      .text-center= paginate @incoming_messages, theme: "twitter-bootstrap-3"

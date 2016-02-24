@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222200752) do
+ActiveRecord::Schema.define(version: 20160224112131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "incoming_messages", force: :cascade do |t|
+    t.text     "body"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "measurements", force: :cascade do |t|
     t.float    "p1_ratio"
