@@ -80,11 +80,11 @@ Rails.application.configure do
   # Mailer config
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
+    address: "smtp.sendgrid.net",
     port: 587,
     enable_starttls_auto: true,
-    user_name: Rails.application.secrets.mandrill["user_name"],
-    password: Rails.application.secrets.mandrill["password"],
+    user_name: Rails.application.secrets.sendgrid["user_name"],
+    password: Rails.application.secrets.sendgrid["password"],
     authentication: :login,
     domain: "dustproof.be"
   }
