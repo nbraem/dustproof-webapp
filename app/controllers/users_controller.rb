@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def new
     add_breadcrumb :new
-    @user = User.new(admin: true)
+    @user = User.new
     respond_with(@user)
   end
 

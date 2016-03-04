@@ -17,7 +17,6 @@ set :shoryuken_env,            -> { fetch(:rack_env, fetch(:rails_env, fetch(:st
 set :shoryuken_log,            -> { File.join(shared_path, 'log', 'shoryuken.log') }
 set :shoryuken_config,         -> { File.join(release_path, 'config', 'shoryuken.yml') }
 set :shoryuken_options,        -> { ['--rails'] }
-set :shoryuken_queues,         -> { ['dustproof-queue-production'] }
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call

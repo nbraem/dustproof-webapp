@@ -35,6 +35,12 @@ nl:
         p2_ratio: "P2 ratio"
         p1_count: "P1 deeltjes"
         p2_count: "P2 deeltjes"
+      incoming_message:
+        gateway_eui: "Gateway"
+        human_gateway: "Gateway"
+        device_eui: "Device"
+        rssi: "RSSI"
+        snr: "SNR"
 
   flash:
     users:

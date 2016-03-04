@@ -5,10 +5,18 @@ class IncomingMessagesController < ApplicationController
   add_breadcrumb :index, :incoming_messages_path
 
   def index
-    @q = IncomingMessage.search(params[:q])
-    @q.sorts = "created_at desc" if @q.sorts.empty?
-    @incoming_messages = @q.result(distinct: true).page(params[:page])
-    respond_with(@incoming_messages)
+    respond_to do |format|
+      format.html {
+        @q = IncomingMessage.search(params[:q])
+        @q.sorts = "timestamp desc" if @q.sorts.empty?
+        @incoming_messages = @q.result(distinct: true).page(params[:page])
+      }
+      format.csv {
+        send_data IncomingMessage.order("timestamp desc").to_csv,
+          filename: "Dustproof - Incoming Messages.csv",
+          type: 'text/csv'
+      }
+    end
   end
 
   def show

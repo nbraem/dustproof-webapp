@@ -5,7 +5,14 @@ class SqsWorker
                     auto_delete: true
 
   def perform(sqs_msg, body)
-    IncomingMessage.create! body: body, status: "new"
-    puts "Received message: #{body}"
+    sent_timestamp = sqs_msg.attributes['SentTimestamp'].to_i / 1000
+    incoming_message = IncomingMessage.new body: body,
+      timestamp: Time.at(sent_timestamp),
+      status: "new"
+    if incoming_message.save
+      puts "Saved incoming message: #{body}"
+    else
+      puts "Discarded incoming message: #{incoming_message.errors.full_messages.to_sentence}"
+    end
   end
 end
