@@ -7,6 +7,7 @@ class CreateLoraMetricsView < ActiveRecord::Migration
                count(data) AS datapoints,
                date_trunc('hour', timestamp) AS hourly_timestamp
             FROM incoming_messages
+              WHERE date_trunc('hour', timestamp) < date_trunc('hour', (now() at time zone 'utc'))
               GROUP BY hourly_timestamp, device_eui
               ORDER BY hourly_timestamp;
     SQL
