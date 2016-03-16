@@ -9,14 +9,6 @@ class MeasurementsController < ApplicationController
     respond_with(@measurements)
   end
 
-  def chart
-    @q = current_user.measurements.search(params[:q])
-    @q.sorts = "timestamp ASC" if @q.sorts.empty?
-    @measurements = @q.result
-    @measurements = @measurements.where(timestamp: 2.hours.ago..Time.now) unless params[:q]
-    respond_with(@measurements)
-  end
-
   def destroy
     @measurement.destroy
     redirect_to :measurements

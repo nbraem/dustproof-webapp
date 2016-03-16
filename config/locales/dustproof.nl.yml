@@ -35,6 +35,10 @@ nl:
         p2_ratio: "P2 ratio"
         p1_count: "P1 deeltjes"
         p2_count: "P2 deeltjes"
+      average_hourly_measurement:
+        hourly_timestamp: "Tijdstip"
+      average_daily_measurement:
+        daily_timestamp: "Datum"
       incoming_message:
         gateway_eui: "Gateway"
         human_gateway: "Gateway"
