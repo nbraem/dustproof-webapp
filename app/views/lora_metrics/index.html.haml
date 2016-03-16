@@ -1,0 +1,71 @@
+- content_for(:title) do
+  Lora metrics
+  &ndash;
+  Overzicht per uur
+
+- content_for :scripts do
+  :javascript
+    $(function () {
+        var options1 = {
+            chart: {
+              type: 'column',
+              renderTo: 'container1'
+            },
+            title: {
+              text: 'Lora pakketverlies'
+            },
+            xAxis: {
+              type: 'datetime',
+              title: {
+                text: 'Tijdstip'
+              },
+              dateTimeLabelFormats: {
+                day: '%a %e %b'
+              }
+            },
+            yAxis: {
+              title: {
+                  text: 'Verloren pakketten'
+              }
+            },
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            tooltip: {
+              valueDecimals: 0,
+              dateTimeLabelFormats: {
+                millisecond: "%A, %b %e, %H:%M:%S.%L",
+                second: "%A, %b %e, %H:%M:%S",
+                minute: "%A, %b %e, %H:%M",
+                hour: "%e %b %H:%M",
+                day: "%A, %b %e, %Y",
+                week: "Week van %A, %b %e, %Y",
+                month: "%B %Y",
+                year: "%Y"
+              }
+            },
+            legend: {
+              enabled: false
+            },
+            series: [{
+              name: 'Verloren pakketten',
+              data: #{@lora_metrics.map{|m| [m.chart_datetime, m.datapoints_lost]}}
+            }]
+        };
+
+        var chart1 = new Highcharts.Chart(options1);
+    });
+
+.page-header
+  %h1
+    Lora metrics
+    %small Overzicht per uur
+
+.row
+  .col-lg-12
+    #container1{style: "min-width: 310px; height: 500px; margin: 0 auto"}
