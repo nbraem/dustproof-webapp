@@ -55,10 +55,12 @@
             },
             series: [{
               name: 'P1',
+              color: '#ff0000',
               data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p1_ratio]}}
             },
             {
               name: 'P2',
+              color: '#008000',
               data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p2_ratio]}}
             }]
         };
@@ -106,10 +108,12 @@
             },
             series: [{
               name: 'P1',
+              color: '#ff0000',
               data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p1_count]}}
             },
             {
               name: 'P2',
+              color: '#008000',
               data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p2_count]}}
             }]
         };
