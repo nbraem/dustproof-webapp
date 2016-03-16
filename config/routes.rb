@@ -38,7 +38,6 @@ Rails.application.routes.draw do
   resources :measurements do
     collection do
       delete :destroy_all
-      get :chart
     end
   end
 
