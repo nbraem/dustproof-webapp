@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   resources :average_hourly_measurements
   resources :average_daily_measurements
+  resources :lora_metrics
 
   # Other actions
   put "/regenerate_api_key", to: "api_key#regenerate_api_key"
