@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   devise_scope :user do
     authenticated :user do
-      root to: "measurements#index", as: :authenticated_root
+      root to: "average_hourly_measurements#index", as: :authenticated_root
     end
   end
 
@@ -40,6 +40,9 @@ Rails.application.routes.draw do
       delete :destroy_all
     end
   end
+
+  resources :average_hourly_measurements
+  resources :average_daily_measurements
 
   # Other actions
   put "/regenerate_api_key", to: "api_key#regenerate_api_key"
