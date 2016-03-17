@@ -74,26 +74,6 @@ describe IncomingMessage do
 
   it { should validate_presence_of(:timestamp) }
 
-  context "when the gateway is known" do
-    describe "#human_gateway" do
-      it "should return a human readable representation of the gateway" do
-        expect(incoming_message.valid?).to be true
-        incoming_message.gateway_eui = "AA555A0000098006"
-        expect(incoming_message.human_gateway).to eq("Middelheim")
-      end
-    end
-  end
-
-  context "when the gateway is unknown" do
-    describe "#human_gateway" do
-      it "should just return the eui of gateway" do
-        expect(incoming_message.valid?).to be true
-        incoming_message.gateway_eui = "unknown"
-        expect(incoming_message.human_gateway).to eq("unknown")
-      end
-    end
-  end
-
   context "with a valid JSON payload" do
     it "should extract Lora data" do
       incoming_message = FactoryGirl.build(:incoming_message)

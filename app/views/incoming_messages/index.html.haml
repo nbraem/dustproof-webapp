@@ -27,7 +27,7 @@
         - @incoming_messages.each do |incoming_message|
           %tr{ id: dom_id(incoming_message) }
             %td= link_to incoming_message.timestamp, incoming_message_path(incoming_message)
-            %td= incoming_message.human_gateway
+            %td= incoming_message.gateway_eui
             %td= incoming_message.device_eui
             %td
               = incoming_message.frequency

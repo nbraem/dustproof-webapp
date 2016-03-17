@@ -21,11 +21,9 @@
           = @incoming_message.timestamp
 
         %p
-          %strong= model_class.human_attribute_name(:human_gateway)
+          %strong= model_class.human_attribute_name(:gateway_eui)
           %br
-          = @incoming_message.human_gateway
-          %br
-          == (#{@incoming_message.gateway_eui})
+          = @incoming_message.gateway_eui
 
         - %w(device_eui packet_time tmst).each do |attr|
           %p

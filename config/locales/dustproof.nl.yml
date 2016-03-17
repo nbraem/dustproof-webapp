@@ -41,7 +41,6 @@ nl:
         daily_timestamp: "Datum"
       incoming_message:
         gateway_eui: "Gateway"
-        human_gateway: "Gateway"
         device_eui: "Device"
         rssi: "RSSI"
         snr: "SNR"

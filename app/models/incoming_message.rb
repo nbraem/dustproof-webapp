@@ -4,19 +4,6 @@ class IncomingMessage < ActiveRecord::Base
   validate :is_not_duplicate_packet, on: :create
   after_create :convert_to_measurement
 
-  def human_gateway
-    case self.gateway_eui
-    when "AA555A0000098006"
-      "Middelheim"
-    when "AA555A0000094194"
-      "Walem"
-    when "AA555A0000094200"
-      "Boom A12"
-    else
-      self.gateway_eui
-    end
-  end
-
   def self.to_csv
     columns = %w[id gateway_eui device_eui timestamp packet_time tmst frequency
       data_rate rssi snr data comments]
