@@ -17,6 +17,7 @@
       %tr
         %th ID
         %th.text-center= sort_link(@q, :timestamp)
+        %th.text-center= Measurement.human_attribute_name(:pm25_ratio)
         %th.text-center= Measurement.human_attribute_name(:p1_ratio)
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
         %th.text-center= Measurement.human_attribute_name(:p1_count)
@@ -27,6 +28,9 @@
         %tr
           %th{ scope: "row" }= measurement.id
           %td.text-center.nowrap= l Time.at(measurement.timestamp), format: :short
+          %td.text-center
+            = measurement.pm25_ratio
+            \%
           %td.text-center
             = measurement.p1_ratio
             \%

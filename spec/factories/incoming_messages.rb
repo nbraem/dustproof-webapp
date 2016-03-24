@@ -24,9 +24,15 @@ FactoryGirl.define do
               '"snr":-14.2,"data":null}'
     end
 
+    trait :via_wifi do
+      body '{"api_key":"API_KEY","transport":"wifi",'\
+              '"measurement":{"ratioPM25": 0,"ratioP2": 0,"nP1": 0,"nP2": 0}}'
+    end
+
     factory :incoming_message_with_lora_data, traits: [:with_lora_data]
     factory :incoming_message_with_lora_data_from_another_device_eui,
       traits: [:with_lora_data_from_different_device_eui]
     factory :incoming_message_with_invalid_lora_data, traits: [:with_invalid_lora_data]
+    factory :incoming_message_via_wifi, traits: [:via_wifi]
   end
 end

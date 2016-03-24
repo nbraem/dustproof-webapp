@@ -24,6 +24,11 @@ describe Measurement do
   end
 
   it do
+    should have_db_column(:pm25_ratio).
+      of_type(:float)
+  end
+
+  it do
     should have_db_column(:p1_ratio).
       of_type(:float)
   end
@@ -44,7 +49,7 @@ describe Measurement do
   end
 
   it { should validate_presence_of(:timestamp) }
-  it { should validate_presence_of(:p1_ratio) }
+  it { should validate_presence_of(:pm25_ratio) }
   it { should validate_presence_of(:p2_ratio) }
 
   it { should belong_to(:user) }

@@ -31,6 +31,7 @@ nl:
         timestamp: "Tijdstip"
         temperature: "Temperatuur"
         humidity: "Luchtvochtigheid"
+        pm25_ratio: "PM2.5 ratio"
         p1_ratio: "P1 ratio"
         p2_ratio: "P2 ratio"
         p1_count: "P1 deeltjes"

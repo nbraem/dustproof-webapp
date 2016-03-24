@@ -68,11 +68,36 @@ describe IncomingMessage do
       of_type(:text)
   end
 
+  it do
+    should have_db_column(:transport).
+      of_type(:string)
+  end
+
   it "should have a body" do
     expect(incoming_message.valid?).to be true
   end
 
   it { should validate_presence_of(:timestamp) }
+
+  context "with a valid JSON payload through Lora" do
+    it "should extract the transport" do
+      incoming_message = FactoryGirl.build(:incoming_message)
+      expect(incoming_message.valid?).to be true
+
+      expect(incoming_message.status).to eq("processed")
+      expect(incoming_message.transport).to eq("lora")
+    end
+  end
+
+  context "with a valid JSON payload through WiFi" do
+    it "should extract the transport" do
+      incoming_message = FactoryGirl.build(:incoming_message_via_wifi)
+      expect(incoming_message.valid?).to be true
+
+      expect(incoming_message.status).to eq("processed")
+      expect(incoming_message.transport).to eq("wifi")
+    end
+  end
 
   context "with a valid JSON payload" do
     it "should extract Lora data" do

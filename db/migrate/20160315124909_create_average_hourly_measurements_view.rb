@@ -6,6 +6,7 @@ class CreateAverageHourlyMeasurementsView < ActiveRecord::Migration
                user_id,
                avg(temperature) AS average_temperature,
                avg(humidity) AS average_humidity,
+               avg(pm25_ratio) AS average_pm25_ratio,
                avg(p1_ratio) AS average_p1_ratio,
                avg(p1_count) AS average_p1_count,
                avg(p2_ratio) AS average_p2_ratio,

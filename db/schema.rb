@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316153713) do
+ActiveRecord::Schema.define(version: 20160324123252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,10 @@ ActiveRecord::Schema.define(version: 20160316153713) do
     t.text     "data"
     t.string   "packet_time"
     t.text     "comments"
+    t.string   "transport"
   end
+
+  add_index "incoming_messages", ["transport"], name: "index_incoming_messages_on_transport", using: :btree
 
   create_table "measurements", force: :cascade do |t|
     t.float    "p1_ratio"
@@ -46,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160316153713) do
     t.string   "transport"
     t.integer  "p1_count"
     t.integer  "p2_count"
+    t.float    "pm25_ratio"
   end
 
   add_index "measurements", ["user_id"], name: "index_measurements_on_user_id", using: :btree

@@ -30,6 +30,7 @@ class Api::V1::MeasurementsController < Api::V1::BaseController
              :humidity,
              :temperature,
              :timestamp,
+             :pm25_ratio,
              :p1_ratio,
              :p2_ratio,
              :p1_count,
