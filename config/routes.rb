@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   resources :average_hourly_measurements
   resources :average_daily_measurements
+  resources :wifi_metrics
   resources :lora_metrics
 
   # Other actions
