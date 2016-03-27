@@ -9,6 +9,6 @@ class AverageDailyMeasurement < ActiveRecord::Base
   scope :this_month, -> { where(daily_timestamp: Date.today.beginning_of_month.to_time..Time.now) }
 
   def chart_datetime
-    (daily_timestamp.to_i + 3600) * 1000 if daily_timestamp
+    daily_timestamp.to_i * 1000 if daily_timestamp
   end
 end

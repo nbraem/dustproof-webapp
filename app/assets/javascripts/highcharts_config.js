@@ -1,6 +1,9 @@
 var ready_highcharts;
 ready_highcharts = function() {
   Highcharts.setOptions({
+    global: {
+      useUTC: false
+    },
     lang: {
       decimalPoint: ",",
       thousandsSep: " ",
