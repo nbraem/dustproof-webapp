@@ -50,6 +50,7 @@ class IncomingMessage < ActiveRecord::Base
 
         p1_ratio = nil
         pm25_ratio = json_data['measurement']['ratioPM25']
+        p1_ratio = json_data['measurement']['ratioP1']
         p2_ratio = json_data['measurement']['ratioP2']
         p1_count = json_data['measurement']['nP1']
         p2_count = json_data['measurement']['nP2']
