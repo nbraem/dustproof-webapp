@@ -33,11 +33,11 @@ class IncomingMessage < ActiveRecord::Base
       # Extract values
       byte_array = self.data.chars.each_slice(4).map(&:join)
       # lora_seq_id = byte_array[0]
-      p1_ratio = nil
-      pm25_ratio = byte_array[1].to_i(16) / 100.0
-      p2_ratio = byte_array[2].to_i(16) / 100.0
-      p1_count = byte_array[3].to_i(16)
-      p2_count = byte_array[4].to_i(16)
+      p1_ratio = byte_array[1].to_i(16) / 100.0
+      pm25_ratio = byte_array[2].to_i(16) / 100.0
+      p2_ratio = byte_array[3].to_i(16) / 100.0
+      p1_count = byte_array[4].to_i(16)
+      p2_count = byte_array[5].to_i(16)
 
       user = User.where(device_eui: self.device_eui).first
 
