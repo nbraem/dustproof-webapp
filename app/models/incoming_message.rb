@@ -3,7 +3,7 @@ class IncomingMessage < ActiveRecord::Base
   before_validation :extract_lora_data
   validates :timestamp, presence: true
   validate :is_not_duplicate_packet, on: :create
-  after_create :convert_to_measurement
+  # after_create :convert_to_measurement
 
   def self.to_csv
     columns = %w[id gateway_eui device_eui timestamp packet_time tmst frequency
