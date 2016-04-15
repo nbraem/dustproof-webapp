@@ -12,7 +12,7 @@
               renderTo: 'container1'
             },
             title: {
-              text: 'PM2.5 & P2 ratio'
+              text: 'P1, P2 & PM2.5 ratio'
             },
             subtitle: {
                 text: document.ontouchstart === undefined ?
@@ -25,21 +25,53 @@
               },
               dateTimeLabelFormats: {
                 day: '%a %e %b'
-              }
+              },
+              crosshair: true
             },
-            yAxis: {
+            yAxis: [{
               labels: {
-                formatter: function() {
-                  return this.value + ' %';
+                format: '{value} °C',
+                style: {
+                    color: Highcharts.getOptions().colors[5]
+                }
+              },
+              title: {
+                text: 'Temperatuur',
+                style: {
+                    color: Highcharts.getOptions().colors[5]
+                }
+              },
+              opposite: true
+            },
+            {
+              labels: {
+                format: '{value} %',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+              },
+              title: {
+                text: 'Luchtvochtigheid',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+              },
+              opposite: true
+            },
+            {
+              labels: {
+                format: '{value} %',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
                 }
               },
               title: {
                   text: 'Ratio'
               }
-            },
+            }],
             tooltip: {
+              shared: true,
               valueDecimals: 2,
-              valueSuffix: ' %',
               dateTimeLabelFormats: {
                 millisecond: "%A, %b %e, %H:%M:%S.%L",
                 second: "%A, %b %e, %H:%M:%S",
@@ -57,75 +89,61 @@
               align: 'center',
             },
             series: [{
-              name: 'PM2.5',
-              color: '#ff0000',
-              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_pm25_ratio]}}
-            },
-            {
-              name: 'P2',
-              color: '#008000',
-              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p2_ratio]}}
-            }]
-        };
-
-        var options2 = {
-            chart: {
-              zoomType: 'x',
-              renderTo: 'container2'
-            },
-            title: {
-              text: 'Aantal deeltjes'
-            },
-            subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'Klik en sleep in de grafiek om in te zoomen' : 'Knijp de grafiek om in te zoomen'
-            },
-            xAxis: {
-              type: 'datetime',
-              title: {
-                text: 'Tijdstip'
+              name: 'Temperatuur',
+              color: Highcharts.getOptions().colors[5],
+              type: 'column',
+              yAxis: 0,
+              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_temperature]}},
+              tooltip: {
+                valueSuffix: ' °C'
               },
-              dateTimeLabelFormats: {
-                day: '%a %e %b'
-              }
+              visible: true
             },
-            yAxis: {
-              title: {
-                  text: 'Aantal deeltjes'
-              }
+            {
+              name: 'Luchtvochtigheid',
+              color: Highcharts.getOptions().colors[0],
+              type: 'column',
+              yAxis: 1,
+              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_humidity]}},
+              tooltip: {
+                valueSuffix: ' %'
+              },
+              visible: false
             },
-            tooltip: {
-              valueDecimals: 0,
-              dateTimeLabelFormats: {
-                millisecond: "%A, %b %e, %H:%M:%S.%L",
-                second: "%A, %b %e, %H:%M:%S",
-                minute: "%A, %b %e, %H:%M",
-                hour: "%A %e %b %H:%M",
-                day: "%A, %b %e, %Y",
-                week: "Week van %A, %b %e, %Y",
-                month: "%B %Y",
-                year: "%Y"
-              }
-            },
-            legend: {
-              enabled: true,
-              borderWidth: 1,
-              align: 'center'
-            },
-            series: [{
+            {
               name: 'P1',
-              color: '#ff0000',
-              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p1_count]}}
+              color: Highcharts.getOptions().colors[2],
+              type: 'spline',
+              yAxis: 2,
+              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p1_ratio]}},
+              tooltip: {
+                valueSuffix: ' %'
+              }
             },
             {
               name: 'P2',
-              color: '#008000',
-              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p2_count]}}
-            }]
+              color: Highcharts.getOptions().colors[3],
+              type: 'spline',
+              yAxis: 2,
+              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p2_ratio]}},
+              tooltip: {
+                valueSuffix: ' %'
+              }
+            },
+            {
+              name: 'PM2.5',
+              color: Highcharts.getOptions().colors[4],
+              type: 'spline',
+              yAxis: 2,
+              data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_pm25_ratio]}},
+              tooltip: {
+                valueSuffix: ' %'
+              }
+            }
+            ]
         };
 
         var chart1 = new Highcharts.Chart(options1);
-        var chart2 = new Highcharts.Chart(options2);
 
     });
 
@@ -137,7 +155,3 @@
 .row
   .col-lg-12
     #container1{style: "min-width: 310px; height: 500px; margin: 0 auto"}
-%hr
-.row
-  .col-lg-12
-    #container2{style: "min-width: 310px; height: 500px; margin: 0 auto"}

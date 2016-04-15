@@ -29,8 +29,8 @@ nl:
         api_key: "API key"
       measurement:
         timestamp: "Tijdstip"
-        temperature: "Temperatuur"
-        humidity: "Luchtvochtigheid"
+        temperature: "Temp."
+        humidity: "Luchtv."
         pm25_ratio: "PM2.5 ratio"
         p1_ratio: "P1 ratio"
         p2_ratio: "P2 ratio"
