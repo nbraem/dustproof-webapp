@@ -13,6 +13,13 @@ class CreateAverageDailyMeasurementsView < ActiveRecord::Migration
                avg(p2_count) AS average_p2_count,
                date_trunc('day', timestamp) AS daily_timestamp
             FROM measurements
+              WHERE temperature IS NOT NULL
+                AND humidity IS NOT NULL
+                AND pm25_ratio IS NOT NULL
+                AND p1_ratio IS NOT NULL
+                AND p1_count IS NOT NULL
+                AND p2_ratio IS NOT NULL
+                AND p2_count IS NOT NULL
               GROUP BY daily_timestamp, user_id
               ORDER BY daily_timestamp;
     SQL
