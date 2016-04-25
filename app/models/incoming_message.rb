@@ -53,13 +53,17 @@ class IncomingMessage < ActiveRecord::Base
 
         api_key = json_data['api_key']
 
-        p1_ratio = json_data['measurement']['ratioP1']
-        p2_ratio = json_data['measurement']['ratioP2']
-        pm25_ratio = json_data['measurement']['ratioPM25']
-        p1_count = json_data['measurement']['nP1']
-        p2_count = json_data['measurement']['nP2']
-        temperature = json_data['measurement']['temperature']
-        humidity = json_data['measurement']['humidity']
+        measurement = json_data['measurement']
+        # Extract values
+        byte_array = measurement.chars.each_slice(4).map(&:join)
+        # wifi_seq_id = byte_array[0]
+        p1_ratio = byte_array[1].to_i(16) / 100.0
+        p2_ratio = byte_array[2].to_i(16) / 100.0
+        pm25_ratio = byte_array[3].to_i(16) / 100.0
+        p1_count = byte_array[4].to_i(16)
+        p2_count = byte_array[5].to_i(16)
+        temperature = byte_array[6].to_i(16) / 10.0
+        humidity = byte_array[7].to_i(16) / 10.0
 
       rescue
         print "json parse error"
