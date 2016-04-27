@@ -113,7 +113,7 @@ describe IncomingMessage do
       expect(incoming_message.data_rate).to eq("SF12BW125")
       expect(incoming_message.rssi).to eq(-120)
       expect(incoming_message.snr).to eq(-14.2)
-      expect(incoming_message.data).to eq("000d012f0016003b000526fc26fc")
+      expect(incoming_message.data).to eq("15f400780019005f000d0004004e02c4")
     end
   end
 

@@ -8,13 +8,13 @@ FactoryGirl.define do
     body '{"gatewayEui":"GATEWAY_EUI","deviceEui":"DEVICE_EUI",'\
             '"packetTime":"2016-03-14T11:51:19.783817Z","tmst":3969010612,'\
             '"frequency":868.1,"dataRate":"SF12BW125","rssi":-120,'\
-            '"snr":-14.2,"data":"AA0BLwAWADsABSb8Jvw="}'
+            '"snr":-14.2,"data":"FfQAeAAZAF8ADQAEAE4CxA=="}'
 
     trait :with_lora_data_from_different_device_eui do
       body '{"gatewayEui":"GATEWAY_EUI","deviceEui":"ANOTHER_DEVICE_EUI",'\
               '"packetTime":"2016-03-14T11:51:19.783817Z","tmst":3969010612,'\
               '"frequency":868.1,"dataRate":"SF12BW125","rssi":-120,'\
-              '"snr":-14.2,"data":"AA0BLwAWADsABSb8Jvw="}'
+              '"snr":-14.2,"data":"FfQAeAAZAF8ADQAEAE4CxA=="}'
     end
 
     trait :with_invalid_lora_data do
@@ -26,7 +26,7 @@ FactoryGirl.define do
 
     trait :via_wifi do
       body '{"api_key":"API_KEY","transport":"wifi",'\
-              '"measurement":{"ratioPM25": 0,"ratioP2": 0,"nP1": 0,"nP2": 0}}'
+              '"measurement":"00000a8e05b704d800f300be003d0337"}'
     end
 
     factory :incoming_message_with_lora_data, traits: [:with_lora_data]
