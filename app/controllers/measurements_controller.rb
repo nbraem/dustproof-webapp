@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-  before_action :set_measurement, only: [:destroy]
+  before_action :set_measurement, only: [:show, :destroy]
   respond_to :html
 
   def index

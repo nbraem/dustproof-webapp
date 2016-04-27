@@ -1,0 +1,46 @@
+- model_class = Measurement
+
+.page-header
+  %h1
+    = @measurement.id
+    %small= t '.title', default: model_class.model_name.human.titleize
+
+.row
+  .col-lg-3
+    .row
+      .col-sm-4.col-lg-12
+        .well
+          = link_to icon_text("trash-o", t('.destroy', default: t("helpers.links.destroy"))), measurement_path(@measurement), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-block'
+
+  .col-lg-9
+    .row
+      .col-md-6
+        %p
+          %strong= model_class.human_attribute_name(:timestamp)
+          %br
+          = @measurement.timestamp
+
+        - %w(p1_ratio p2_ratio pm25_ratio).each do |attr|
+          %p
+            %strong= model_class.human_attribute_name(attr)
+            %br
+            = @measurement.send(attr)
+            \%
+
+      .col-md-6
+        - %w(p1_count p2_count).each do |attr|
+          %p
+            %strong= model_class.human_attribute_name(attr)
+            %br
+            = @measurement.send(attr)
+        %p
+          %strong= model_class.human_attribute_name(:temperature)
+          %br
+          = @measurement.temperature
+          &deg;C
+
+        %p
+          %strong= model_class.human_attribute_name(:humidity)
+          %br
+          = @measurement.humidity
+          \%
