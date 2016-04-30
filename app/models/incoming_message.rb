@@ -29,8 +29,8 @@ class IncomingMessage < ActiveRecord::Base
 
   def convert_to_measurement
     # Lora packets contain 8 groups of 2 bytes:
-    # seq    P1    P2    PM25    nP1    nP2    Temp.    Hum.
-    # 0000  0000  0000  0000  0000  0000  0000  0000
+    # seq   P1    P2    nP1   nP2   Temp. Hum.
+    # 0000  0000  0000  0000  0000  0000  0000
     # If this is a message from Lora
     if self.transport == "lora"
       # Extract values
@@ -38,11 +38,10 @@ class IncomingMessage < ActiveRecord::Base
       # lora_seq_id = byte_array[0]
       p1_ratio = byte_array[1].to_i(16) / 100.0
       p2_ratio = byte_array[2].to_i(16) / 100.0
-      pm25_ratio = byte_array[3].to_i(16) / 100.0
-      p1_count = byte_array[4].to_i(16)
-      p2_count = byte_array[5].to_i(16)
-      temperature = byte_array[6].to_i(16) / 10.0
-      humidity = byte_array[7].to_i(16) / 10.0
+      p1_count = byte_array[3].to_i(16)
+      p2_count = byte_array[4].to_i(16)
+      temperature = byte_array[5].to_i(16) / 10.0
+      humidity = byte_array[6].to_i(16) / 10.0
 
       user = User.where(device_eui: self.device_eui).first
 
@@ -59,11 +58,10 @@ class IncomingMessage < ActiveRecord::Base
         # wifi_seq_id = byte_array[0]
         p1_ratio = byte_array[1].to_i(16) / 100.0
         p2_ratio = byte_array[2].to_i(16) / 100.0
-        pm25_ratio = byte_array[3].to_i(16) / 100.0
-        p1_count = byte_array[4].to_i(16)
-        p2_count = byte_array[5].to_i(16)
-        temperature = byte_array[6].to_i(16) / 10.0
-        humidity = byte_array[7].to_i(16) / 10.0
+        p1_count = byte_array[3].to_i(16)
+        p2_count = byte_array[4].to_i(16)
+        temperature = byte_array[5].to_i(16) / 10.0
+        humidity = byte_array[6].to_i(16) / 10.0
 
       rescue
         print "json parse error"
@@ -74,7 +72,7 @@ class IncomingMessage < ActiveRecord::Base
     if user
       user.measurements.create! p1_ratio: p1_ratio,
                                 p2_ratio: p2_ratio,
-                                pm25_ratio: pm25_ratio,
+                                pm25_ratio: p1_ratio - p2_ratio,
                                 p1_count: p1_count,
                                 p2_count: p2_count,
                                 temperature: temperature,
