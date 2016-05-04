@@ -63,16 +63,16 @@ describe Measurement do
   it "calculates concentration" do
     measurement = FactoryGirl.create(:measurement)
     expect(measurement.valid?).to be true
-    expect(measurement.p1_concentration).to eq(322516)
-    expect(measurement.p2_concentration).to eq(163797)
+    expect(measurement.p1_concentration).to eq(11385575)
+    expect(measurement.p2_concentration).to eq(5784545)
   end
 
   context "with the first measurement" do
     it "calculates filtered concentration" do
       measurement = FactoryGirl.build(:measurement)
       expect(measurement.valid?).to be true
-      expect(measurement.p1_concentration_filtered).to eq(322516)
-      expect(measurement.p2_concentration_filtered).to eq(163797)
+      expect(measurement.p1_concentration_filtered).to eq(11385575)
+      expect(measurement.p2_concentration_filtered).to eq(5784545)
     end
   end
 
@@ -88,8 +88,8 @@ describe Measurement do
                                               p2_ratio: 1.45)
 
       expect(second_measurement.valid?).to be true
-      expect(second_measurement.p1_concentration_filtered).to eq(317832)
-      expect(second_measurement.p2_concentration_filtered).to eq(160850)
+      expect(second_measurement.p1_concentration_filtered).to eq(11220298)
+      expect(second_measurement.p2_concentration_filtered).to eq(5680484)
     end
   end
 end
