@@ -6,144 +6,262 @@
 - content_for :scripts do
   :javascript
     $(function () {
-        var options1 = {
-            chart: {
-              zoomType: 'x',
-              renderTo: 'container1'
-            },
-            title: {
-              text: 'P1, P2 & PM2.5 ratio'
-            },
-            subtitle: {
-                text: document.ontouchstart === undefined ?
-                        'Klik en sleep in de grafiek om in te zoomen' : 'Knijp de grafiek om in te zoomen'
-            },
-            xAxis: {
-              type: 'datetime',
-              title: {
-                text: 'Tijdstip'
-              },
-              dateTimeLabelFormats: {
-                day: '%a %e %b'
-              },
-              crosshair: true
-            },
-            yAxis: [{
-              labels: {
-                format: '{value} °C',
-                style: {
-                    color: Highcharts.getOptions().colors[5]
+            var options1 = {
+                chart: {
+                  zoomType: 'x',
+                  renderTo: 'container1'
+                },
+                title: {
+                  text: 'P1 & P2 concentratie (gefilterd)'
+                },
+                subtitle: {
+                    text: document.ontouchstart === undefined ?
+                            'Klik en sleep in de grafiek om in te zoomen' : 'Knijp de grafiek om in te zoomen'
+                },
+                xAxis: {
+                  type: 'datetime',
+                  title: {
+                    text: 'Tijdstip'
+                  },
+                  dateTimeLabelFormats: {
+                    day: '%a %e %b'
+                  },
+                  crosshair: true
+                },
+                yAxis: [{
+                  labels: {
+                    format: '{value} °C',
+                    style: {
+                        color: Highcharts.getOptions().colors[5]
+                    }
+                  },
+                  title: {
+                    text: 'Temperatuur',
+                    style: {
+                        color: Highcharts.getOptions().colors[5]
+                    }
+                  },
+                  opposite: true
+                },
+                {
+                  labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                  },
+                  title: {
+                    text: 'Luchtvochtigheid',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                  },
+                  opposite: true
+                },
+                {
+                  labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                  },
+                  title: {
+                      text: 'Aantal deeltjes / m^3'
+                  }
+                }],
+                tooltip: {
+                  shared: true,
+                  valueDecimals: 2,
+                  dateTimeLabelFormats: {
+                    millisecond: "%A, %b %e, %H:%M:%S.%L",
+                    second: "%A, %b %e, %H:%M:%S",
+                    minute: "%A, %b %e, %H:%M",
+                    hour: "%A %e %b %H:%M",
+                    day: "%A, %b %e, %Y",
+                    week: "Week van %A, %b %e, %Y",
+                    month: "%B %Y",
+                    year: "%Y"
+                  }
+                },
+                legend: {
+                  enabled: true,
+                  borderWidth: 1,
+                  align: 'center',
+                },
+                series: [{
+                  name: 'Temperatuur',
+                  color: Highcharts.getOptions().colors[5],
+                  type: 'column',
+                  yAxis: 0,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_temperature.to_f]}},
+                  tooltip: {
+                    valueSuffix: ' °C'
+                  },
+                  visible: false
+                },
+                {
+                  name: 'Luchtvochtigheid',
+                  color: Highcharts.getOptions().colors[0],
+                  type: 'column',
+                  yAxis: 1,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_humidity.to_f]}},
+                  tooltip: {
+                    valueSuffix: ' %'
+                  },
+                  visible: false
+                },
+                {
+                  name: 'P1',
+                  color: Highcharts.getOptions().colors[2],
+                  type: 'spline',
+                  yAxis: 2,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_p1_concentration_filtered.to_i]}},
+                  tooltip: {
+                    valueSuffix: ' #/m^3'
+                  }
+                },
+                {
+                  name: 'P2',
+                  color: Highcharts.getOptions().colors[3],
+                  type: 'spline',
+                  yAxis: 2,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_p2_concentration_filtered.to_i]}},
+                  tooltip: {
+                    valueSuffix: ' #/m^3'
+                  }
                 }
-              },
-              title: {
-                text: 'Temperatuur',
-                style: {
-                    color: Highcharts.getOptions().colors[5]
+                ]
+            };
+
+            var options2 = {
+                chart: {
+                  zoomType: 'x',
+                  renderTo: 'container2'
+                },
+                title: {
+                  text: 'P1 & P2 concentratie'
+                },
+                subtitle: {
+                    text: document.ontouchstart === undefined ?
+                            'Klik en sleep in de grafiek om in te zoomen' : 'Knijp de grafiek om in te zoomen'
+                },
+                xAxis: {
+                  type: 'datetime',
+                  title: {
+                    text: 'Tijdstip'
+                  },
+                  dateTimeLabelFormats: {
+                    day: '%a %e %b'
+                  },
+                  crosshair: true
+                },
+                yAxis: [{
+                  labels: {
+                    format: '{value} °C',
+                    style: {
+                        color: Highcharts.getOptions().colors[5]
+                    }
+                  },
+                  title: {
+                    text: 'Temperatuur',
+                    style: {
+                        color: Highcharts.getOptions().colors[5]
+                    }
+                  },
+                  opposite: true
+                },
+                {
+                  labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                  },
+                  title: {
+                    text: 'Luchtvochtigheid',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                  },
+                  opposite: true
+                },
+                {
+                  labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                  },
+                  title: {
+                      text: 'Aantal deeltjes / m^3'
+                  }
+                }],
+                tooltip: {
+                  shared: true,
+                  valueDecimals: 2,
+                  dateTimeLabelFormats: {
+                    millisecond: "%A, %b %e, %H:%M:%S.%L",
+                    second: "%A, %b %e, %H:%M:%S",
+                    minute: "%A, %b %e, %H:%M",
+                    hour: "%A %e %b %H:%M",
+                    day: "%A, %b %e, %Y",
+                    week: "Week van %A, %b %e, %Y",
+                    month: "%B %Y",
+                    year: "%Y"
+                  }
+                },
+                legend: {
+                  enabled: true,
+                  borderWidth: 1,
+                  align: 'center',
+                },
+                series: [{
+                  name: 'Temperatuur',
+                  color: Highcharts.getOptions().colors[5],
+                  type: 'column',
+                  yAxis: 0,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_temperature.to_f]}},
+                  tooltip: {
+                    valueSuffix: ' °C'
+                  },
+                  visible: false
+                },
+                {
+                  name: 'Luchtvochtigheid',
+                  color: Highcharts.getOptions().colors[0],
+                  type: 'column',
+                  yAxis: 1,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_humidity.to_f]}},
+                  tooltip: {
+                    valueSuffix: ' %'
+                  },
+                  visible: false
+                },
+                {
+                  name: 'P1',
+                  color: Highcharts.getOptions().colors[2],
+                  type: 'spline',
+                  yAxis: 2,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_p1_concentration.to_i]}},
+                  tooltip: {
+                    valueSuffix: ' #/m^3'
+                  }
+                },
+                {
+                  name: 'P2',
+                  color: Highcharts.getOptions().colors[3],
+                  type: 'spline',
+                  yAxis: 2,
+                  data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_p2_concentration.to_i]}},
+                  tooltip: {
+                    valueSuffix: ' #/m^3'
+                  }
                 }
-              },
-              opposite: true
-            },
-            {
-              labels: {
-                format: '{value} %',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-              },
-              title: {
-                text: 'Luchtvochtigheid',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-              },
-              opposite: true
-            },
-            {
-              labels: {
-                format: '{value} %',
-                style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-              },
-              title: {
-                  text: 'Ratio'
-              }
-            }],
-            tooltip: {
-              shared: true,
-              valueDecimals: 2,
-              dateTimeLabelFormats: {
-                millisecond: "%A, %b %e, %H:%M:%S.%L",
-                second: "%A, %b %e, %H:%M:%S",
-                minute: "%A, %b %e, %H:%M",
-                hour: "%A %e %b %H:%M",
-                day: "%A, %b %e, %Y",
-                week: "Week van %A, %b %e, %Y",
-                month: "%B %Y",
-                year: "%Y"
-              }
-            },
-            legend: {
-              enabled: true,
-              borderWidth: 1,
-              align: 'center',
-            },
-            series: [{
-              name: 'Temperatuur',
-              color: Highcharts.getOptions().colors[5],
-              type: 'column',
-              yAxis: 0,
-              data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_temperature]}},
-              tooltip: {
-                valueSuffix: ' °C'
-              },
-              visible: false
-            },
-            {
-              name: 'Luchtvochtigheid',
-              color: Highcharts.getOptions().colors[0],
-              type: 'column',
-              yAxis: 1,
-              data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_humidity]}},
-              tooltip: {
-                valueSuffix: ' %'
-              },
-              visible: false
-            },
-            {
-              name: 'P1',
-              color: Highcharts.getOptions().colors[2],
-              type: 'spline',
-              yAxis: 2,
-              data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_p1_ratio]}},
-              tooltip: {
-                valueSuffix: ' %'
-              }
-            },
-            {
-              name: 'P2',
-              color: Highcharts.getOptions().colors[3],
-              type: 'spline',
-              yAxis: 2,
-              data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_p2_ratio]}},
-              tooltip: {
-                valueSuffix: ' %'
-              }
-            },
-            {
-              name: 'PM2.5',
-              color: Highcharts.getOptions().colors[4],
-              type: 'spline',
-              yAxis: 2,
-              data: #{@average_daily_measurements.map{|m| [m.chart_datetime, m.average_pm25_ratio]}},
-              tooltip: {
-                valueSuffix: ' %'
-              }
-            }
-            ]
-        };
+                ]
+            };
 
         var chart1 = new Highcharts.Chart(options1);
+        var chart2 = new Highcharts.Chart(options2);
 
     });
 
@@ -155,3 +273,6 @@
 .row
   .col-lg-12
     #container1{style: "min-width: 310px; height: 500px; margin: 0 auto"}
+.row
+  .col-lg-12
+    #container2{style: "min-width: 310px; height: 500px; margin: 0 auto"}

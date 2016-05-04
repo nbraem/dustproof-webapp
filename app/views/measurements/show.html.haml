@@ -16,6 +16,27 @@
     .row
       .col-md-6
         %p
+          %strong= model_class.human_attribute_name(:p1_concentration)
+          %br
+          = number_with_delimiter(@measurement.p1_concentration)
+        %p
+          %strong= model_class.human_attribute_name(:p1_concentration_filtered)
+          %br
+          = number_with_delimiter(@measurement.p1_concentration_filtered)
+
+      .col-md-6
+        %p
+          %strong= model_class.human_attribute_name(:p2_concentration)
+          %br
+          = number_with_delimiter(@measurement.p2_concentration)
+        %p
+          %strong= model_class.human_attribute_name(:p2_concentration_filtered)
+          %br
+          = number_with_delimiter(@measurement.p2_concentration_filtered)
+
+    .row
+      .col-md-6
+        %p
           %strong= model_class.human_attribute_name(:timestamp)
           %br
           = @measurement.timestamp

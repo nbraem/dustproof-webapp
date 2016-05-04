@@ -147,7 +147,7 @@ nl:
         strip_insignificant_zeros: false
         unit: €
     format:
-      delimiter: .
+      delimiter: ' '
       precision: 2
       separator: ! ','
       significant: false

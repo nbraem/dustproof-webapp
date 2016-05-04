@@ -1,8 +1,4 @@
-require "rounded_averages_accessors"
-
 class AverageDailyMeasurement < ActiveRecord::Base
-  include RoundedAveragesAccessors
-
   self.primary_key = "id"
   belongs_to :user
 
