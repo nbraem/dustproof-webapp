@@ -19,6 +19,7 @@
         %th.text-center= sort_link(@q, :timestamp)
         %th.text-center= Measurement.human_attribute_name(:p1_ratio)
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
+        %th.text-center= Measurement.human_attribute_name(:pm25_ratio)
         %th.text-center= Measurement.human_attribute_name(:p1_count)
         %th.text-center= Measurement.human_attribute_name(:p2_count)
         %th.text-center= Measurement.human_attribute_name(:temperature)
@@ -34,6 +35,9 @@
             \%
           %td.text-center
             = measurement.p2_ratio
+            \%
+          %td.text-center
+            = measurement.pm25_ratio
             \%
           %td.text-center= number_with_delimiter(measurement.p1_count)
           %td.text-center= number_with_delimiter(measurement.p2_count)
