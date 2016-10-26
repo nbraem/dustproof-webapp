@@ -29,7 +29,7 @@
       - @measurements.each do |measurement|
         %tr
           %th{ scope: "row" }= link_to measurement.id, measurement
-          %td.text-center.nowrap= l Time.at(measurement.timestamp), format: :short
+          %td.text-center.nowrap= l Time.at(measurement.timestamp), format: "%d-%m-%Y %H:%M:%S"
           %td.text-center
             = measurement.p1_ratio
             \%
