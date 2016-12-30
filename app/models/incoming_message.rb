@@ -40,7 +40,9 @@ class IncomingMessage < ActiveRecord::Base
       p2_ratio = byte_array[2].to_i(16) / 100.0
       p1_count = byte_array[3].to_i(16)
       p2_count = byte_array[4].to_i(16)
-      temperature = byte_array[5].to_i(16) / 10.0
+      temperature = byte_array[5].to_i(16)
+      # Account for the fact that the temperature is a signed value
+      temperature = ((temperature & ~(1 << 15)) - (temperature & (1 << 15))) / 10.0
       humidity = byte_array[6].to_i(16) / 10.0
 
       user = User.where(device_eui: self.device_eui).first
@@ -61,7 +63,9 @@ class IncomingMessage < ActiveRecord::Base
         pm25_ratio = byte_array[3].to_i(16) / 100.0
         p1_count = byte_array[4].to_i(16)
         p2_count = byte_array[5].to_i(16)
-        temperature = byte_array[6].to_i(16) / 10.0
+        temperature = byte_array[6].to_i(16)
+        # Account for the fact that the temperature is a signed value
+        temperature = ((temperature & ~(1 << 15)) - (temperature & (1 << 15))) / 10.0
         humidity = byte_array[7].to_i(16) / 10.0
 
       rescue
