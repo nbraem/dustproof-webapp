@@ -9,7 +9,25 @@
             var options1 = {
                 chart: {
                   zoomType: 'x',
-                  renderTo: 'container1'
+                  renderTo: 'container1',
+                  events: {
+                    load: function (e) {
+                      if (typeof(Storage) !== "undefined") {
+                        // Reload series visibility from localstorage
+                        var chart = e.target;
+                        var series = chart.series;
+                        var series_length = series.length;
+                        for (var i = 0; i < series_length; i++) {
+                          var series_visible = localStorage.getItem("hourly_series_" + i + "_visible");
+                          if (series_visible == "hidden") {
+                            series[i].setVisible(false);
+                          } else {
+                            series[i].setVisible(true);
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 title: {
                   text: 'P1, P2, PM2.5 ratio, temperatuur en luchtvochtigheid'
@@ -17,6 +35,22 @@
                 subtitle: {
                     text: document.ontouchstart === undefined ?
                             'Klik en sleep in de grafiek om in te zoomen' : 'Knijp de grafiek om in te zoomen'
+                },
+                plotOptions: {
+                  series: {
+                    events: {
+                      legendItemClick: function (e) {
+                        if (typeof(Storage) !== "undefined") {
+                          var series = e.target;
+                          if (series.visible) {
+                            localStorage.setItem("hourly_series_" + series.index + "_visible", "hidden");
+                          } else {
+                            localStorage.removeItem("hourly_series_" + series.index + "_visible");
+                          }
+                        }
+                      }
+                    }
+                  }
                 },
                 xAxis: {
                   type: 'datetime',
@@ -96,8 +130,7 @@
                   data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_temperature.to_f]}},
                   tooltip: {
                     valueSuffix: ' °C'
-                  },
-                  visible: false
+                  }
                 },
                 {
                   name: 'Luchtvochtigheid',
@@ -107,8 +140,7 @@
                   data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_humidity.to_f]}},
                   tooltip: {
                     valueSuffix: ' %'
-                  },
-                  visible: false
+                  }
                 },
                 {
                   name: 'P1',
