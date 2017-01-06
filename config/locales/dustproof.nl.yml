@@ -36,10 +36,6 @@ nl:
         p2_ratio: "P2 ratio"
         p1_count: "P1 deeltjes"
         p2_count: "P2 deeltjes"
-        p1_concentration: "P1 conc. (#/m³)"
-        p2_concentration: "P2 conc. (#/m³)"
-        p1_concentration_filtered: "P1 conc. (gefilterd) (#/m³)"
-        p2_concentration_filtered: "P2 conc. (gefilterd) (#/m³)"
       average_hourly_measurement:
         hourly_timestamp: "Tijdstip"
       average_daily_measurement:

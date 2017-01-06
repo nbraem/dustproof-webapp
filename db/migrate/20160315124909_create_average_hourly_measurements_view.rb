@@ -9,10 +9,6 @@ class CreateAverageHourlyMeasurementsView < ActiveRecord::Migration
           avg(p1_ratio) AS average_p1_ratio,
           avg(p2_ratio) AS average_p2_ratio,
           avg(pm25_ratio) AS average_pm25_ratio,
-          round(avg(p1_concentration)) AS average_p1_concentration,
-          round(avg(p2_concentration)) AS average_p2_concentration,
-          round(avg(p1_concentration_filtered)) AS average_p1_concentration_filtered,
-          round(avg(p2_concentration_filtered)) AS average_p2_concentration_filtered,
           date_trunc('hour', timestamp) AS hourly_timestamp
         FROM measurements
           WHERE temperature IS NOT NULL
@@ -20,10 +16,6 @@ class CreateAverageHourlyMeasurementsView < ActiveRecord::Migration
             AND p1_ratio IS NOT NULL
             AND p2_ratio IS NOT NULL
             AND pm25_ratio IS NOT NULL
-            AND p1_concentration IS NOT NULL
-            AND p2_concentration IS NOT NULL
-            AND p1_concentration_filtered IS NOT NULL
-            AND p2_concentration_filtered IS NOT NULL
           GROUP BY hourly_timestamp, user_id
           ORDER BY hourly_timestamp;
     SQL

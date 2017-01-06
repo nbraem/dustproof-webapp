@@ -53,43 +53,5 @@ describe Measurement do
   it { should validate_presence_of(:pm25_ratio) }
   it { should validate_presence_of(:p2_ratio) }
 
-  it { should validate_presence_of(:p1_concentration) }
-  it { should validate_presence_of(:p1_concentration_filtered) }
-  it { should validate_presence_of(:p2_concentration) }
-  it { should validate_presence_of(:p2_concentration_filtered) }
-
   it { should belong_to(:user) }
-
-  it "calculates concentration" do
-    measurement = FactoryGirl.create(:measurement)
-    expect(measurement.valid?).to be true
-    expect(measurement.p1_concentration).to eq(11385575)
-    expect(measurement.p2_concentration).to eq(5784545)
-  end
-
-  context "with the first measurement" do
-    it "calculates filtered concentration" do
-      measurement = FactoryGirl.build(:measurement)
-      expect(measurement.valid?).to be true
-      expect(measurement.p1_concentration_filtered).to eq(11385575)
-      expect(measurement.p2_concentration_filtered).to eq(5784545)
-    end
-  end
-
-  context "with subsequent measurements" do
-    it "calculates filtered concentration" do
-      user = FactoryGirl.create(:user)
-      measurement = FactoryGirl.create(:measurement,
-                                        user: user,
-                                        timestamp: Time.now - 5.minutes)
-      second_measurement = FactoryGirl.build(:measurement,
-                                              user: user,
-                                              p1_ratio: 3.5,
-                                              p2_ratio: 1.45)
-
-      expect(second_measurement.valid?).to be true
-      expect(second_measurement.p1_concentration_filtered).to eq(11220298)
-      expect(second_measurement.p2_concentration_filtered).to eq(5680484)
-    end
-  end
 end
