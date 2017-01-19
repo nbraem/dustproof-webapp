@@ -2,6 +2,9 @@ class LoraMetricsController < ApplicationController
   respond_to :html
 
   def index
-    @lora_metrics = LoraMetric.where(device_eui: current_user.device_eui).order("hourly_timestamp ASC")
+    @q = LoraMetric.search(params[:q])
+    @q.sorts = "hourly_timestamp asc"
+    @q.device_eui_eq = "001AF081" if @q.device_eui_eq.blank?
+    @lora_metrics = @q.result
   end
 end

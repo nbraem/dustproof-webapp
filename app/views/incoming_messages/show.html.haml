@@ -23,7 +23,10 @@
         %p
           %strong= model_class.human_attribute_name(:gateway_eui)
           %br
-          = @incoming_message.gateway_eui
+          - if @incoming_message.transport == "lora"
+            = @incoming_message.gateway_eui
+          - else
+            WiFi
 
         - %w(device_eui packet_time tmst).each do |attr|
           %p
@@ -35,8 +38,9 @@
         %p
           %strong= model_class.human_attribute_name(:frequency)
           %br
-          = @incoming_message.frequency
-          MHz
+          - if @incoming_message.transport == "lora"
+            = @incoming_message.frequency
+            MHz
 
         - %w(data_rate rssi snr data).each do |attr|
           %p
@@ -47,9 +51,10 @@
     %p
       %strong= model_class.human_attribute_name(:body)
       %br
-      %pre= @incoming_message.body
+      = @incoming_message.body
 
-    %p
-      %strong= model_class.human_attribute_name(:comments)
-      %br
-      %pre= @incoming_message.comments
+    - if @incoming_message.comments
+      %p
+        %strong= model_class.human_attribute_name(:comments)
+        %br
+        %pre= @incoming_message.comments

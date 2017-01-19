@@ -1,5 +1,5 @@
 - content_for(:title) do
-  Lora metrics
+  LoRa metrics
   &ndash;
   Overzicht per uur
 
@@ -13,7 +13,7 @@
               renderTo: 'container1'
             },
             title: {
-              text: 'Lora pakketverlies'
+              text: 'LoRa pakketverlies'
             },
             xAxis: {
               type: 'datetime',
@@ -55,7 +55,7 @@
             },
             series: [{
               name: 'Verloren pakketten',
-              data: #{@lora_metrics.map{|m| [m.chart_datetime, m.datapoints_lost]}}
+              data: #{@lora_metrics.map{|m| [m.chart_datetime, m.hourly_lost_packets]}}
             }]
         };
 
@@ -64,9 +64,17 @@
 
 .page-header
   %h1
-    Lora metrics
+    LoRa metrics
     %small Overzicht per uur
 
+.row
+  .col-lg-12
+    = search_form_for @q do |f|
+      .row
+        .col-sm-3
+          = f.input :device_eui_eq, input_html: { class: "input-sm" }, label: "Device EUI"
+          = f.button :submit, "Filter", class: "btn btn-primary btn-sm"
+          = link_to "Clear", lora_metrics_path, class: "btn btn-default btn-sm"
 .row
   .col-lg-12
     #container1{style: "min-width: 310px; height: 500px; margin: 0 auto"}

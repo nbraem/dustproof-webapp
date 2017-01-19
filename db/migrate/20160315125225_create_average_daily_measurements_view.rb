@@ -16,6 +16,7 @@ class CreateAverageDailyMeasurementsView < ActiveRecord::Migration
             AND p1_ratio IS NOT NULL
             AND p2_ratio IS NOT NULL
             AND pm25_ratio IS NOT NULL
+            AND is_valid = TRUE
           GROUP BY daily_timestamp, user_id
           ORDER BY daily_timestamp;
     SQL

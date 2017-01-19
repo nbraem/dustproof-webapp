@@ -4,11 +4,12 @@ class CreateLoraMetricsView < ActiveRecord::Migration
       CREATE VIEW lora_metrics AS
         SELECT row_number() OVER () AS id,
                device_eui,
-               count(data) AS datapoints,
+               sum(lost_packets) AS hourly_lost_packets,
                date_trunc('hour', timestamp) AS hourly_timestamp
             FROM incoming_messages
-              WHERE date_trunc('hour', timestamp) < date_trunc('hour', (now() at time zone 'utc'))
-              AND transport = 'lora'
+              WHERE transport = 'lora'
+              AND lost_packets IS NOT NULL
+              AND lost_packets <= 60
               GROUP BY hourly_timestamp, device_eui
               ORDER BY hourly_timestamp;
     SQL

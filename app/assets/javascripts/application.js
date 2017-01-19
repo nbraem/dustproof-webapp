@@ -17,6 +17,10 @@
 
 var ready_application;
 ready_application = function() {
+  $('#refresh-link').on('click', function(e) {
+    window.location.reload();
+    e.preventDefault();
+  });
 };
 
 $(document).ready(ready_application);

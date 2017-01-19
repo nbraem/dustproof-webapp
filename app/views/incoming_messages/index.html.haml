@@ -3,9 +3,21 @@
 .page-header
   %h1 Incoming messages
 
-= link_to icon_text("trash", "Destroy all"), [:destroy_all, :incoming_messages], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger"
-= link_to icon_text("refresh", "Refresh"), incoming_messages_path, class: "btn btn-sm btn-default"
-= link_to icon_text("file", "CSV"), incoming_messages_path(format: :csv), class: "btn btn-sm btn-primary"
+.row
+  .col-md-4
+    = link_to icon_text("trash", "Delete all"), [:destroy_all, :incoming_messages], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger"
+    = link_to icon_text("refresh", "Refresh"), "#", class: "btn btn-sm btn-default", id: "refresh-link"
+    = link_to icon_text("file", "CSV"), incoming_messages_path(format: :csv), class: "btn btn-sm btn-primary"
+  .col-md-1
+    &nbsp;
+  .col-md-7
+    = search_form_for @q do |f|
+      .row
+        .col-sm-4
+          = f.input :device_eui_cont, label: false, input_html: { class: "input-sm" }, placeholder: "Device eui"
+        .col-sm-8
+          = f.button :submit, "Filter", class: "btn btn-primary btn-sm"
+          = link_to "Clear", incoming_messages_path, class: "btn btn-default btn-sm"
 
 .row
   .col-lg-12
@@ -22,19 +34,24 @@
           %th= sort_link(@q, :rssi)
           %th= sort_link(@q, :snr)
           %th Raw data
+          %th Lost packets
           %th= sort_link(@q, :status)
       %tbody
         - @incoming_messages.each do |incoming_message|
           %tr{ id: dom_id(incoming_message) }
             %td= link_to incoming_message.timestamp, incoming_message_path(incoming_message)
-            %td= incoming_message.gateway_eui
-            %td= incoming_message.device_eui
-            %td
-              = incoming_message.frequency
-              MHz
-            %td= incoming_message.rssi
-            %td= incoming_message.snr
-            %td= incoming_message.data
+            - if incoming_message.transport == "lora"
+              %td== LoRa (#{incoming_message.gateway_eui})
+              %td= incoming_message.device_eui
+              %td
+                = incoming_message.frequency
+                MHz
+              %td= incoming_message.rssi
+              %td= incoming_message.snr
+              %td= incoming_message.data
+              %td= incoming_message.lost_packets
+            - else
+              %td{ colspan: 7 } WiFi
             %td= incoming_message.status
 
     .text-center= paginate @incoming_messages, theme: "twitter-bootstrap-3"

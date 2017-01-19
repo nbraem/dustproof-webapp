@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119135912) do
+ActiveRecord::Schema.define(version: 20170124150023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,11 @@ ActiveRecord::Schema.define(version: 20170119135912) do
   create_table "incoming_messages", force: :cascade do |t|
     t.text     "body"
     t.string   "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "gateway_eui"
     t.string   "device_eui"
-    t.datetime "timestamp",   null: false
+    t.datetime "timestamp",    null: false
     t.string   "tmst"
     t.float    "frequency"
     t.string   "data_rate"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170119135912) do
     t.string   "packet_time"
     t.text     "comments"
     t.string   "transport"
+    t.integer  "lost_packets"
   end
 
   add_index "incoming_messages", ["transport"], name: "index_incoming_messages_on_transport", using: :btree

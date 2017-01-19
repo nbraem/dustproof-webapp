@@ -16,6 +16,7 @@ class CreateAverageHourlyMeasurementsView < ActiveRecord::Migration
             AND p1_ratio IS NOT NULL
             AND p2_ratio IS NOT NULL
             AND pm25_ratio IS NOT NULL
+            AND is_valid = TRUE
           GROUP BY hourly_timestamp, user_id
           ORDER BY hourly_timestamp;
     SQL

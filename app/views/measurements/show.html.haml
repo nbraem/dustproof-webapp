@@ -44,3 +44,9 @@
           %br
           = @measurement.humidity
           \%
+    .row
+      .col-lg-12
+        %p
+          %strong= model_class.human_attribute_name(:transport)
+          %br
+          = @measurement.transport
