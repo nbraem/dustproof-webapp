@@ -5,6 +5,8 @@ FactoryGirl.define do
     pm25_ratio 0.55
     p1_ratio 6.20
     p2_ratio 3.15
+    temperature 10.0
+    humidity 49.0
 
     timestamp Time.now
     user

@@ -48,6 +48,11 @@ describe Measurement do
       of_type(:integer)
   end
 
+  it do
+    should have_db_column(:is_valid).
+      of_type(:boolean)
+  end
+
   it { should validate_presence_of(:timestamp) }
   it { should validate_presence_of(:p1_ratio) }
   it { should validate_presence_of(:pm25_ratio) }
