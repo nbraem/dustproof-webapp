@@ -11,16 +11,10 @@ class Measurement < ActiveRecord::Base
   private
 
   def validate_measurement
-    begin
-      if (self.p1_ratio < self.p2_ratio) ||
-          (self.temperature < -40.0 || self.temperature > 125.0) ||
-          (self.humidity < 0.0 || self.humidity > 100.0)
-        self.is_valid = false
-      else
-        self.is_valid = true
-      end
-    rescue
+    if self.p1_ratio < self.p2_ratio
       self.is_valid = false
+    else
+      self.is_valid = true
     end
     return true
   end
