@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106131619) do
+ActiveRecord::Schema.define(version: 20170119135912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,14 +42,15 @@ ActiveRecord::Schema.define(version: 20170106131619) do
     t.float    "p2_ratio"
     t.float    "humidity"
     t.float    "temperature"
-    t.datetime "timestamp",   null: false
+    t.datetime "timestamp",                   null: false
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "transport"
     t.integer  "p1_count"
     t.integer  "p2_count"
     t.float    "pm25_ratio"
+    t.boolean  "is_valid",    default: false, null: false
   end
 
   add_index "measurements", ["user_id"], name: "index_measurements_on_user_id", using: :btree
