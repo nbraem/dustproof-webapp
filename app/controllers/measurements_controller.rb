@@ -20,7 +20,7 @@ class MeasurementsController < ApplicationController
   end
 
   def chart
-    @measurements = current_user.measurements.order(timestamp: :desc).limit(4000).reverse
+    @measurements = current_user.measurements.where(is_valid: true).order(timestamp: :desc).limit(4000).reverse
     respond_with(@measurements)
   end
 
