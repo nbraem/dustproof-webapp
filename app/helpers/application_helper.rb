@@ -14,7 +14,6 @@ module ApplicationHelper
   def dust_level
     last_measurement = current_user.measurements.select(:pm25_ratio).order(timestamp: :desc).first
     ratio = last_measurement.pm25_ratio
-    ratio = 5.0
     if ratio < 1.0
       content_tag(:span, 1, class: "label label-success")
     elsif ratio.between?(1.0, 1.99)
