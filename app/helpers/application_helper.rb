@@ -10,4 +10,21 @@ module ApplicationHelper
   def device_euis
     IncomingMessage.select(:device_eui).order(device_eui: :asc).where("device_eui IS NOT NULL").uniq.collect(&:device_eui)
   end
+
+  def dust_level
+    last_measurement = current_user.measurements.select(:pm25_ratio).order(timestamp: :desc).first
+    ratio = last_measurement.pm25_ratio
+    ratio = 5.0
+    if ratio < 1.0
+      content_tag(:span, 1, class: "label label-success")
+    elsif ratio.between?(1.0, 1.99)
+      content_tag(:span, 2, class: "label label-warning")
+    elsif ratio.between?(2.0, 3.99)
+      content_tag(:span, 3, class: "label label-warning")
+    elsif ratio.between?(4.0, 5.99)
+      content_tag(:span, 4, class: "label label-danger")
+    elsif ratio >= 6.0
+      content_tag(:span, 5, class: "label label-danger")
+    end
+  end
 end
