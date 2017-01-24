@@ -30,7 +30,7 @@
                   }
                 },
                 title: {
-                  text: 'P1, P2, PM2.5 ratio, temperatuur en luchtvochtigheid'
+                  text: 'P2, PM2.5 ratio, temperatuur en luchtvochtigheid'
                 },
                 subtitle: {
                     text: document.ontouchstart === undefined ?
@@ -138,16 +138,6 @@
                   type: 'column',
                   yAxis: 1,
                   data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_humidity.to_f]}},
-                  tooltip: {
-                    valueSuffix: ' %'
-                  }
-                },
-                {
-                  name: 'P1',
-                  color: Highcharts.getOptions().colors[2],
-                  type: 'spline',
-                  yAxis: 2,
-                  data: #{@average_hourly_measurements.map{|m| [m.chart_datetime, m.average_p1_ratio]}},
                   tooltip: {
                     valueSuffix: ' %'
                   }
