@@ -14,10 +14,7 @@
     = search_form_for @q do |f|
       .row
         .col-sm-4
-          = f.input :device_eui_cont, label: false, input_html: { class: "input-sm" }, placeholder: "Device eui"
-        .col-sm-8
-          = f.button :submit, "Filter", class: "btn btn-primary btn-sm"
-          = link_to "Clear", incoming_messages_path, class: "btn btn-default btn-sm"
+          = f.input :device_eui_eq, as: :select, collection: device_euis.prepend(""), include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Filter device EUI:"
 
 .row
   .col-lg-12

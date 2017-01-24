@@ -21,6 +21,11 @@ ready_application = function() {
     window.location.reload();
     e.preventDefault();
   });
+
+  $("#q_device_eui_eq").on("change", function(){
+    $(this).closest('form')[0].submit();
+  });
+
 };
 
 $(document).ready(ready_application);
