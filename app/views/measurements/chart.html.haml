@@ -94,7 +94,7 @@
           },
           series: [{
             name: 'PM 10',
-            type: 'spline',
+            type: 'line',
             data: #{@measurements.map{|m| [m.chart_datetime, m.p2_ratio]}},
             tooltip: {
               valueSuffix: ' %'
@@ -102,7 +102,7 @@
           },
           {
             name: 'PM 2.5',
-            type: 'spline',
+            type: 'line',
             data: #{@measurements.map{|m| [m.chart_datetime, m.pm25_ratio]}},
             tooltip: {
               valueSuffix: ' %'
