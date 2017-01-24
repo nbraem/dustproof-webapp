@@ -19,6 +19,11 @@ class MeasurementsController < ApplicationController
     redirect_to :measurements, notice: "Alle metingen zijn verwijderd."
   end
 
+  def chart
+    @measurements = current_user.measurements.order(timestamp: :desc).limit(4000).reverse
+    respond_with(@measurements)
+  end
+
   private
 
   def set_measurement

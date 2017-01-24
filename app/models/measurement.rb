@@ -8,6 +8,10 @@ class Measurement < ActiveRecord::Base
 
   belongs_to :user
 
+  def chart_datetime
+    timestamp.to_i * 1000 if timestamp
+  end
+
   private
 
   def validate_measurement
