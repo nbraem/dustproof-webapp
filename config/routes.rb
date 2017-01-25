@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get "/richtlijnen", to: "pages#guidelines"
   get "/metingen", to: "pages#measurements"
   get "/over-ons", to: "pages#about"
+  get "/dust_level", to: "pages#dust_level"
 
   # Contact form
   resources :contacts, only: [:new, :create]
