@@ -41,8 +41,9 @@
               %td== LoRa (#{incoming_message.gateway_eui})
               %td= incoming_message.device_eui
               %td
-                = incoming_message.frequency
-                MHz
+                - if incoming_message.frequency.present?
+                  = incoming_message.frequency
+                  MHz
               %td= incoming_message.rssi
               %td= incoming_message.snr
               %td= incoming_message.data
