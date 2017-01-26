@@ -123,20 +123,32 @@ class IncomingMessage < ActiveRecord::Base
       begin
         json_data = JSON.parse(self.body)
 
-        self.gateway_eui = json_data['gatewayEui']
-        self.device_eui = json_data['devAddr']
-        self.packet_time = json_data['packetTime']
-        self.tmst = json_data['tmst']
-        self.frequency = json_data['frequency']
-        self.data_rate = json_data['dataRate']
-        self.rssi = json_data['rssi']
-        self.snr = json_data['snr']
-        begin
-          self.data = Base64.decode64(json_data['payload']).unpack("H*").first
-        rescue
-          self.data = "Decode error."
+        if json_data['DevEUI_uplink'].present?
+          # UA LoRa network
+          self.gateway_eui = 'UA LoRa network'
+          self.device_eui = json_data['DevEUI_uplink']['DevAddr']
+          self.packet_time = json_data['DevEUI_uplink']['Time']
+          self.rssi = json_data['DevEUI_uplink']['LrrRSSI']
+          self.snr = json_data['DevEUI_uplink']['LrrSNR']
+          self.data = json_data['DevEUI_uplink']['payload_hex']
+          self.status = "processed"
+        else
+          # Wireless Thing LoRa network
+          self.gateway_eui = json_data['gatewayEui']
+          self.device_eui = json_data['devAddr']
+          self.packet_time = json_data['packetTime']
+          self.tmst = json_data['tmst']
+          self.frequency = json_data['frequency']
+          self.data_rate = json_data['dataRate']
+          self.rssi = json_data['rssi']
+          self.snr = json_data['snr']
+          begin
+            self.data = Base64.decode64(json_data['payload']).unpack("H*").first
+          rescue
+            self.data = "Decode error."
+          end
+          self.status = "processed"
         end
-        self.status = "processed"
       rescue
         self.status = "json_parse_error"
       end
