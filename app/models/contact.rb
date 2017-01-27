@@ -9,7 +9,7 @@ class Contact < MailForm::Base
   def headers
     {
       subject: "Contact via de DustProof website",
-      to: "hostmaster@dustproof.be",
+      to: "info@dustproof.be",
       from: "#{name} <#{email}>"
     }
   end
