@@ -19,6 +19,7 @@
             %li{ class: action_name == "about" ? "active" : nil }= link_to icon_text("users", "Team"), "/over-ons"
 
         - if user_signed_in?
+          %li= link_to icon_text("dashboard", "Meters"), devices_path
           %li.dropdown
             = link_to "#", class: "dropdown-toggle", "aria-expanded" => false, data: { toggle: "dropdown" }, role: "button" do
               = icon_text("line-chart", "Mijn metingen")

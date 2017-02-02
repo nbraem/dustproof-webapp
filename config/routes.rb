@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :devices
   resources :average_hourly_measurements
   resources :average_daily_measurements
   resources :wifi_metrics

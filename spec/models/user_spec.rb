@@ -29,6 +29,7 @@ describe User do
   end
 
   it { should have_many(:measurements) }
+  it { should have_many(:devices) }
 
   it_behaves_like "an Object with a full_name accessor"
 end

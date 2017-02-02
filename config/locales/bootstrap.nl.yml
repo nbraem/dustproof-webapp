@@ -21,6 +21,8 @@ nl:
       destroy: "Verwijderen"
       new: "Nieuw"
       edit: "Bewerken"
+      measurements: "Metingen"
+      graphs: "Grafieken"
     titles:
       edit: "Bewerk %{model}"
       save: "Bewaar %{model}"

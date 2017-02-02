@@ -15,6 +15,9 @@ nl:
       measurement:
         one: "Meting"
         other: "Metingen"
+      device:
+        one: "Meter"
+        other: "Meters"
     attributes:
       user:
         first_name: "Voornaam"
@@ -36,6 +39,11 @@ nl:
         p2_ratio: "P2 ratio"
         p1_count: "P1 deeltjes"
         p2_count: "P2 deeltjes"
+      device:
+        name: "Naam"
+        api_key: "API key"
+        device_eui: "Device EUI"
+        transport: "Verbinding"
       average_hourly_measurement:
         hourly_timestamp: "Tijdstip"
       average_daily_measurement:
