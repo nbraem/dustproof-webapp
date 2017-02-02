@@ -44,6 +44,7 @@ nl:
         p2_count: "P2 deeltjes"
       device:
         name: "Naam"
+        location: "Locatie"
         api_key: "API key"
         device_eui: "Device EUI"
         transport: "Verbinding"

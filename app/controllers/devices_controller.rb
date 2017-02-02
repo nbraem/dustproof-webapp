@@ -71,6 +71,7 @@ class DevicesController < ApplicationController
     params.
       require(:device).
       permit(:name,
+             :location,
              :transport,
              :device_eui
       )

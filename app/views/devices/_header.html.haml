@@ -1,11 +1,9 @@
-- model_class = Device
-
 .page-header
   .row
     .col-sm-8
       %h1
         = @device.name
-        %small= t '.title', default: model_class.model_name.human.titleize
+        %small= @device.location
     .col-sm-4
       .text-right
         = link_to icon_text("pencil"), [:edit, @device], class: "btn btn-warning btn-xs"
