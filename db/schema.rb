@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202140608) do
+ActiveRecord::Schema.define(version: 20170202144032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20170202140608) do
     t.float    "humidity"
     t.float    "temperature"
     t.datetime "timestamp",                   null: false
-    t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "transport"
@@ -69,7 +68,6 @@ ActiveRecord::Schema.define(version: 20170202140608) do
   end
 
   add_index "measurements", ["device_id"], name: "index_measurements_on_device_id", using: :btree
-  add_index "measurements", ["user_id"], name: "index_measurements_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -103,5 +101,4 @@ ActiveRecord::Schema.define(version: 20170202140608) do
 
   add_foreign_key "devices", "users"
   add_foreign_key "measurements", "devices"
-  add_foreign_key "measurements", "users"
 end
