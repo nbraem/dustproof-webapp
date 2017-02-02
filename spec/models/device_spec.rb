@@ -12,4 +12,5 @@ describe Device do
   it { should validate_presence_of(:transport) }
 
   it { should belong_to(:user) }
+  it { should have_many(:measurements) }
 end

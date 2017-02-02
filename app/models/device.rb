@@ -3,6 +3,7 @@ class Device < ActiveRecord::Base
   validates :transport, presence: true
 
   belongs_to :user
+  has_many :measurements, dependent: :destroy
 
   before_create :generate_api_key
 

@@ -59,4 +59,5 @@ describe Measurement do
   it { should validate_presence_of(:p2_ratio) }
 
   it { should belong_to(:user) }
+  it { should belong_to(:device) }
 end

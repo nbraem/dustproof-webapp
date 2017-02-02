@@ -7,6 +7,7 @@ class Measurement < ActiveRecord::Base
   before_save :validate_measurement
 
   belongs_to :user
+  belongs_to :device
 
   def chart_datetime
     timestamp.to_i * 1000 if timestamp
