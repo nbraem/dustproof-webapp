@@ -12,7 +12,7 @@ class MeasurementsController < ApplicationController
 
   def destroy
     @measurement.destroy
-    redirect_to :measurements
+    redirect_to [@device, :measurements]
   end
 
   def destroy_all

@@ -23,7 +23,7 @@
     %tbody
       - @measurements.each do |measurement|
         %tr{class: measurement.is_valid? ? nil : "danger"}
-          %th{ scope: "row" }= link_to measurement.id, measurement
+          %th{ scope: "row" }= link_to measurement.id, [@device, measurement]
           %td.text-center.nowrap= measurement.transport
           %td.text-center.nowrap= l Time.at(measurement.timestamp), format: "%d-%m-%Y %H:%M:%S"
           %td.text-center

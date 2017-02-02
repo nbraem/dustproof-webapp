@@ -10,7 +10,7 @@
     .row
       .col-sm-4.col-lg-12
         .well
-          = link_to icon_text("trash-o", t('.destroy', default: t("helpers.links.destroy"))), measurement_path(@measurement), method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-block'
+          = link_to icon_text("trash-o", t('.destroy', default: t("helpers.links.destroy"))), [@device, @measurement], method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-danger btn-block'
 
   .col-lg-9
     .row
