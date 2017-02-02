@@ -3,7 +3,7 @@ class CreateAverageHourlyMeasurementsView < ActiveRecord::Migration
     execute <<-SQL
       CREATE VIEW average_hourly_measurements AS
         SELECT row_number() OVER () AS id,
-          user_id,
+          device_id,
           round(avg(temperature)::numeric, 2) AS average_temperature,
           round(avg(humidity)::numeric, 2) AS average_humidity,
           avg(p1_ratio) AS average_p1_ratio,
@@ -17,7 +17,7 @@ class CreateAverageHourlyMeasurementsView < ActiveRecord::Migration
             AND p2_ratio IS NOT NULL
             AND pm25_ratio IS NOT NULL
             AND is_valid = TRUE
-          GROUP BY hourly_timestamp, user_id
+          GROUP BY hourly_timestamp, device_id
           ORDER BY hourly_timestamp;
     SQL
   end

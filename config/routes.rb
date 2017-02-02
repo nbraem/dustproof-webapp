@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   devise_scope :user do
     authenticated :user do
-      root to: "average_hourly_measurements#index", as: :authenticated_root
+      root to: "devices#index", as: :authenticated_root
     end
   end
 
@@ -36,21 +36,20 @@ Rails.application.routes.draw do
   resources :contacts, only: [:new, :create]
 
   # Other resources
-  resources :measurements do
-    collection do
-      delete :destroy_all
-      get :chart
+  resources :devices do
+    resources :average_hourly_measurements
+    resources :average_daily_measurements
+    resources :measurements do
+      collection do
+        delete :destroy_all
+      end
+    end
+    member do
+      put :regenerate_api_key
     end
   end
-
-  resources :devices
-  resources :average_hourly_measurements
-  resources :average_daily_measurements
   resources :wifi_metrics
   resources :lora_metrics
-
-  # Other actions
-  put "/regenerate_api_key", to: "api_key#regenerate_api_key"
 
   root "pages#home"
 end

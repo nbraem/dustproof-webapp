@@ -7,17 +7,21 @@ module ApplicationHelper
     end
   end
 
+  def active?(controller_name)
+    controller.controller_name == controller_name ? "active" : nil
+  end
+
   def device_euis
     IncomingMessage.select(:device_eui).order(device_eui: :asc).where("device_eui IS NOT NULL").uniq.collect(&:device_eui)
   end
 
-  def dust_level
-    last_measurement = current_user.measurements.select(:pm25_ratio).order(timestamp: :desc).first
+  def dust_level(device)
+    last_measurement = device.measurements.select(:pm25_ratio).order(timestamp: :desc).first
     last_measurement.pm25_ratio if last_measurement
   end
 
-  def dust_level_badge
-    ratio = dust_level
+  def dust_level_badge(device)
+    ratio = dust_level(device)
     if ratio
       if ratio < 1.0
         content_tag(:span, 1, class: "label label-success")
@@ -30,6 +34,8 @@ module ApplicationHelper
       elsif ratio >= 6.0
         content_tag(:span, 5, class: "label label-danger")
       end
+    else
+      "geen metingen"
     end
   end
 

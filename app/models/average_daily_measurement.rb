@@ -1,6 +1,6 @@
 class AverageDailyMeasurement < ActiveRecord::Base
   self.primary_key = "id"
-  belongs_to :user
+  belongs_to :device
 
   scope :this_month, -> { where(daily_timestamp: 30.days.ago.beginning_of_day..Time.now) }
 

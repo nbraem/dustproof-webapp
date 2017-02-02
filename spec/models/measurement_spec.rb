@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Measurement do
-  it { should have_db_index(:user_id) }
+  it { should have_db_index(:device_id) }
 
   it do
     should have_db_column(:transport).
@@ -58,6 +58,5 @@ describe Measurement do
   it { should validate_presence_of(:pm25_ratio) }
   it { should validate_presence_of(:p2_ratio) }
 
-  it { should belong_to(:user) }
   it { should belong_to(:device) }
 end

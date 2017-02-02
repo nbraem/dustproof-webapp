@@ -19,19 +19,7 @@
             %li{ class: action_name == "about" ? "active" : nil }= link_to icon_text("users", "Team"), "/over-ons"
 
         - if user_signed_in?
-          %li= link_to icon_text("dashboard", "Meters"), devices_path
-          %li.dropdown
-            = link_to "#", class: "dropdown-toggle", "aria-expanded" => false, data: { toggle: "dropdown" }, role: "button" do
-              = icon_text("line-chart", "Mijn metingen")
-              %span.caret
-            %ul.dropdown-menu{ role: "menu" }
-              %li= link_to "Detailgrafiek", chart_measurements_path
-              %li= link_to "Overzicht per uur", average_hourly_measurements_path
-              %li= link_to "Overzicht per dag", average_daily_measurements_path
-              %li.divider
-              %li= link_to "Alle metingen", measurements_path
-        - else
-          %li{ class: action_name == "measurements" ? "active" : nil }= link_to icon_text("line-chart", "Metingen"), "/metingen"
+          %li{ class: active?("devices") || active?("average_daily_measurements") || active?("average_hourly_measurements") || active?("measurements") }= link_to icon_text("dashboard", t("devices.index.title")), devices_path
         - if user_signed_in? && current_user.admin?
           %li.dropdown
             = link_to "#", class: "dropdown-toggle", "aria-expanded" => false, data: { toggle: "dropdown" }, role: "button" do

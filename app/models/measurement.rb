@@ -6,7 +6,6 @@ class Measurement < ActiveRecord::Base
 
   before_save :validate_measurement
 
-  belongs_to :user
   belongs_to :device
 
   def chart_datetime

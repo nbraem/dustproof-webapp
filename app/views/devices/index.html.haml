@@ -1,26 +1,23 @@
 - content_for(:title) do
-  Mijn meters
+  = t(".title")
 
 .page-header
-  %h1
-    Mijn meters
+  .row
+    .col-sm-8
+      %h1= t(".title")
+    .col-sm-4
+      .text-right
+        = link_to icon_text("plus", "Meter toevoegen"), [:new, :device], class: "btn btn-info"
 
 %p.text-right= page_entries_info @devices
 .text-center= paginate @devices, theme: "twitter-bootstrap-3"
 
 .row
-  - @devices.each do |device|
-    .col-sm-6.col-lg-4
-      .thumbnail
-        %h1.text-center{style: "font-size: 5em;"}= icon_text("dashboard")
-        .caption
-          %h3= device.name
-          %p
-            Huidig fijnstofniveau:
-            = dust_level_badge
-          %p
-            = link_to icon_text("line-chart", t("helpers.links.graphs")), device, class: "btn btn-primary btn-sm"
-            = link_to icon_text("list", t("helpers.links.measurements")), device, class: "btn btn-primary btn-sm"
-            = link_to icon_text("pencil", t("helpers.links.edit")), [:edit, device], class: "btn btn-warning btn-sm"
+  .col-lg-12
+    - if @devices.any?
+      = render @devices
+    - else
+      Geen meters.
+      = link_to "Voeg er een toe.", [:new, :device]
 
 .text-center= paginate @devices, theme: "twitter-bootstrap-3"

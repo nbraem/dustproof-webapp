@@ -1,12 +1,6 @@
-- content_for(:title) do
-  Mijn metingen
+= render "devices/header"
 
-.page-header
-  %h1
-    Mijn metingen
-    %small Alle metingen
-
-= link_to icon_text("trash", "Verwijder all metingen"), [:destroy_all, :measurements], method: :delete, data: {confirm: "Alle metingen worden verwijderd. Dit kan niet ongedaan gemaakt worden. Ben je zeker?"}, class: "btn btn-sm btn-danger"
+= link_to icon_text("trash", "Verwijder all metingen"), [:destroy_all, @device, :measurements], method: :delete, data: {confirm: "Alle metingen worden verwijderd. Dit kan niet ongedaan gemaakt worden. Ben je zeker?"}, class: "btn btn-sm btn-danger"
 
 %p.text-right= page_entries_info @measurements
 .text-center= paginate @measurements, theme: "twitter-bootstrap-3"

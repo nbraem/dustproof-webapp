@@ -4,10 +4,14 @@ nl:
       root: "Index"
     users:
       index: "Gebruikers"
-      new: "Nieuwe gebruiker"
+      new: "Nieuw"
       edit: "Bewerken"
     incoming_messages:
       index: "Incoming messages"
+    devices:
+      index: "Meters"
+      new: "Nieuw"
+      edit: "Bewerken"
   helpers:
     actions: "Actions"
     submit:
