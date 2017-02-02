@@ -17,6 +17,15 @@ Rails.application.routes.draw do
     end
   end
 
+  # Public routes
+  namespace :public do
+    resources :devices, only: :show do
+      resources :average_hourly_measurements, only: :index
+      resources :average_daily_measurements, only: :index
+      resources :measurements, only: [:index, :show]
+    end
+  end
+
   # API
   namespace :api do
     namespace :v1 do

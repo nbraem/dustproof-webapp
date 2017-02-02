@@ -40,7 +40,7 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
-      redirect_to @device
+      redirect_to @device, notice: "Wijzigingen met succes bewaard."
     else
       set_common_breadcrumbs
       add_breadcrumb @device.name, @device
@@ -73,7 +73,8 @@ class DevicesController < ApplicationController
       permit(:name,
              :location,
              :transport,
-             :device_eui
+             :device_eui,
+             :public
       )
   end
 

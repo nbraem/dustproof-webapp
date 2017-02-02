@@ -45,6 +45,7 @@ nl:
       device:
         name: "Naam"
         location: "Locatie"
+        public: "Publiek toegangkelijk"
         api_key: "API key"
         device_eui: "Device EUI"
         transport: "Verbinding"

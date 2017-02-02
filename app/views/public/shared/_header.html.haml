@@ -1,0 +1,18 @@
+.page-header
+  .row
+    .col-sm-8
+      %h1
+        = @device.name
+        %small= @device.location
+
+%ul.nav.nav-pills.nav-justified
+  %li{ role: "presentation", class: active?("devices") }= link_to icon_text("line-chart", "Detailgrafiek"), [:public, @device]
+  %li{ role: "presentation", class: active?("average_hourly_measurements") }
+    = link_to icon_text("line-chart", "Uurgemiddelde"), [:public, @device, :average_hourly_measurements]
+  %li{ role: "presentation", class: active?("average_daily_measurements") }
+    = link_to icon_text("line-chart", "Daggemiddelde"), [:public, @device, :average_daily_measurements]
+  %li{ role: "presentation", class: active?("measurements") }= link_to icon_text("list", "Alle metingen"), [:public, @device, :measurements]
+
+.row
+  .col-lg-12
+    &nbsp;

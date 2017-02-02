@@ -9,6 +9,7 @@ describe Device do
   it { should have_db_column(:device_eui).of_type(:string) }
   it { should have_db_column(:transport).of_type(:string) }
   it { should have_db_column(:location).of_type(:string) }
+  it { should have_db_column(:public).of_type(:boolean) }
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:transport) }
