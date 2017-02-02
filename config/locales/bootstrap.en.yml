@@ -22,6 +22,8 @@ en:
       destroy: "Delete"
       new: "New"
       edit: "Edit"
+      measurements: "Measurements"
+      graphs: "Graphs"
     titles:
       edit: "Edit %{model}"
       save: "Save %{model}"

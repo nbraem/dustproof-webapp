@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :measurements, dependent: :destroy
   has_many :average_hourly_measurements
   has_many :average_daily_measurements
+  has_many :devices, dependent: :destroy
 
   before_create :generate_api_key
 

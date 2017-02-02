@@ -22,3 +22,9 @@ admin = User.create! first_name: "Addo",
                             p1_count: rand(20),
                             p2_count: rand(20)
 end
+
+5.times do |i|
+  user.devices.create! name: "Dustcube #{i}",
+                       device_eui: "00000000",
+                       transport: "wifi"
+end
