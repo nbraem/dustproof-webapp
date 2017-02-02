@@ -13,7 +13,7 @@
                   var series = chart.series;
                   var series_length = series.length;
                   for (var i = 0; i < series_length; i++) {
-                    var series_visible = localStorage.getItem("daily_series_" + i + "_visible");
+                    var series_visible = localStorage.getItem("detailed_series_" + i + "_visible");
                     if (series_visible == "hidden") {
                       series[i].setVisible(false);
                     } else {
@@ -38,9 +38,9 @@
                   if (typeof(Storage) !== "undefined") {
                     var series = e.target;
                     if (series.visible) {
-                      localStorage.setItem("daily_series_" + series.index + "_visible", "hidden");
+                      localStorage.setItem("detailed_series_" + series.index + "_visible", "hidden");
                     } else {
-                      localStorage.removeItem("daily_series_" + series.index + "_visible");
+                      localStorage.removeItem("detailed_series_" + series.index + "_visible");
                     }
                   }
                 }
