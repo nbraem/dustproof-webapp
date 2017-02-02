@@ -33,9 +33,10 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def authenticate_user!
-    user = params[:api_key] && User.find_by(api_key: params[:api_key])
-    if user && params[:api_key] && ActiveSupport::SecurityUtils.secure_compare(user.api_key, params[:api_key])
-      @current_user = user
+    device = params[:api_key] && Device.find_by(api_key: params[:api_key])
+    if device && params[:api_key] && ActiveSupport::SecurityUtils.secure_compare(device.api_key, params[:api_key])
+      @current_device = device
+      @current_user = device.user
     else
       return unauthenticated!
     end

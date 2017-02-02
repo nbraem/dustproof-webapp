@@ -12,19 +12,19 @@ admin = User.create! first_name: "Addo",
                      password: "secret",
                      admin: true
 
-50.times do |i|
-  user.measurements.create! timestamp: Time.now + i * 10.seconds,
-                            temperature: rand(25).to_f,
-                            humidity: rand(100).to_f,
-                            pm25_ratio: rand(3500) / 100.to_f,
-                            p1_ratio: rand(3500) / 100.to_f,
-                            p2_ratio: rand(3500) / 100.to_f,
-                            p1_count: rand(20),
-                            p2_count: rand(20)
-end
 
 5.times do |i|
-  user.devices.create! name: "Dustcube #{i}",
-                       device_eui: "00000000",
-                       transport: "wifi"
+  device = user.devices.create! name: "Dustcube #{i}",
+                                device_eui: "0000000#{i}",
+                                transport: "wifi"
+  50.times do |i|
+    device.measurements.create! timestamp: Time.now + i * 10.seconds,
+                                temperature: rand(25).to_f,
+                                humidity: rand(100).to_f,
+                                pm25_ratio: rand(3500) / 100.to_f,
+                                p1_ratio: rand(3500) / 100.to_f,
+                                p2_ratio: rand(3500) / 100.to_f,
+                                p1_count: rand(20),
+                                p2_count: rand(20)
+  end
 end

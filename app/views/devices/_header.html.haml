@@ -1,0 +1,24 @@
+- model_class = Device
+
+.page-header
+  .row
+    .col-sm-8
+      %h1
+        = @device.name
+        %small= t '.title', default: model_class.model_name.human.titleize
+    .col-sm-4
+      .text-right
+        = link_to icon_text("pencil"), [:edit, @device], class: "btn btn-warning btn-xs"
+        = link_to icon_text("trash-o"), @device, method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: "Are you sure?")) }, class: "btn btn-danger btn-xs"
+
+%ul.nav.nav-pills.nav-justified
+  %li{ role: "presentation", class: active?("devices") }= link_to icon_text("line-chart", "Detailgrafiek"), @device
+  %li{ role: "presentation", class: active?("average_hourly_measurements") }
+    = link_to icon_text("line-chart", "Uurgemiddelde"), [@device, :average_hourly_measurements]
+  %li{ role: "presentation", class: active?("average_daily_measurements") }
+    = link_to icon_text("line-chart", "Daggemiddelde"), [@device, :average_daily_measurements]
+  %li{ role: "presentation", class: active?("measurements") }= link_to icon_text("list", "Alle metingen"), [@device, :measurements]
+
+.row
+  .col-lg-12
+    &nbsp;

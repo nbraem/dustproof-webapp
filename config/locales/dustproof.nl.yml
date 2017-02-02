@@ -7,6 +7,9 @@ nl:
       new: "Nieuwe gebruiker"
     new:
       title: "Nieuwe gebruiker"
+  devices:
+    index:
+      title: "Mijn meters"
   activerecord:
     models:
       user:

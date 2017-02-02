@@ -1,0 +1,11 @@
+.col-sm-6.col-lg-4
+  .thumbnail
+    %h1.text-center{style: "font-size: 5em;"}= icon_text("dashboard")
+    .caption
+      %h3= device.name
+      %p
+        Huidig fijnstofniveau:
+        = dust_level_badge(device)
+      %p
+        = link_to icon_text("line-chart", t("helpers.links.measurements")), device, class: "btn btn-primary btn-sm"
+        = link_to icon_text("pencil", t("helpers.links.edit")), [:edit, device], class: "btn btn-warning btn-sm"

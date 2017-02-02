@@ -9,7 +9,7 @@ FactoryGirl.define do
     humidity 49.0
 
     timestamp Time.now
-    user
+    device
 
     trait :invalid do
       p2_ratio nil

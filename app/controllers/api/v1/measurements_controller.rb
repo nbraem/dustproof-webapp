@@ -1,7 +1,7 @@
 class Api::V1::MeasurementsController < Api::V1::BaseController
 
   def index
-    measurements = current_user.measurements.order("timestamp asc").limit(120)
+    measurements = @current_device.measurements.order("timestamp asc").limit(120)
 
     render(
       json: ActiveModel::ArraySerializer.new(
@@ -13,7 +13,7 @@ class Api::V1::MeasurementsController < Api::V1::BaseController
   end
 
   def create
-    measurement = current_user.measurements.new(measurement_params.merge({timestamp: Time.now}))
+    measurement = @current_device.measurements.new(measurement_params.merge({timestamp: Time.now}))
     if measurement.save
       render json: { status: 'ok' }, status: 200
     else

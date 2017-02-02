@@ -1,13 +1,14 @@
 class Device < ActiveRecord::Base
   validates :name, presence: true
   validates :transport, presence: true
+  validates :device_eui, uniqueness: true
 
   belongs_to :user
   has_many :measurements, dependent: :destroy
+  has_many :average_hourly_measurements
+  has_many :average_daily_measurements
 
   before_create :generate_api_key
-
-  protected
 
   def generate_api_key
     self.api_key = loop do

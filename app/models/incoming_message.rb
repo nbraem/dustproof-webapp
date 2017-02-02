@@ -58,7 +58,7 @@ class IncomingMessage < ActiveRecord::Base
       end
 
       if self.device_eui.present?
-        user = User.where(device_eui: self.device_eui).first
+        device = Device.where(transport: "lora").where(device_eui: self.device_eui).first
       end
 
     # If this is a message from WiFi
@@ -86,18 +86,18 @@ class IncomingMessage < ActiveRecord::Base
         print "json parse error"
       end
 
-      user = User.where(api_key: api_key).first
+      device = Device.where(transport: "wifi").where(api_key: api_key).first
     end
-    if user
-      user.measurements.create! p1_ratio: p1_ratio,
-                                p2_ratio: p2_ratio,
-                                pm25_ratio: pm25_ratio,
-                                p1_count: p1_count,
-                                p2_count: p2_count,
-                                temperature: temperature,
-                                humidity: humidity,
-                                timestamp: self.timestamp,
-                                transport: self.transport
+    if device
+      device.measurements.create! p1_ratio: p1_ratio,
+                                  p2_ratio: p2_ratio,
+                                  pm25_ratio: pm25_ratio,
+                                  p1_count: p1_count,
+                                  p2_count: p2_count,
+                                  temperature: temperature,
+                                  humidity: humidity,
+                                  timestamp: self.timestamp,
+                                  transport: self.transport
     end
   end
 
