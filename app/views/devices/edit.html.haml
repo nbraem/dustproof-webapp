@@ -16,8 +16,13 @@
         %br
         .well= @device.api_key
 
-      .form-group
+      .form-group.text-right
         = link_to icon_text("refresh", "API key vernieuwen"), [:regenerate_api_key, @device], method: :put, data: {confirm: "Deze actie maakt de vorige API key ongeldig. Ben je zeker?"}, class: "btn btn-warning btn-sm"
-
-      = f.button :submit, class: 'btn-primary'
-      = link_to t('.cancel', default: t("helpers.links.cancel")), @device, class: 'btn btn-default'
+    .col-md-4
+      = f.input :location
+      .well
+        = f.input :public, wrapper: :vertical_boolean, hint: "Wanneer je je meter publiek maakt kunnen anderen je metingen zien via onderstaande link:"
+        = link_to public_device_url(@device), public_device_url(@device)
+  %hr
+  = f.button :submit, class: 'btn-primary'
+  = link_to t('.cancel', default: t("helpers.links.cancel")), @device, class: 'btn btn-default'

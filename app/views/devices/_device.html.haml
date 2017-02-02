@@ -4,6 +4,12 @@
     .caption
       %h3= device.name
       %p
+        - if device.location.present?
+          = icon_text("map-marker")
+          %em= device.location
+        - else
+          &nbsp;
+      %p
         Huidig fijnstofniveau:
         = dust_level_badge(device)
       %p
