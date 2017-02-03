@@ -1,7 +1,7 @@
 class Device < ActiveRecord::Base
   validates :name, presence: true
   validates :transport, presence: true
-  validates :device_eui, uniqueness: true
+  validates :device_eui, uniqueness: true, allow_blank: true
 
   belongs_to :user
   has_many :measurements, dependent: :destroy

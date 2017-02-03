@@ -10,7 +10,7 @@
     .col-md-4
       = f.input :name
       = f.input :transport, collection: TRANSPORTS
-      = f.input :device_eui, hint: "Alleen nodig voor LoRa."
+      = f.input :device_eui, hint: "Alleen nodig voor LoRa. Maak leeg voor WiFi."
       .form-group
         %label.control-label API key
         %br

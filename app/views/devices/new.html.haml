@@ -10,7 +10,7 @@
       = f.input :location
       = f.input :public
       = f.input :transport, collection: TRANSPORTS
-      = f.input :device_eui, hint: "Alleen nodig voor LoRa."
+      = f.input :device_eui, hint: "Alleen nodig voor LoRa. Maak leeg voor WiFi."
 
       = f.button :submit, class: 'btn-primary'
       = link_to t('.cancel', default: t("helpers.links.cancel")), @device, class: 'btn btn-default'
