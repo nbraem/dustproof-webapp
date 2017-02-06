@@ -1,4 +1,7 @@
 class Device < ActiveRecord::Base
+  has_attached_file :photo, styles: { thumb: "x200>" }
+  validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
+
   validates :name, presence: true
   validates :transport, presence: true
   validates :device_eui, uniqueness: true, allow_blank: true

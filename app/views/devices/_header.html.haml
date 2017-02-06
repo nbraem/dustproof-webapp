@@ -6,8 +6,7 @@
         %small= @device.location
     .col-sm-4
       .text-right
-        = link_to icon_text("pencil"), [:edit, @device], class: "btn btn-warning btn-xs"
-        = link_to icon_text("trash-o"), @device, method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: "Are you sure?")) }, class: "btn btn-danger btn-xs"
+        = link_to icon_text("pencil", "Meter bewerken"), [:edit, @device], class: "btn btn-warning"
 
 %ul.nav.nav-pills.nav-justified
   %li{ role: "presentation", class: active?("devices") }= link_to icon_text("line-chart", "Detailgrafiek"), @device

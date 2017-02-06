@@ -21,6 +21,7 @@ gem 'exception_notification'
 gem 'active_model_serializers'
 gem 'aws-sdk-rails'
 gem 'shoryuken'
+gem 'paperclip', '~> 5.0.0'
 
 group :development do
   gem 'web-console', '~> 2.0'

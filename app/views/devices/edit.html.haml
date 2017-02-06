@@ -16,13 +16,21 @@
         %br
         .well= @device.api_key
 
-      .form-group.text-right
-        = link_to icon_text("refresh", "API key vernieuwen"), [:regenerate_api_key, @device], method: :put, data: {confirm: "Deze actie maakt de vorige API key ongeldig. Ben je zeker?"}, class: "btn btn-warning btn-sm"
+      .form-group
+        = link_to icon_text("refresh", "API key vernieuwen"), [:regenerate_api_key, @device], method: :put, data: {confirm: "Deze actie maakt de vorige API key ongeldig. Ben je zeker?"}, class: "btn btn-info btn-sm"
     .col-md-4
+      - if @device.photo.present?
+        .thumbnail
+          = image_tag @device.photo.url(:thumb)
+          .text-right= link_to icon_text("trash-o"), [:destroy_photo, @device], method: "delete", class: "btn btn-danger btn-xs"
+      = f.input :photo, as: :file
       = f.input :location
       .well
         = f.input :public, wrapper: :vertical_boolean, hint: "Wanneer je je meter publiek maakt kunnen anderen je metingen zien via onderstaande link:"
         = link_to public_device_url(@device), public_device_url(@device)
+      .well
+        = link_to icon_text("trash-o", "Meter verwijderen"), @device, method: "delete", data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: "Are you sure?")) }, class: "btn btn-danger"
+
   %hr
   = f.button :submit, class: 'btn-primary'
   = link_to t('.cancel', default: t("helpers.links.cancel")), @device, class: 'btn btn-default'

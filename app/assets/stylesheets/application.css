@@ -29,3 +29,60 @@ footer {
 .jumbotron a:hover, .jumbotron a:focus {
   text-decoration: none;
 }
+
+.no-hover {
+    display: block;
+    /* 4:3 aspect ratio */
+    padding-top: 75%;
+    /* center align pt. 1 */
+    position: relative;
+}
+
+.no-hover > .text-center {
+    /* fit within container */
+    max-width: 100%;
+    max-height: 100%;
+    /* center align pt. 2 */
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    height: 100px;
+}
+
+.no-hover:hover {
+    text-decoration: none;
+}
+
+.no-hover:focus {
+    text-decoration: none;
+}
+
+.thumbnail > a {
+    display: block;
+    /* 4:3 aspect ratio */
+    padding-top: 75%;
+    /* center align pt. 1 */
+    position: relative;
+}
+
+.thumbnail > a > img {
+    /* fit within container */
+    max-width: 100%;
+    max-height: 100%;
+    /* center align pt. 2 */
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
