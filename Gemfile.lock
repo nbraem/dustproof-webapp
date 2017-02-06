@@ -94,6 +94,10 @@ GEM
       timers (>= 4.1.1)
     celluloid-supervision (0.20.5)
       timers (>= 4.1.1)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -188,6 +192,7 @@ GEM
       activemodel (>= 3.2, < 5)
     method_source (0.8.2)
     mime-types (2.99.1)
+    mimemagic (0.3.2)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     nenv (0.2.0)
@@ -200,6 +205,12 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
+    paperclip (5.0.0)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
+      cocaine (~> 0.5.5)
+      mime-types
+      mimemagic (~> 0.3.0)
     pg (0.18.4)
     polyamorous (1.3.0)
       activerecord (>= 3.0)
@@ -354,6 +365,7 @@ DEPENDENCIES
   kaminari
   letter_opener (~> 1.2.0)
   mail_form
+  paperclip (~> 5.0.0)
   pg (~> 0.18.4)
   pry-rails (~> 0.3.2)
   quiet_assets (~> 1.1.0)
@@ -370,5 +382,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
 
+RUBY VERSION
+   ruby 2.3.1p112
+
 BUNDLED WITH
-   1.10.0
+   1.13.6

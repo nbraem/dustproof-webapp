@@ -1,17 +1,26 @@
-.col-sm-6.col-lg-4
+.col-sm-6.col-md-4.col-lg-3
   .thumbnail
-    %h1.text-center{style: "font-size: 5em;"}= icon_text("dashboard")
-    .caption
-      %h3= device.name
-      %p
+    - if device.photo.present?
+      = link_to image_tag(device.photo.url(:thumb)), device
+    - else
+      = link_to device, class: "no-hover" do
+        .text-center
+          %p{style: "font-size: 5em;"}= icon_text("dashboard")
+
+    .row
+      .col-lg-12
+        &nbsp;
+    .row
+      .col-lg-12
+        %h3.truncate= device.name
+    .row
+      .col-lg-12
+        Fijnstofniveau
+        = dust_level_badge(device)
+    .row
+      .col-lg-12
         - if device.location.present?
           = icon_text("map-marker")
           %em= device.location
         - else
           &nbsp;
-      %p
-        Huidig fijnstofniveau:
-        = dust_level_badge(device)
-      %p
-        = link_to icon_text("line-chart", t("helpers.links.measurements")), device, class: "btn btn-primary btn-sm"
-        = link_to icon_text("pencil", t("helpers.links.edit")), [:edit, device], class: "btn btn-warning btn-sm"

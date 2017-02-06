@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     end
     member do
       put :regenerate_api_key
+      delete :destroy_photo
     end
   end
   resources :wifi_metrics

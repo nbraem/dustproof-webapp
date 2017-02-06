@@ -49,6 +49,7 @@ nl:
         api_key: "API key"
         device_eui: "Device EUI"
         transport: "Verbinding"
+        photo: "Foto"
       average_hourly_measurement:
         hourly_timestamp: "Tijdstip"
       average_daily_measurement:

@@ -7,10 +7,11 @@
   .row
     .col-md-4
       = f.input :name
-      = f.input :location
-      = f.input :public
       = f.input :transport, collection: TRANSPORTS
       = f.input :device_eui, hint: "Alleen nodig voor LoRa. Maak leeg voor WiFi."
+      = f.input :location
+      = f.input :photo, as: :file
 
-      = f.button :submit, class: 'btn-primary'
-      = link_to t('.cancel', default: t("helpers.links.cancel")), @device, class: 'btn btn-default'
+  %hr
+  = f.button :submit, class: 'btn-primary'
+  = link_to t('.cancel', default: t("helpers.links.cancel")), @device, class: 'btn btn-default'

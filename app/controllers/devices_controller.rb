@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy, :regenerate_api_key]
+  before_action :set_device, only: [:show, :edit, :update, :destroy, :regenerate_api_key, :destroy_photo]
   before_action :set_common_breadcrumbs, only: [:show, :new, :edit]
   respond_to :html
 
@@ -40,7 +40,7 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
-      redirect_to @device, notice: "Wijzigingen met succes bewaard."
+      redirect_to [:edit, @device], notice: "Wijzigingen met succes bewaard."
     else
       set_common_breadcrumbs
       add_breadcrumb @device.name, @device
@@ -53,6 +53,12 @@ class DevicesController < ApplicationController
     @device.generate_api_key
     @device.save
     redirect_to [:edit, @device], notice: "API key met succes vernieuwd. Vergeet je code niet aan te passen!"
+  end
+
+  def destroy_photo
+    @device.photo = nil
+    @device.save
+    redirect_to [:edit, @device], notice: "Foto met succes verwijderd."
   end
 
   def destroy
@@ -74,7 +80,8 @@ class DevicesController < ApplicationController
              :location,
              :transport,
              :device_eui,
-             :public
+             :public,
+             :photo
       )
   end
 
