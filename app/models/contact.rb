@@ -8,7 +8,7 @@ class Contact < MailForm::Base
   # in ActionMailer accepts.
   def headers
     {
-      subject: "Contact via de DustProof website",
+      subject: "Contact via dustProof.be",
       to: "info@dustproof.be",
       from: "#{name} <#{email}>"
     }

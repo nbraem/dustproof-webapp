@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "DustProof <bounces@dustproof.be>"
+  default from: "dustProof.be <bounces@dustproof.be>"
   layout "mailer"
 end

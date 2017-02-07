@@ -15,8 +15,8 @@ ExceptionNotification.configure do |config|
 
   # Email notifier sends notifications by email.
   config.add_notifier :email, {
-    :email_prefix         => "[DustProof Exception]  ",
-    :sender_address       => %{"DustProof" <bounces@dustproof.be>},
+    :email_prefix         => "[dustProof.be Exception]  ",
+    :sender_address       => %{"dustProof.be" <bounces@dustproof.be>},
     :exception_recipients => %w{hostmaster@dustproof.be}
   }
 end
