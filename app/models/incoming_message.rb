@@ -1,5 +1,6 @@
 class IncomingMessage < ActiveRecord::Base
   before_validation :extract_transport
+  before_validation :extract_wifi_data
   before_validation :extract_lora_data
   before_validation :calculate_packet_loss
   validates :timestamp, presence: true
@@ -109,12 +110,24 @@ class IncomingMessage < ActiveRecord::Base
 
       if json_data.key?("transport")
         self.transport = json_data['transport']
-        self.status = "processed"
       else
         self.transport = 'lora'
       end
     rescue
       self.status = "json_parse_error"
+    end
+  end
+
+  def extract_wifi_data
+    if self.transport == "wifi"
+      begin
+        json_data = JSON.parse(self.body)
+
+        self.api_key = json_data['api_key']
+        self.status = "processed"
+      rescue
+        self.status = "json_parse_error"
+      end
     end
   end
 
@@ -124,8 +137,8 @@ class IncomingMessage < ActiveRecord::Base
         json_data = JSON.parse(self.body)
 
         if json_data['DevEUI_uplink'].present?
-          # UA LoRa network
-          self.gateway_eui = 'UA LoRa network'
+          # Proximus LoRa network
+          self.gateway_eui = 'Proximus LoRa network'
           self.device_eui = json_data['DevEUI_uplink']['DevAddr']
           self.packet_time = json_data['DevEUI_uplink']['Time']
           self.rssi = json_data['DevEUI_uplink']['LrrRSSI']
@@ -164,6 +177,24 @@ class IncomingMessage < ActiveRecord::Base
         previous_message = IncomingMessage.order(timestamp: :desc).where(device_eui: self.device_eui).first
         if previous_message
           byte_array = previous_message.data.chars.each_slice(4).map(&:join)
+          previous_sequence_number = byte_array[0].to_i(16)
+          if previous_sequence_number < current_sequence_number
+            missing_packets = current_sequence_number - previous_sequence_number - 1
+            self.lost_packets = missing_packets if missing_packets <= 60
+          end
+        end
+      end
+    elsif self.transport == "wifi"
+      json_data = JSON.parse(self.body)
+      api_key = json_data["api_key"]
+      byte_array = json_data["measurement"].chars.each_slice(4).map(&:join)
+      current_sequence_number = byte_array[0].to_i(16)
+
+      if current_sequence_number > 0
+        previous_message = IncomingMessage.order(timestamp: :desc).where(api_key: self.api_key).first
+        if previous_message
+          json_data = JSON.parse(previous_message.body)
+          byte_array = json_data["measurement"].chars.each_slice(4).map(&:join)
           previous_sequence_number = byte_array[0].to_i(16)
           if previous_sequence_number < current_sequence_number
             missing_packets = current_sequence_number - previous_sequence_number - 1

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206192315) do
+ActiveRecord::Schema.define(version: 20170208135420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,8 +52,11 @@ ActiveRecord::Schema.define(version: 20170206192315) do
     t.text     "comments"
     t.string   "transport"
     t.integer  "lost_packets"
+    t.string   "api_key"
   end
 
+  add_index "incoming_messages", ["api_key"], name: "index_incoming_messages_on_api_key", using: :btree
+  add_index "incoming_messages", ["device_eui"], name: "index_incoming_messages_on_device_eui", using: :btree
   add_index "incoming_messages", ["transport"], name: "index_incoming_messages_on_transport", using: :btree
 
   create_table "measurements", force: :cascade do |t|
