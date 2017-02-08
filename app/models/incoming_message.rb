@@ -123,7 +123,10 @@ class IncomingMessage < ActiveRecord::Base
       begin
         json_data = JSON.parse(self.body)
 
-        self.api_key = json_data['api_key']
+        if json_data['api_key'].present?
+          self.api_key = Digest::SHA1.hexdigest json_data['api_key']
+        end
+
         self.status = "processed"
       rescue
         self.status = "json_parse_error"
@@ -186,12 +189,12 @@ class IncomingMessage < ActiveRecord::Base
       end
     elsif self.transport == "wifi"
       json_data = JSON.parse(self.body)
-      api_key = json_data["api_key"]
+      api_key_hash = Digest::SHA1.hexdigest json_data["api_key"]
       byte_array = json_data["measurement"].chars.each_slice(4).map(&:join)
       current_sequence_number = byte_array[0].to_i(16)
 
       if current_sequence_number > 0
-        previous_message = IncomingMessage.order(timestamp: :desc).where(api_key: self.api_key).first
+        previous_message = IncomingMessage.order(timestamp: :desc).where(api_key: api_key_hash).first
         if previous_message
           json_data = JSON.parse(previous_message.body)
           byte_array = json_data["measurement"].chars.each_slice(4).map(&:join)

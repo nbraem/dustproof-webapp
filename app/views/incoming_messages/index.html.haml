@@ -13,8 +13,10 @@
   .col-md-7
     = search_form_for @q do |f|
       .row
-        .col-sm-4
-          = f.input :device_eui_eq, as: :select, collection: device_euis.prepend(""), include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Filter device EUI:"
+        .col-sm-3
+          = f.input :device_eui_eq, as: :select, collection: device_euis.prepend(""), include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Filter LoRa device:"
+        .col-sm-6
+          = f.input :api_key_eq, as: :select, collection: api_keys.prepend(""), include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Filter WiFi device:"
 
 .row
   .col-lg-12
@@ -47,9 +49,11 @@
               %td= incoming_message.rssi
               %td= incoming_message.snr
               %td= incoming_message.data
-              %td= incoming_message.lost_packets
             - else
-              %td{ colspan: 7 } WiFi
+              %td WiFi
+              %td= incoming_message.api_key
+              %td{ colspan: 4 } &nbsp;
+            %td= incoming_message.lost_packets
             %td= incoming_message.status
 
     .text-center= paginate @incoming_messages, theme: "twitter-bootstrap-3"

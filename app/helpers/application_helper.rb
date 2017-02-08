@@ -15,6 +15,10 @@ module ApplicationHelper
     IncomingMessage.select(:device_eui).order(device_eui: :asc).where("device_eui IS NOT NULL").uniq.collect(&:device_eui)
   end
 
+  def api_keys
+    IncomingMessage.select(:api_key).order(api_key: :asc).where("api_key IS NOT NULL").uniq.collect(&:api_key)
+  end
+
   def dust_level(device)
     last_measurement = device.measurements.select(:pm25_ratio).order(timestamp: :desc).first
     last_measurement.pm25_ratio if last_measurement

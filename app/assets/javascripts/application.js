@@ -26,6 +26,10 @@ ready_application = function() {
     $(this).closest('form')[0].submit();
   });
 
+  $("#q_api_key_eq").on("change", function(){
+    $(this).closest('form')[0].submit();
+  });
+
 };
 
 $(document).ready(ready_application);

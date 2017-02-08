@@ -3,12 +3,14 @@ class CreateWifiMetricsView < ActiveRecord::Migration
     execute <<-SQL
       CREATE VIEW wifi_metrics AS
         SELECT row_number() OVER () AS id,
-               count(body) AS datapoints,
+               api_key,
+               sum(lost_packets) AS hourly_lost_packets,
                date_trunc('hour', timestamp) AS hourly_timestamp
             FROM incoming_messages
-              WHERE date_trunc('hour', timestamp) < date_trunc('hour', (now() at time zone 'utc'))
-              AND transport = 'wifi'
-              GROUP BY hourly_timestamp
+              WHERE transport = 'wifi'
+              AND lost_packets IS NOT NULL
+              AND lost_packets <= 60
+              GROUP BY hourly_timestamp, api_key
               ORDER BY hourly_timestamp;
     SQL
   end
