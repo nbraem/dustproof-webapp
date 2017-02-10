@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210225248) do
+ActiveRecord::Schema.define(version: 20170210231007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20170210225248) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.uuid     "uuid",               default: "uuid_generate_v4()"
+    t.uuid     "user_uuid"
   end
 
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20170210225248) do
     t.boolean  "is_valid",    default: false,                null: false
     t.integer  "device_id"
     t.uuid     "uuid",        default: "uuid_generate_v4()"
+    t.uuid     "device_uuid"
   end
 
   add_index "measurements", ["device_id"], name: "index_measurements_on_device_id", using: :btree
