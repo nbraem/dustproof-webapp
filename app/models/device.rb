@@ -1,5 +1,8 @@
 class Device < ActiveRecord::Base
-  has_attached_file :photo, styles: { thumb: "x200>" }
+  has_attached_file :photo,
+    styles: { thumb: "x200>" },
+    path: ":rails_root/public/system/:class/:attachment/:id/:style/:filename",
+    url: "/system/:class/:attachment/:id/:style/:filename"
   validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
 
   validates :name, presence: true
