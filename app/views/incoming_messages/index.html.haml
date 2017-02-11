@@ -24,12 +24,12 @@
       %thead
         %tr
           %th= sort_link(@q, :timestamp, default_order: :desc)
-          %th= sort_link(@q, :gateway_eui)
-          %th= sort_link(@q, :identifier)
-          %th= sort_link(@q, :frequency)
-          %th= sort_link(@q, :rssi)
-          %th= sort_link(@q, :snr)
-          %th Raw data
+          %th= model_class.human_attribute_name(:gateway_eui)
+          %th= model_class.human_attribute_name(:identifier)
+          %th= model_class.human_attribute_name(:frequency)
+          %th= model_class.human_attribute_name(:rssi)
+          %th= model_class.human_attribute_name(:snr)
+          %th Payload
           %th Lost packets
       %tbody
         - @incoming_messages.each do |incoming_message|
