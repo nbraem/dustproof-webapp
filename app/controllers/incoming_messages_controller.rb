@@ -1,17 +1,13 @@
 class IncomingMessagesController < ApplicationController
   before_action :require_admin
   before_action :set_incoming_message, only: [:show, :destroy]
-  respond_to :html
   add_breadcrumb :index, :incoming_messages_path
+  respond_to :html
 
   def index
-    respond_to do |format|
-      format.html {
-        @q = IncomingMessage.search(params[:q])
-        @q.sorts = "timestamp desc" if @q.sorts.empty?
-        @incoming_messages = @q.result(distinct: true).page(params[:page])
-      }
-    end
+    @q = IncomingMessage.search(params[:q])
+    @q.sorts = "timestamp desc" if @q.sorts.empty?
+    @incoming_messages = @q.result(distinct: true).page(params[:page])
   end
 
   def show
