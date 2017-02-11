@@ -4,14 +4,6 @@ class IncomingMessage < ActiveRecord::Base
   validates :identifier, presence: true
   after_create :convert_to_measurement
 
-  def identifier
-    if lora?
-      device_eui
-    else
-      self.body["api_key"]
-    end
-  end
-
   def device_eui
     if proximus?
       self.body['DevEUI_uplink']['DevAddr']
