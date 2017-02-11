@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211002625) do
+ActiveRecord::Schema.define(version: 20170211004714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20170211002625) do
   add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
 
   create_table "incoming_messages", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.text     "body"
     t.string   "status"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -54,12 +53,12 @@ ActiveRecord::Schema.define(version: 20170211002625) do
     t.string   "transport"
     t.integer  "lost_packets"
     t.string   "api_key"
-    t.jsonb    "json_body",    default: {}, null: false
+    t.jsonb    "body",         default: {}, null: false
   end
 
   add_index "incoming_messages", ["api_key"], name: "index_incoming_messages_on_api_key", using: :btree
+  add_index "incoming_messages", ["body"], name: "index_incoming_messages_on_body", using: :gin
   add_index "incoming_messages", ["device_eui"], name: "index_incoming_messages_on_device_eui", using: :btree
-  add_index "incoming_messages", ["json_body"], name: "index_incoming_messages_on_json_body", using: :gin
   add_index "incoming_messages", ["transport"], name: "index_incoming_messages_on_transport", using: :btree
 
   create_table "measurements", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
