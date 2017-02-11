@@ -30,7 +30,6 @@
           %th= model_class.human_attribute_name(:rssi)
           %th= model_class.human_attribute_name(:snr)
           %th Payload
-          %th Lost packets
       %tbody
         - @incoming_messages.each do |incoming_message|
           %tr{ id: dom_id(incoming_message) }
@@ -44,6 +43,5 @@
             %td= incoming_message.rssi
             %td= incoming_message.snr
             %td= incoming_message.data
-            %td= incoming_message.lost_packets
 
     .text-center= paginate @incoming_messages, theme: "twitter-bootstrap-3"

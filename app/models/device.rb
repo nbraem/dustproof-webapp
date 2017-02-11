@@ -16,6 +16,10 @@ class Device < ActiveRecord::Base
 
   before_create :generate_api_key
 
+  def name_with_id
+    "#{name} (#{id})"
+  end
+
   def generate_api_key
     self.api_key = loop do
       random_api_key = SecureRandom.urlsafe_base64(nil, false)

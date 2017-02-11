@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :device do
     name "Dustcube1"
     api_key "MyString"
-    device_eui "MyString"
+    sequence(:device_eui) {|n| "device_#{n}"}
     transport "MyString"
     user
 

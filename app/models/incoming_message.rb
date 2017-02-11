@@ -1,9 +1,14 @@
 class IncomingMessage < ActiveRecord::Base
-  before_validation :extract_identifier
-  before_validation :calculate_packet_loss
   validates :timestamp, presence: true
-  validates :identifier, presence: true
   after_create :convert_to_measurement
+
+  def identifier
+    if lora?
+      device_eui
+    else
+      self.body["api_key"]
+    end
+  end
 
   def device_eui
     if proximus?
@@ -61,11 +66,6 @@ class IncomingMessage < ActiveRecord::Base
     end
   end
 
-  def sequence_number
-    byte_array = self.data.chars.each_slice(4).map(&:join)
-    byte_array[0].to_i(16)
-  end
-
   def proximus?
     self.body.key?("DevEUI_uplink")
   end
@@ -86,7 +86,7 @@ class IncomingMessage < ActiveRecord::Base
     # Extract values
     byte_array = self.data.chars.each_slice(4).map(&:join)
     if byte_array.size == 8
-      # seq_id = byte_array[0].to_i(16)
+      seq_num = byte_array[0].to_i(16)
       p1_ratio = byte_array[1].to_i(16) / 100.0
       p2_ratio = byte_array[2].to_i(16) / 100.0
       pm25_ratio = byte_array[3].to_i(16) / 100.0
@@ -105,7 +105,8 @@ class IncomingMessage < ActiveRecord::Base
       end
 
       if device
-        device.measurements.create! p1_ratio: p1_ratio,
+        measurement = device.measurements.new seq_num: seq_num,
+                                    p1_ratio: p1_ratio,
                                     p2_ratio: p2_ratio,
                                     pm25_ratio: pm25_ratio,
                                     p1_count: p1_count,
@@ -114,25 +115,8 @@ class IncomingMessage < ActiveRecord::Base
                                     humidity: humidity,
                                     timestamp: self.timestamp,
                                     transport: wifi? ? "wifi" : "lora"
-      end
-    end
-  end
-
-  private
-
-  def extract_identifier
-    self.identifier = self.body["api_key"] ||
-      (self.body['DevEUI_uplink']['DevAddr'] if self.body['DevEUI_uplink']) ||
-      self.body['devAddr']
-  end
-
-  def calculate_packet_loss
-    if self.sequence_number > 0
-      previous_message = IncomingMessage.where(identifier: self.identifier).order(timestamp: :desc).first
-      if previous_message
-        if previous_message.sequence_number < self.sequence_number
-          missing_packets = self.sequence_number - previous_message.sequence_number - 1
-          self.lost_packets = missing_packets if missing_packets <= 60
+        unless measurement.save
+          Logger.info "Unable to create measurement from message: #{measurement.errors.full_messages.to_sentence}"
         end
       end
     end

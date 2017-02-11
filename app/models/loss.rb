@@ -1,4 +1,4 @@
-class WifiMetric < ActiveRecord::Base
+class Loss < ActiveRecord::Base
   self.primary_key = "id"
 
   def chart_datetime

@@ -76,6 +76,10 @@ class DevicesController < ApplicationController
     render layout: false
   end
 
+  def loss
+
+  end
+
   private
 
   def device_params

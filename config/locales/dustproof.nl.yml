@@ -34,6 +34,7 @@ nl:
         admin: "Beheerder?"
         api_key: "API key"
       measurement:
+        seq_num: "Seq. nr."
         timestamp: "Tijdstip"
         temperature: "Temp."
         humidity: "Luchtv."

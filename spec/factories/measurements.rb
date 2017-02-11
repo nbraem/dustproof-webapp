@@ -7,6 +7,7 @@ FactoryGirl.define do
     p2_ratio 3.15
     temperature 10.0
     humidity 49.0
+    sequence(:seq_num)
 
     timestamp Time.now
     device

@@ -49,9 +49,10 @@ Rails.application.routes.draw do
       put :regenerate_api_key
       delete :destroy_photo
       get :dust_level
+      get :loss
     end
   end
-  resources :wifi_metrics
+  resources :losses
 
   root "pages#home"
 end

@@ -13,16 +13,6 @@ describe IncomingMessage do
       of_type(:datetime)
   end
 
-  it do
-    should have_db_column(:identifier).
-      of_type(:string)
-  end
-
-  it do
-    should have_db_column(:lost_packets).
-      of_type(:integer)
-  end
-
   it "should have a body" do
     expect(incoming_message.valid?).to be true
   end
