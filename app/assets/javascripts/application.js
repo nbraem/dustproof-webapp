@@ -22,7 +22,7 @@ ready_application = function() {
     e.preventDefault();
   });
 
-  $("#q_identifier_eq").on("change", function(){
+  $("#q_device_id_eq").on("change", function(){
     $(this).closest('form')[0].submit();
   });
 

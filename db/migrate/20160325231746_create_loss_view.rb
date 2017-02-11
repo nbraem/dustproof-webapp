@@ -13,6 +13,6 @@ class CreateLossView < ActiveRecord::Migration
   end
 
   def down
-    execute "DROP VIEW loss"
+    execute "DROP VIEW losses"
   end
 end
