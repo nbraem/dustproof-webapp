@@ -39,8 +39,8 @@ module ApplicationHelper
     end
   end
 
-  def dust_level_color
-    ratio = dust_level
+  def dust_level_color(device)
+    ratio = dust_level(device)
     if ratio
       if ratio < 1.0
         "lime"

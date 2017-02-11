@@ -1,5 +1,7 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: [:show, :edit, :update, :destroy, :regenerate_api_key, :destroy_photo]
+  before_action :set_device, only: [:show,
+    :edit, :update, :destroy, :regenerate_api_key,
+    :dust_level, :destroy_photo]
   before_action :set_common_breadcrumbs, only: [:show, :new, :edit]
   respond_to :html
 
@@ -68,7 +70,10 @@ class DevicesController < ApplicationController
       @device.destroy
       redirect_to :devices
     end
+  end
 
+  def dust_level
+    render layout: false
   end
 
   private

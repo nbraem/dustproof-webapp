@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   get "/richtlijnen", to: "pages#guidelines"
   get "/metingen", to: "pages#measurements"
   get "/over-ons", to: "pages#about"
-  get "/dust_level", to: "pages#dust_level"
 
   # Contact form
   resources :contacts, only: [:new, :create]
@@ -49,6 +48,7 @@ Rails.application.routes.draw do
     member do
       put :regenerate_api_key
       delete :destroy_photo
+      get :dust_level
     end
   end
   resources :wifi_metrics

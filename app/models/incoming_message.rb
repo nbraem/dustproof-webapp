@@ -3,8 +3,7 @@ class IncomingMessage < ActiveRecord::Base
   before_validation :calculate_packet_loss
   validates :timestamp, presence: true
   validates :identifier, presence: true
-  # Broken, see below
-  # validate :is_not_duplicate_packet, on: :create
+  validate :is_not_duplicate_packet, on: :create
   after_create :convert_to_measurement
 
   def device_eui
@@ -81,11 +80,6 @@ class IncomingMessage < ActiveRecord::Base
   end
 
   def is_not_duplicate_packet
-    # Broken
-    # This needs fixing to enable multiple LoRa providers
-    # Because LoRa providers use different formats and even different
-    # representations of the fcnt field, this becomes extremely complex
-    # to do at our end.
     return true if wifi?
     if self.timestamp
       if IncomingMessage.where("body @> ? AND timestamp >= ?",

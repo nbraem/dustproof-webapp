@@ -9,9 +9,9 @@
     %title
       = t("app_name")
       &ndash;
-      = t("tag_line")
-      - if content_for?(:title)
+      = @device.name
+      - if @device.location.present?
         &ndash;
-        = yield(:title)
+        = @device.location
 
-  %body{style: "background-color: #{dust_level_color}"}
+  %body{style: "background-color: #{dust_level_color(@device)}"}
