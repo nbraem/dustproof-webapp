@@ -8,7 +8,8 @@ class CreateLossView < ActiveRecord::Migration
                date_trunc('hour', timestamp) AS hourly_timestamp
             FROM measurements
               GROUP BY hourly_timestamp, device_id
-              ORDER BY hourly_timestamp;
+              ORDER BY hourly_timestamp DESC
+              LIMIT 168;
     SQL
   end
 
