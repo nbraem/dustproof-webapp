@@ -7,7 +7,7 @@ class IncomingMessagesController < ApplicationController
   def index
     @q = IncomingMessage.search(params[:q])
     @q.sorts = "timestamp desc" if @q.sorts.empty?
-    @incoming_messages = @q.result(distinct: true).page(params[:page])
+    @incoming_messages = @q.result.page(params[:page])
   end
 
   def show

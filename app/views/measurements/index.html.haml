@@ -12,6 +12,7 @@
         %th ID
         %th.text-center= sort_link(@q, :transport)
         %th.text-center= sort_link(@q, :seq_num)
+        %th.text-center= Measurement.human_attribute_name(:loss)
         %th.text-center= sort_link(@q, :timestamp)
         %th.text-center= Measurement.human_attribute_name(:p1_ratio)
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
@@ -27,6 +28,7 @@
           %th{ scope: "row" }= link_to measurement.id, [@device, measurement]
           %td.text-center.nowrap= measurement.transport
           %td.text-center.nowrap= measurement.seq_num
+          %td.text-center.nowrap= measurement.loss
           %td.text-center.nowrap= l Time.at(measurement.timestamp), format: "%d-%m-%Y %H:%M:%S"
           %td.text-center
             = measurement.p1_ratio
