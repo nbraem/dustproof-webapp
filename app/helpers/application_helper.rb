@@ -11,12 +11,8 @@ module ApplicationHelper
     controller.controller_name == controller_name ? "active" : nil
   end
 
-  def device_euis
-    IncomingMessage.select(:device_eui).order(device_eui: :asc).where("device_eui IS NOT NULL").uniq.collect(&:device_eui)
-  end
-
-  def api_keys
-    IncomingMessage.select(:api_key).order(api_key: :asc).where("api_key IS NOT NULL").uniq.collect(&:api_key)
+  def identifiers
+    IncomingMessage.select(:identifier).order(identifier: :asc).where("identifier IS NOT NULL").uniq.collect(&:identifier)
   end
 
   def dust_level(device)

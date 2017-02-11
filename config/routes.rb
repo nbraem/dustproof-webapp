@@ -26,13 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # API
-  namespace :api do
-    namespace :v1 do
-      resources :measurements, only: [:index, :create]
-    end
-  end
-
   # Static pages
   get "/contact", to: "contacts#new"
   get "/hoe", to: "pages#how"
@@ -59,7 +52,6 @@ Rails.application.routes.draw do
     end
   end
   resources :wifi_metrics
-  resources :lora_metrics
 
   root "pages#home"
 end

@@ -1,5 +1,5 @@
 - content_for(:title) do
-  WiFi metrics
+  Pakketverlies
   &ndash;
   Overzicht per uur
 
@@ -13,7 +13,7 @@
               renderTo: 'container1'
             },
             title: {
-              text: 'WiFi pakketverlies'
+              text: 'Pakketverlies'
             },
             xAxis: {
               type: 'datetime',
@@ -64,7 +64,7 @@
 
 .page-header
   %h1
-    WiFi metrics
+    Pakketverlies
     %small Overzicht per uur
 
 .row
@@ -72,7 +72,7 @@
     = search_form_for @q do |f|
       .row
         .col-sm-4
-          = f.input :api_key_eq, as: :select, collection: api_keys, include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Select WiFi device:"
+          = f.input :identifier_eq, as: :select, collection: identifiers, include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Filter device:"
 .row
   .col-lg-12
     #container1{style: "min-width: 310px; height: 500px; margin: 0 auto"}

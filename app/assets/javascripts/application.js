@@ -22,11 +22,7 @@ ready_application = function() {
     e.preventDefault();
   });
 
-  $("#q_device_eui_eq").on("change", function(){
-    $(this).closest('form')[0].submit();
-  });
-
-  $("#q_api_key_eq").on("change", function(){
+  $("#q_identifier_eq").on("change", function(){
     $(this).closest('form')[0].submit();
   });
 

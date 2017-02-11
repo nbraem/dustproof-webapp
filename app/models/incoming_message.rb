@@ -1,8 +1,8 @@
 class IncomingMessage < ActiveRecord::Base
-  before_validation :extract_transport_and_identifier
+  before_validation :extract_identifier
   before_validation :calculate_packet_loss
   validates :timestamp, presence: true
-  validates :identifier, presenc: true, uniqueness: true
+  validates :identifier, presence: true
   validate :is_not_duplicate_packet, on: :create
   after_create :convert_to_measurement
 
@@ -15,10 +15,14 @@ class IncomingMessage < ActiveRecord::Base
   end
 
   def gateway_eui
-    if proximus?
-      'Proximus LoRa network'
+    if lora?
+      if proximus?
+        'Proximus LoRa network'
+      else
+        self.body['gatewayEui']
+      end
     else
-      self.body['gatewayEui']
+      "WiFi"
     end
   end
 
@@ -50,9 +54,9 @@ class IncomingMessage < ActiveRecord::Base
         self.body['DevEUI_uplink']['payload_hex']
       else
         begin
-          self.data = Base64.decode64(self.body['payload']).unpack("H*").first
+          Base64.decode64(self.body['payload']).unpack("H*").first
         rescue
-          self.data = "Decode error."
+          ""
         end
       end
     end
@@ -93,34 +97,36 @@ class IncomingMessage < ActiveRecord::Base
 
     # Extract values
     byte_array = self.data.chars.each_slice(4).map(&:join)
-    # seq_id = byte_array[0].to_i(16)
-    p1_ratio = byte_array[1].to_i(16) / 100.0
-    p2_ratio = byte_array[2].to_i(16) / 100.0
-    pm25_ratio = byte_array[3].to_i(16) / 100.0
-    p1_count = byte_array[4].to_i(16)
-    p2_count = byte_array[5].to_i(16)
-    temperature = byte_array[6].to_i(16)
-    # Account for the fact that the temperature is a signed value
-    temperature = ((temperature & ~(1 << 15)) - (temperature & (1 << 15))) / 10.0
-    humidity = byte_array[7].to_i(16) / 10.0
+    if byte_array.size == 8
+      # seq_id = byte_array[0].to_i(16)
+      p1_ratio = byte_array[1].to_i(16) / 100.0
+      p2_ratio = byte_array[2].to_i(16) / 100.0
+      pm25_ratio = byte_array[3].to_i(16) / 100.0
+      p1_count = byte_array[4].to_i(16)
+      p2_count = byte_array[5].to_i(16)
+      temperature = byte_array[6].to_i(16)
+      # Account for the fact that the temperature is a signed value
+      temperature = ((temperature & ~(1 << 15)) - (temperature & (1 << 15))) / 10.0
+      humidity = byte_array[7].to_i(16) / 10.0
 
-    # Find the appropriate device
-    if self.device_eui.present?
-      device = Device.where(transport: "lora").where(device_eui: self.device_eui).first
-    elsif self.body["api_key"].present?
-      device = Device.where(transport: "wifi").where(api_key: self.body["api_key"]).first
-    end
+      # Find the appropriate device
+      if self.device_eui.present?
+        device = Device.where(transport: "lora").where(device_eui: self.device_eui).first
+      elsif self.body["api_key"].present?
+        device = Device.where(transport: "wifi").where(api_key: self.body["api_key"]).first
+      end
 
-    if device
-      device.measurements.create! p1_ratio: p1_ratio,
-                                  p2_ratio: p2_ratio,
-                                  pm25_ratio: pm25_ratio,
-                                  p1_count: p1_count,
-                                  p2_count: p2_count,
-                                  temperature: temperature,
-                                  humidity: humidity,
-                                  timestamp: self.timestamp,
-                                  transport: self.transport
+      if device
+        device.measurements.create! p1_ratio: p1_ratio,
+                                    p2_ratio: p2_ratio,
+                                    pm25_ratio: pm25_ratio,
+                                    p1_count: p1_count,
+                                    p2_count: p2_count,
+                                    temperature: temperature,
+                                    humidity: humidity,
+                                    timestamp: self.timestamp,
+                                    transport: wifi? ? "wifi" : "lora"
+      end
     end
   end
 
@@ -128,8 +134,8 @@ class IncomingMessage < ActiveRecord::Base
 
   def extract_identifier
     self.identifier = self.body["api_key"] ||
-      self.body['DevEUI_uplink']['DevAddr'] ||
-      self.identifier = self.body['devAddr']
+      (self.body['DevEUI_uplink']['DevAddr'] if self.body['DevEUI_uplink']) ||
+      self.body['devAddr']
   end
 
   def calculate_packet_loss
@@ -137,7 +143,7 @@ class IncomingMessage < ActiveRecord::Base
       previous_message = IncomingMessage.order(timestamp: :desc).where(identifier: self.identifier).first
       if previous_message
         if previous_message.sequence_number < self.sequence_number
-          missing_packets = current_sequence_number - previous_sequence_number - 1
+          missing_packets = self.sequence_number - previous_message.sequence_number - 1
           self.lost_packets = missing_packets if missing_packets <= 60
         end
       end
