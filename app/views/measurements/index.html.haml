@@ -9,11 +9,10 @@
   %table.table.table-condensed.table-hover
     %thead
       %tr
-        %th ID
+        %th.text-center= sort_link(@q, :timestamp)
         %th.text-center= sort_link(@q, :transport)
         %th.text-center= sort_link(@q, :seq_num)
         %th.text-center= Measurement.human_attribute_name(:loss)
-        %th.text-center= sort_link(@q, :timestamp)
         %th.text-center= Measurement.human_attribute_name(:p1_ratio)
         %th.text-center= Measurement.human_attribute_name(:p2_ratio)
         %th.text-center= Measurement.human_attribute_name(:pm25_ratio)
@@ -25,11 +24,10 @@
     %tbody
       - @measurements.each do |measurement|
         %tr{class: measurement.is_valid? ? nil : "danger"}
-          %th{ scope: "row" }= link_to measurement.id, [@device, measurement]
+          %td.text-center.nowrap= link_to(l(Time.at(measurement.timestamp), format: "%d-%m-%Y %H:%M:%S"), [@device, measurement])
           %td.text-center.nowrap= measurement.transport
           %td.text-center.nowrap= measurement.seq_num
           %td.text-center.nowrap= measurement.loss
-          %td.text-center.nowrap= l Time.at(measurement.timestamp), format: "%d-%m-%Y %H:%M:%S"
           %td.text-center
             = measurement.p1_ratio
             \%

@@ -34,6 +34,7 @@ nl:
         admin: "Beheerder?"
         api_key: "API key"
       measurement:
+        transport: "Via"
         seq_num: "Seq. nr."
         timestamp: "Tijdstip"
         temperature: "Temp."
@@ -43,6 +44,7 @@ nl:
         p2_ratio: "P2 ratio"
         p1_count: "P1 deeltjes"
         p2_count: "P2 deeltjes"
+        loss: "Verlies"
       device:
         name: "Naam"
         location: "Locatie"
