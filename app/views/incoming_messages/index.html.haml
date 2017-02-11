@@ -8,7 +8,7 @@
     = link_to icon_text("trash", "Delete all"), [:destroy_all, :incoming_messages], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger"
     = link_to icon_text("refresh", "Refresh"), "#", class: "btn btn-sm btn-default", id: "refresh-link"
   .col-md-1
-      &nbsp;
+    &nbsp;
   .col-md-7
     = search_form_for @q do |f|
       .row
