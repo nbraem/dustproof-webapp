@@ -3,7 +3,6 @@ class IncomingMessage < ActiveRecord::Base
   before_validation :calculate_packet_loss
   validates :timestamp, presence: true
   validates :identifier, presence: true
-  validate :is_not_duplicate_packet, on: :create
   after_create :convert_to_measurement
 
   def device_eui
@@ -79,17 +78,6 @@ class IncomingMessage < ActiveRecord::Base
     !wifi?
   end
 
-  def is_not_duplicate_packet
-    return true if wifi?
-    if self.timestamp
-      if IncomingMessage.where("body @> ? AND timestamp >= ?",
-          {fcnt: self.body["fcnt"], devAddr: self.device_eui}.to_json,
-          (self.timestamp - 1.minute).to_s(:db)).any?
-        errors[:base] << "This is a duplicate packet."
-      end
-    end
-  end
-
   def convert_to_measurement
     # Measurements contain 8 groups of 2 bytes:
     # seq   P1    P2    PM25  nP1   nP2   Temp. Hum.
@@ -140,7 +128,7 @@ class IncomingMessage < ActiveRecord::Base
 
   def calculate_packet_loss
     if self.sequence_number > 0
-      previous_message = IncomingMessage.order(timestamp: :desc).where(identifier: self.identifier).first
+      previous_message = IncomingMessage.where(identifier: self.identifier).order(timestamp: :desc).first
       if previous_message
         if previous_message.sequence_number < self.sequence_number
           missing_packets = self.sequence_number - previous_message.sequence_number - 1

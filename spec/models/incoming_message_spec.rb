@@ -46,33 +46,4 @@ describe IncomingMessage do
       expect(incoming_message.identifier).to eq("API_KEY")
     end
   end
-
-  context "from the same device eui within a duplication time frame" do
-    it "should be considered a duplicate packet" do
-      incoming_message1 = FactoryGirl.create(:incoming_message)
-      incoming_message2 = FactoryGirl.build(:incoming_message)
-      expect(incoming_message1.new_record?).to be false
-      expect(incoming_message2.valid?).to be false
-      expect(incoming_message2.errors.full_messages.to_sentence).to eq("This is a duplicate packet.")
-    end
-  end
-
-  context "from the same device eui outside a duplication time frame" do
-    it "should not not be considered a duplicate packet" do
-      incoming_message1 = FactoryGirl.create(:incoming_message)
-      incoming_message2 = FactoryGirl.build(:incoming_message,
-        timestamp: incoming_message1.timestamp + 121.seconds)
-      expect(incoming_message1.new_record?).to be false
-      expect(incoming_message2.valid?).to be true
-    end
-  end
-
-  context "from different device eui" do
-    it "should not filter out duplicate packets" do
-      incoming_message1 = FactoryGirl.create(:incoming_message)
-      incoming_message2 = FactoryGirl.build(:incoming_message_with_lora_wireless_things_from_another_device_eui)
-      expect(incoming_message1.new_record?).to be false
-      expect(incoming_message2.valid?).to be true
-    end
-  end
 end
