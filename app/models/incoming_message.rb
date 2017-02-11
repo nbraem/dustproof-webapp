@@ -1,5 +1,7 @@
 class IncomingMessage < ActiveRecord::Base
+  before_validation :extract_identifier
   validates :timestamp, presence: true
+  validates :identifier, presence: true
   after_create :convert_to_measurement
 
   def identifier
@@ -78,6 +80,8 @@ class IncomingMessage < ActiveRecord::Base
     !wifi?
   end
 
+  private
+
   def convert_to_measurement
     # Measurements contain 8 groups of 2 bytes:
     # seq   P1    P2    PM25  nP1   nP2   Temp. Hum.
@@ -120,5 +124,11 @@ class IncomingMessage < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def extract_identifier
+    self.identifier = self.body["api_key"] ||
+      (self.body['DevEUI_uplink']['DevAddr'] if self.body['DevEUI_uplink']) ||
+      self.body['devAddr']
   end
 end

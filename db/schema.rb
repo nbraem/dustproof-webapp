@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211214708) do
+ActiveRecord::Schema.define(version: 20170211225516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,9 +42,11 @@ ActiveRecord::Schema.define(version: 20170211214708) do
     t.datetime "updated_at",              null: false
     t.datetime "timestamp",               null: false
     t.jsonb    "body",       default: {}, null: false
+    t.string   "identifier", default: "", null: false
   end
 
   add_index "incoming_messages", ["body"], name: "index_incoming_messages_on_body", using: :gin
+  add_index "incoming_messages", ["identifier"], name: "index_incoming_messages_on_identifier", using: :btree
   add_index "incoming_messages", ["timestamp"], name: "index_incoming_messages_on_timestamp", using: :btree
 
   create_table "measurements", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|

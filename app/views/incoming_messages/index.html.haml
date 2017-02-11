@@ -7,6 +7,13 @@
   .col-md-4
     = link_to icon_text("trash", "Delete all"), [:destroy_all, :incoming_messages], method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-sm btn-danger"
     = link_to icon_text("refresh", "Refresh"), "#", class: "btn btn-sm btn-default", id: "refresh-link"
+  .col-md-1
+      &nbsp;
+  .col-md-7
+    = search_form_for @q do |f|
+      .row
+        .col-sm-3
+          = f.input :identifier_eq, as: :select, collection: identifiers.prepend(""), include_blank: false, input_html: { class: "input-sm" }, required: false, label: "Filter device:"
 
 .row
   .col-lg-12
