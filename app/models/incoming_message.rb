@@ -7,17 +7,6 @@ class IncomingMessage < ActiveRecord::Base
   validate :is_not_duplicate_packet, on: :create
   after_create :convert_to_measurement
 
-  def self.to_csv
-    columns = %w[id gateway_eui device_eui timestamp packet_time tmst frequency
-      data_rate rssi snr data comments]
-    CSV.generate do |csv|
-      csv << columns
-      all.each do |incoming_message|
-        csv << incoming_message.attributes.values_at(*columns)
-      end
-    end
-  end
-
   def is_not_duplicate_packet
     if self.timestamp && self.transport == "lora"
       if IncomingMessage.where("data = ? AND device_eui = ? AND timestamp >= ?",

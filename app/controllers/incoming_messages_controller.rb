@@ -11,11 +11,6 @@ class IncomingMessagesController < ApplicationController
         @q.sorts = "timestamp desc" if @q.sorts.empty?
         @incoming_messages = @q.result(distinct: true).page(params[:page])
       }
-      format.csv {
-        send_data IncomingMessage.order("timestamp desc").to_csv,
-          filename: "Dustproof - Incoming Messages.csv",
-          type: 'text/csv'
-      }
     end
   end
 
