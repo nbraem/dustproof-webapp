@@ -59,34 +59,5 @@ describe Measurement do
       of_type(:integer)
   end
 
-  it { should validate_presence_of(:timestamp) }
-  it { should validate_presence_of(:p1_ratio) }
-  it { should validate_presence_of(:pm25_ratio) }
-  it { should validate_presence_of(:p2_ratio) }
-  it { should validate_presence_of(:seq_num) }
-  it { should validate_presence_of(:loss) }
-
   it { should belong_to(:device) }
-
-  context "with the same sequence number within a duplication time frame" do
-    it "should be considered a duplicate packet" do
-      measurement1 = FactoryGirl.create(:measurement, seq_num: 0)
-      measurement2 = FactoryGirl.build(:measurement, seq_num: 0, device: measurement1.device)
-      expect(measurement1.new_record?).to be false
-      expect(measurement2.valid?).to be false
-      expect(measurement2.errors.full_messages.to_sentence).to eq("This is a duplicate measurement.")
-    end
-  end
-
-  context "with the same sequence number outside a duplication time frame" do
-    it "should be considered a duplicate packet" do
-      measurement1 = FactoryGirl.create(:measurement, seq_num: 0)
-      measurement2 = FactoryGirl.build(:measurement, seq_num: 0,
-        device: measurement1.device,
-        timestamp: measurement1.timestamp + 60.seconds)
-      expect(measurement1.new_record?).to be false
-      expect(measurement2.valid?).to be false
-      expect(measurement2.errors.full_messages.to_sentence).to eq("This is a duplicate measurement.")
-    end
-  end
 end

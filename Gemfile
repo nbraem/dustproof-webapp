@@ -20,7 +20,6 @@ gem 'mail_form'
 gem 'exception_notification'
 gem 'active_model_serializers'
 gem 'aws-sdk-rails'
-gem 'shoryuken'
 gem 'paperclip', '~> 5.0.0'
 
 group :development do
@@ -33,7 +32,6 @@ group :development do
   gem 'guard-rspec', '~> 4.6.4', require: false
   gem 'capistrano-rails', '~> 1.1.2'
   gem 'capistrano-rvm'
-  gem 'capistrano-shoryuken'
 end
 
 group :development, :test do
