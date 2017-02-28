@@ -10,14 +10,7 @@
       = f.input :email
     .col-md-3.col-md-offset-1
       = f.input :password, hint: t("devise.new_password_hint"), label: t("devise.new_password")
-      = f.input :device_eui
-      .form-group
-        %label.control-label API key
-        %br
-        = resource.api_key
 
-      .form-group
-        = link_to icon_text("refresh", "API key vernieuwen"), "/regenerate_api_key", method: :put, data: {confirm: "Deze actie maakt de vorige API key ongeldig. Ben je zeker?"}, class: "btn btn-warning btn-sm"
   .row
     = f.button :submit, class: 'btn-primary'
     = link_to t('.cancel', default: t("helpers.links.cancel")), root_path, class: 'btn btn-default'

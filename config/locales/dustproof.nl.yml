@@ -32,7 +32,6 @@ nl:
         current_password: "Huidig wachtwoord"
         created_at: "Aangemaakt op"
         admin: "Beheerder?"
-        api_key: "API key"
       measurement:
         transport: "Via"
         seq_num: "Seq. nr."
