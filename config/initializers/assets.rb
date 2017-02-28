@@ -8,7 +8,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( bootswatch/default.css highcharts_config.js html5shiv.js )
-THEMES.each do |theme|
-  Rails.application.config.assets.precompile += ["bootswatch/#{theme}.css"]
-end
+Rails.application.config.assets.precompile += %w( bootswatch/default.css bootswatch/cosmo.css highcharts_config.js html5shiv.js )

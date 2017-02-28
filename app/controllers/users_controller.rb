@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def update
     params[:user].delete(:password) if params[:user][:password].blank?
     if user_tries_to_update_own_admin_status
-      redirect_to :back, alert: t("flash.users.cannot_change_own_admin_status")
+      redirect_to :users, alert: t("flash.users.cannot_change_own_admin_status")
     else
       if @user.update(user_params)
         redirect_to @user
@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
   def destroy
     if user_tries_to_delete_own_account
-      redirect_to :back, alert: t("flash.users.cannot_delete_own_account")
+      redirect_to :users, alert: t("flash.users.cannot_delete_own_account")
     else
       @user.destroy
       respond_with(@user)
