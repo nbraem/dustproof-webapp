@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -17,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170214231740) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "devices", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "devices", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "name"
     t.string   "api_key"
     t.string   "device_eui"
@@ -31,25 +30,23 @@ ActiveRecord::Schema.define(version: 20170214231740) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.uuid     "user_id"
+    t.index ["api_key"], name: "index_devices_on_api_key", using: :btree
+    t.index ["device_eui"], name: "index_devices_on_device_eui", using: :btree
+    t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
   end
 
-  add_index "devices", ["api_key"], name: "index_devices_on_api_key", using: :btree
-  add_index "devices", ["device_eui"], name: "index_devices_on_device_eui", using: :btree
-  add_index "devices", ["user_id"], name: "index_devices_on_user_id", using: :btree
-
-  create_table "incoming_messages", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "incoming_messages", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.datetime "timestamp",               null: false
     t.jsonb    "body",       default: {}, null: false
     t.string   "identifier", default: "", null: false
+    t.index ["body"], name: "index_incoming_messages_on_body", using: :gin
+    t.index ["identifier"], name: "index_incoming_messages_on_identifier", using: :btree
+    t.index ["timestamp"], name: "index_incoming_messages_on_timestamp", using: :btree
   end
 
-  add_index "incoming_messages", ["body"], name: "index_incoming_messages_on_body", using: :gin
-  add_index "incoming_messages", ["identifier"], name: "index_incoming_messages_on_identifier", using: :btree
-  add_index "incoming_messages", ["timestamp"], name: "index_incoming_messages_on_timestamp", using: :btree
-
-  create_table "measurements", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "measurements", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.float    "p1_ratio"
     t.float    "p2_ratio"
     t.float    "humidity"
@@ -65,12 +62,11 @@ ActiveRecord::Schema.define(version: 20170214231740) do
     t.uuid     "device_id"
     t.integer  "seq_num",                default: 0,     null: false
     t.integer  "loss",                   default: 0,     null: false
+    t.index ["device_id"], name: "index_measurements_on_device_id", using: :btree
+    t.index ["seq_num"], name: "index_measurements_on_seq_num", using: :btree
   end
 
-  add_index "measurements", ["device_id"], name: "index_measurements_on_device_id", using: :btree
-  add_index "measurements", ["seq_num"], name: "index_measurements_on_seq_num", using: :btree
-
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email",                  default: "",    null: false
@@ -92,13 +88,12 @@ ActiveRecord::Schema.define(version: 20170214231740) do
     t.string   "unconfirmed_email"
     t.string   "api_key"
     t.string   "device_eui"
+    t.index ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["device_eui"], name: "index_users_on_device_eui", using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["device_eui"], name: "index_users_on_device_eui", using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "devices", "users"
   add_foreign_key "measurements", "devices"

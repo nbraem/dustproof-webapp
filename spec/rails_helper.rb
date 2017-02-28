@@ -5,7 +5,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 require "capybara/rspec"
-require "shoulda/matchers"
 require "paperclip/matchers"
 require "devise"
 
@@ -60,7 +59,7 @@ RSpec.configure do |config|
   config.include(EmailSpec::Matchers)
 
   # Devise
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerMacros, type: :controller
   config.include Features::SessionHelpers, type: :feature
 
@@ -70,5 +69,12 @@ RSpec.configure do |config|
   # Configure the Rspec to only accept the new 'expect' syntax
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  Shoulda::Matchers.configure do |config|
+    config.integrate do |with|
+      with.test_framework :rspec
+      with.library :rails
+    end
   end
 end
