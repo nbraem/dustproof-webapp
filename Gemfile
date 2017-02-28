@@ -22,6 +22,7 @@ gem 'exception_notification'
 gem 'active_model_serializers'
 gem 'paperclip', '~> 5.1.0'
 gem 'font-awesome-rails'
+gem 'actionpack-page_caching'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
