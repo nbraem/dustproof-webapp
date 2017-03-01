@@ -1,0 +1,31 @@
+- content_for(:title) do
+  Metingen
+
+.alert.alert-warning
+  %strong Opgelet!
+  Dit zijn nog geen echte metingen.
+
+.page-header
+  %h1 Metingen
+
+.table-responsive
+  %table.table.table-condensed.table-hover
+    %thead
+      %tr
+        %th #
+        %th.text-center Table heading
+        %th.text-center Table heading
+        %th.text-center Table heading
+        %th.text-center Table heading
+        %th.text-center Table heading
+        %th.text-center Table heading
+    %tbody
+      - (1..10).each do |i|
+        %tr
+          %th{ scope: "row" }= i
+          %td.text-center= rand(10)
+          %td.text-center= rand(10)
+          %td.text-center= rand(10)
+          %td.text-center= rand(10)
+          %td.text-center= rand(10)
+          %td.text-center= rand(10)
