@@ -17,7 +17,7 @@ nl:
     confirm_new_password: "Bevestig uw nieuw wachtwoord"
     change_my_password: "Wijzig mijn wachtwoord"
     new_password_hint: "Enkel invullen indien je het huidige wachtwoord wilt wijzigen."
-    current_password_hint: "Dit *moet* je invullen om je gegevens te wijzigen."
+    current_password_hint: "Nodig om je gegevens te kunnen wijzigen."
     change_password: "Wachtwoord wijzigen"
     this_is_you: "Jijzelf"
     confirmations:
