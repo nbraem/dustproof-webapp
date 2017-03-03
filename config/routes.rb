@@ -54,5 +54,5 @@ Rails.application.routes.draw do
   end
   resources :losses
 
-  root "pages#home"
+  root to: redirect("/users/sign_in")
 end
