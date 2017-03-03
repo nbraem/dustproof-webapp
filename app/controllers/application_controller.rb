@@ -5,17 +5,11 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_theme
 
   protected
 
-  def set_theme
-    if params[:theme].present? && (THEMES.include?(params[:theme]) || params[:theme] == "cosmo")
-      @theme = params[:theme]
-      session[:theme] = params[:theme]
-    else
-      @theme ||= session[:theme] || "cosmo"
-    end
+  def after_sign_out_path_for(resource_or_scope)
+    "https://dustproof.be"
   end
 
   def configure_permitted_parameters

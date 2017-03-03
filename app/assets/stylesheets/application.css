@@ -27,10 +27,6 @@ footer {
   margin-top: 5px;
 }
 
-.jumbotron a:hover, .jumbotron a:focus {
-  text-decoration: none;
-}
-
 .no-hover {
     display: block;
     /* 4:3 aspect ratio */
