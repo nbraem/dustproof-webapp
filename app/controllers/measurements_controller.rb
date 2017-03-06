@@ -1,13 +1,15 @@
 class MeasurementsController < ApplicationController
   before_action :load_device, only: [:index, :destroy_all]
   before_action :set_measurement, only: [:show, :destroy]
-  respond_to :html
+  respond_to :html, :csv
 
   def index
     @q = @device.measurements.search(params[:q])
     @q.sorts = "timestamp DESC" if @q.sorts.empty?
-    @measurements = @q.result(distinct: true).page(params[:page])
-    respond_with(@measurements)
+    @measurements = @q.result(distinct: true)
+    # don't do paging for csv
+    @measurements = @measurements.page(params[:page]) if request.format.html?
+    respond_with(@measurements.to_a)
   end
 
   def destroy

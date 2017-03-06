@@ -1,6 +1,7 @@
 = render "devices/header"
 
 = link_to icon_text("trash", "Verwijder all metingen"), [:destroy_all, @device, :measurements], method: :delete, data: {confirm: "Alle metingen worden verwijderd. Dit kan niet ongedaan gemaakt worden. Ben je zeker?"}, class: "btn btn-sm btn-danger"
+= link_to icon_text("list", "Download CSV"), polymorphic_url([@device, :measurements], format: "csv"), class: "btn btn-sm btn-link"
 
 %p.text-right= page_entries_info @measurements
 .text-center= paginate @measurements, theme: "twitter-bootstrap-3"
