@@ -11,3 +11,4 @@ cd $REPO_DIR/provision
 . ./deploy_postgres.sh
 . ./deploy_rvm.sh
 . ./deploy_ruby.sh
+. ./prepare_rails.sh
